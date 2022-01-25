@@ -1,4 +1,4 @@
-let container = document.querySelector(".container");
+let container = document.querySelector(".buttons");
 
 function add(){
   let button = document.createElement("button");
