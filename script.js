@@ -1,0 +1,3 @@
+function rmv(){
+  alert("rmv");
+}
