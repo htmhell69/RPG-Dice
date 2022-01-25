@@ -1,6 +1,6 @@
 let container = document.querySelector(".buttons");
 
-function add(){
+function addBtn(){
   let button = document.createElement("button");
   let buttonText = document.createTextNode("submit");
   button.appendChild(buttonText); 
@@ -9,11 +9,11 @@ function add(){
   document.getElementById("mybutton").addEventListener("click", add);
 }
 
-function rmv(){
+function rmvBtn(){
   Array.from(document.querySelectorAll('button')).forEach(function (button) {
 	button.remove();
 });
 }
 
-document.getElementById("add").addEventListener("click", add);
-document.getElementById("rmv").addEventListener("click", rmv);
+document.getElementById("add").addEventListener("click", addBtn);
+document.getElementById("rmv").addEventListener("click", rmvBtn);
