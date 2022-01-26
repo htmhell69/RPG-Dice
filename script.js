@@ -1,13 +1,24 @@
 let container = document.querySelector(".buttons");
+let attacks = ["strike", "strongStrike","normalAttack"]
 
-function addBtn(){
-  let button = document.createElement("button");
-  let buttonText = document.createTextNode("submit");
+
+function attackMenu(event){
+  rmvBtn();
+  for(let i=0; i<attacks.length; i++){
+  var button = document.createElement("button");
+  var buttonText = document.createTextNode(attacks[i]);
   button.appendChild(buttonText); 
-  button.id="mybutton";
+  button.id=i;
   container.appendChild(button);
-  document.getElementById("mybutton").addEventListener("click", add);
+  document.getElementById(i).addEventListener("click", runAttack);
+  }
 }
+
+function runAttack(event){
+  var attack = event.target.id;
+}
+
+
 
 function rmvBtn(){
   Array.from(document.querySelectorAll('button')).forEach(function (button) {
@@ -15,5 +26,7 @@ function rmvBtn(){
 });
 }
 
-document.getElementById("add").addEventListener("click", addBtn);
+
+
+document.getElementById("add").addEventListener("click", attackMenu);
 document.getElementById("rmv").addEventListener("click", rmvBtn);
