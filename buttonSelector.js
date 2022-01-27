@@ -3,6 +3,7 @@ let attacks = ["strike", "strongStrike","normalAttack"]
 
 
 function attackMenu(event){
+  alert("i ran");
   rmvBtn();
   for(let i=0; i<attacks.length; i++){
   var button = document.createElement("button");
@@ -26,7 +27,6 @@ function removeBtn(){
 	button.remove();
 });
 }
-
 
 
 document.getElementById("add").addEventListener("click", attackMenu);
