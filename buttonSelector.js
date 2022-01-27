@@ -15,12 +15,13 @@ function attackMenu(event){
 }
 
 function runAttack(event){
-  var attack = event.target.id;
+  var attack = parseInt(event.target.id);
+  alert(attack + 1);
 }
 
 
 
-function rmvBtn(){
+function removeBtn(){
   Array.from(document.querySelectorAll('button')).forEach(function (button) {
 	button.remove();
 });
@@ -29,4 +30,4 @@ function rmvBtn(){
 
 
 document.getElementById("add").addEventListener("click", attackMenu);
-document.getElementById("rmv").addEventListener("click", rmvBtn);
+document.getElementById("remove").addEventListener("click", removeBtn);
