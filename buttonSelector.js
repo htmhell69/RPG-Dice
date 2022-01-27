@@ -3,8 +3,7 @@ let attacks = ["strike", "strongStrike","normalAttack"]
 
 
 function attackMenu(event){
-  alert("i ran");
-  rmvBtn();
+  removeButton();
   for(let i=0; i<attacks.length; i++){
   var button = document.createElement("button");
   var buttonText = document.createTextNode(attacks[i]);
@@ -16,13 +15,13 @@ function attackMenu(event){
 }
 
 function runAttack(event){
-  var attack = parseInt(event.target.id);
+  let attack = parseInt(event.target.id,36);
   alert(attack + 1);
 }
 
 
 
-function removeBtn(){
+function removeButton(){
   Array.from(document.querySelectorAll('button')).forEach(function (button) {
 	button.remove();
 });
@@ -30,4 +29,4 @@ function removeBtn(){
 
 
 document.getElementById("add").addEventListener("click", attackMenu);
-document.getElementById("remove").addEventListener("click", removeBtn);
+document.getElementById("remove").addEventListener("click", removeButton);
