@@ -1,4 +1,4 @@
-setInterval(10, resizingCanvas);
+setInterval(10, resizingCanvas());
 function resizingCanvas(){
     alert("i ran");
     canvas.height = window.innerHeight/1.5;
