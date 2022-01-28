@@ -6,8 +6,11 @@ function attackMenu(event){
   for(let i=0; i<items.length; i++){
     let button = document.createElement("button");
     let buttonText = document.createTextNode(items[i].name);
+    button.style.width = "72px";
+    button.style.height = "48px";
     button.appendChild(buttonText); 
     button.id = i;
+    
     container.appendChild(button);
     document.getElementById(i).addEventListener("click", runAttack);
   }
@@ -25,5 +28,5 @@ function removeButton(){
 }
 
 
-document.getElementById("add").addEventListener("click", attackMenu);
+document.getElementById("attack").addEventListener("click", attackMenu);
 document.getElementById("remove").addEventListener("click", removeButton);
