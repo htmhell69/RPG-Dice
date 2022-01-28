@@ -1,24 +1,20 @@
 let container = document.querySelector(".buttons");
-let attacks = ["strike", "strongStrike","normalAttack"]
-
 //this starts up the attack selectors
 function attackMenu(event){
+  let items = player.items;
   removeButton();
-  for(let i=0; i<attacks.length; i++){
-  var button = document.createElement("button");
-  var buttonText = document.createTextNode(attacks[i]);
-  button.appendChild(buttonText); 
-  button.id = i;
-  container.appendChild(button);
-  document.getElementById(i).addEventListener("click", runAttack);
+  for(let i=0; i<items.length; i++){
+    let button = document.createElement("button");
+    let buttonText = document.createTextNode(items[i].name);
+    button.appendChild(buttonText); 
+    button.id = i;
+    container.appendChild(button);
+    document.getElementById(i).addEventListener("click", runAttack);
   }
 }
 
 //this function runs the attack you chose
-function runAttack(event){
-  let attack = parseInt(event.target.id,36);
-  alert(attack + 1);
-}
+
 
 
 
