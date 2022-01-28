@@ -10,7 +10,7 @@ function attackMenu(event){
     button.style.height = "48px";
     button.appendChild(buttonText); 
     button.id = i;
-    
+    button.className = "button";
     container.appendChild(button);
     document.getElementById(i).addEventListener("click", runAttack);
   }
