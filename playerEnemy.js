@@ -3,23 +3,29 @@
 function createPlayer(hp, img, defense, attack){
   let player = {
     hp:hp,
-    img:img,
+    imgSrc:img,
+    img: new Image(),
     items: [],
     defense:defense,
-    attack:attack
+    attack:attack,
+    type:"player"
   };
+  player.img.src = player.imgSrc;
   player.items.push(getWeapon("generic"));
   return player;
 }
 
 function createEnemy(hp, img, defense, attack){
-  let Enemy = {
+  let enemy = {
     hp:hp,
-    img:img,
-    defense,defense,
-    attack,attack
+    imgSrc: img,
+    img: new Image(),
+    defense: defense,
+    attack: attack,
+    type:"enemy"
   }
-  return Enemy
+  enemy.img.src = enemy.imgSrc;
+  return enemy
 }
 
 
