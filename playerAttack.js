@@ -16,8 +16,8 @@ function startAttack(event){
 
   function runAttack(event){
       if(event.target.id == "normal"){
-        
+        currentTarget.hp -= currentWeapon.normal.damage;
       } else if(event.target.id == "special"){
-
+        
       }
   }
