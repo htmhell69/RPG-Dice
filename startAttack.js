@@ -13,6 +13,7 @@ function checkIfNoEnemy(){
         turnOrder.push(Enemy);   
     } 
 }
+
 setInterval(checkIfNoEnemy, 50);
 checkIfNoEnemy();
 

@@ -2,21 +2,24 @@
 //this js file creates the functions needed to make the player/enemy objects
 function createPlayer(hp, img, defense, attack){
   let player = {
-    hp:hp,
+    maxHp:hp,
+    hp:3,
     imgSrc:img,
     img: new Image(),
-    items: [],
+    weapons: [],
     defense:defense,
     attack:attack,
+    specialCooldown: 0,
     type:"player"
   };
   player.img.src = player.imgSrc;
-  player.items.push(getWeapon("generic"));
+  player.weapons.push(getWeapon("generic"));
   return player;
 }
 
 function createEnemy(hp, img, defense, attack){
   let enemy = {
+    maxHp:hp,
     hp:hp,
     imgSrc: img,
     img: new Image(),

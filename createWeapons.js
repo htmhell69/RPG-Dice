@@ -1,14 +1,28 @@
 //base weapon
 let allWeapons = [];
-function createWeapon(name,type,damage, description){
+function createWeapon(name,type,img,normalName, normalDamage, normalDescription, specialName, specialDamage, cooldown, specialDescription){
     Weapon = {
         name: name,
         type: type,
-        damage: damage,
-        description: description
+        imgSrc: img,
+        img: new Image(),
 
+        normal: {
+            name: normalName,
+            damage: normalDamage,
+            description: normalDescription
+        },
+
+        special: {
+            name: specialName,
+            damage: specialDamage,
+            cooldown: cooldown,
+            description: specialDescription
+        }
+
+        
     }
-
+    Weapon.img.src = Weapon.imgSrc;
     allWeapons.push(Weapon);
 }
 
@@ -23,6 +37,6 @@ function getWeapon(name){
 }
 
 //create generic weapon
-createWeapon("generic", "none", 10, "generic");
+createWeapon("generic","none","assets/player.png", "normal", 10, "10 damage", "special", 20, 2, "20 damage 2 turn cooldown");
 
 

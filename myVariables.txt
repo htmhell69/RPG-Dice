@@ -1,0 +1,38 @@
+                                                        VARIABLES and OBJECTS
+container: contains my buttons div class
+allWeapons: an array that contains every weapon in the game 
+turnOrder: stores an array of all current enemys/players 
+currentTurn: stores an integer that tells what index of the turnOrder array is the enemy/player currently going
+player{
+    Maxhp: maximum health points
+    hp: current hp
+    imgSrc: this holds the string a string containing image loaction that will be used to get the image into img 
+    img: holds the image the canvas will draw for the player
+    type: this will be "player" use this to see what kind of object an object is.
+    items: this holds a list of all the weapons the player has.
+    attack: damage you deal
+    defense: damage reduction
+}
+
+enemy{
+    hp: health points
+    imgSrc: this holds the string a string containing image loaction that will be used to get the image into img 
+    img: holds the image the canvas will draw for the player
+    type: this will be "player" use this to see what kind of object an object is.
+    attack: damage you deal
+    defense: damage reduction
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+                                                        FUNCTIONS   
