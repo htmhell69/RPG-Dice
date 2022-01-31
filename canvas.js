@@ -5,14 +5,20 @@ var hpBarSize;
 var hpGone;
 var hpRatio;
 var numDice = 1;
+var oldWindowWidth = window.innerWidth;
+var oldWindowHeight = window.innerHeight;
 setInterval(resizingCanvas, 10);
 function resizingCanvas(){
-   width = (window.innerWidth/(turnOrder.length + 0.5)  + window.innerHeight/(turnOrder.length + 0.5))/2;
-   height = (window.innerWidth/(turnOrder.length) + window.innerHeight/(turnOrder.length))/2;
-   canvas.height = window.innerHeight/1.5;
-   canvas.width = window.innerWidth;
-   hpBarSize = width - 100;
-   getPosition(turnOrder.length);
+   if(oldWindowWidth != canvas.width || Math.floor(oldWindowHeight/1.5) != canvas.height/1.5){
+      oldWindowWidth = window.innerWidth;
+      oldWindowHeight = window.innerHeight;
+      width = (window.innerWidth/(turnOrder.length + 0.5)  + window.innerHeight/(turnOrder.length + 0.5))/2;
+      height = (window.innerWidth/(turnOrder.length) + window.innerHeight/(turnOrder.length))/2;
+      canvas.height = window.innerHeight/1.5;
+      canvas.width = window.innerWidth;
+      hpBarSize = width - 100;
+      getPosition(turnOrder.length);
+   }
    
    for(let i=0; i<turnOrder.length; i++){
       hpRatio = turnOrder[i].hp / turnOrder[i].maxHp * hpBarSize;
@@ -36,10 +42,14 @@ function resizingCanvas(){
 
 setInterval(resizingDieCanvas, 10);
 function resizingDieCanvas(){
-   dieCanvas.height = window.innerHeight/1.5;
-   dieCanvas.width = window.innerWidth;
-   for(let i=0; i<Dice.length; i++)
-      Dice[i].x = window.window.innerWidth/2 - i *200;
+   if(oldWindowWidth != dieCanvas.width || Math.floor(oldWindowHeight/1.5) != dieCanvas.height){
+      oldWindowWidth = window.innerWidth;
+      oldWindowHeight = window.innerHeight;
+      dieCanvas.height = window.innerHeight/1.5;
+      dieCanvas.width = window.innerWidth;
+      for(let i=0; i<Dice.length; i++)
+         Dice[i].x = window.window.innerWidth/2 - i *200;
+   }
 }
 
 function getPosition(numOfPictures){
