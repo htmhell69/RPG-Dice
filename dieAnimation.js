@@ -130,4 +130,4 @@ function draw1(die){
   
 createDie(200,250,200,200,17);
 createDie(400,250,200,200,17);
-setInterval(rollDie,10); 
+setInterval(rollDie,1000); 
