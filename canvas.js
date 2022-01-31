@@ -4,6 +4,7 @@ var placements;
 var hpBarSize;
 var hpGone;
 var hpRatio;
+var numDice = 1;
 setInterval(resizingCanvas, 10);
 function resizingCanvas(){
    width = (window.innerWidth/(turnOrder.length + 0.5)  + window.innerHeight/(turnOrder.length + 0.5))/2;
@@ -31,6 +32,14 @@ function resizingCanvas(){
       
    }
 
+}
+
+setInterval(resizingDieCanvas, 10);
+function resizingDieCanvas(){
+   dieCanvas.height = window.innerHeight/1.5;
+   dieCanvas.width = window.innerWidth;
+   for(let i=0; i<Dice.length; i++)
+      Dice[i].x = window.window.innerWidth/2 - i *200;
 }
 
 function getPosition(numOfPictures){

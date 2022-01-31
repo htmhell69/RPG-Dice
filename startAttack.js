@@ -6,6 +6,9 @@ var player = createPlayer(10, "assets/player.png", 10, 10);
 var canvas = document.getElementById("canvas");
 var ctx = canvas.getContext("2d");
 
+var dieCanvas = document.getElementById("dieCanvas");
+var dieCtx = dieCanvas.getContext("2d");
+
 turnOrder.push(player);
 function checkIfNoEnemy(){
     if(turnOrder.length < 2){
