@@ -4,14 +4,29 @@ function attackMenu(event){
   if(turnOrder[currentTurn].type == "player"){
     let weapons = turnOrder[currentTurn].weapons;
     removeButton();
+    //back
+    let button = document.createElement("button");
+    let buttonText = document.createTextNode("Back");
+    button.style.width = "200px";
+    button.style.height = "105px";
+    button.style.backgroundColor = "orange";
+    
+    button.appendChild(buttonText); 
+    button.className = "button";
+    button.id = "back";
+    container.appendChild(button);
+    document.getElementById("back").addEventListener("click", startMenu);
+
+
     for(let i=0; i<weapons.length; i++){
-      let button = document.createElement("button");
-      let buttonText = document.createTextNode(weapons[i].name);
-      weapons[i].img.style.width = "200x";
-      weapons[i].img.style.height = "105px";
-      container.appendChild(weapons[i].img);
+      button = document.createElement("button");
+      buttonText = document.createTextNode(weapons[i].name);
+      weapons[i].img.style.width = "10x";
+      weapons[i].img.style.height = "10px";
       button.style.width = "200px";
       button.style.height = "105px";
+      button.style.backgroundImage = "url('" + weapons[i].imgSrc + "')";
+      button.style.backgroundRepeat = "no-repeat"
       button.appendChild(buttonText); 
       button.id = i;
       button.className = "button";

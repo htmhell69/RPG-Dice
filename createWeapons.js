@@ -37,6 +37,6 @@ function getWeapon(name){
 }
 
 //create generic weapon
-createWeapon("generic","none","assets/player.png", "normal", 10, "10 damage", "special", 20, 2, "20 damage 2 turn cooldown");
+createWeapon("generic","none","assets/item.png", "normal", 10, "10 damage", "special", 20, 2, "20 damage 2 turn cooldown");
 
 
