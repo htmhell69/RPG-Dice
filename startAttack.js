@@ -10,6 +10,8 @@ var dieCanvas = document.getElementById("dieCanvas");
 var dieCtx = dieCanvas.getContext("2d");
 
 turnOrder.push(player);
+
+
 function checkIfNoEnemy(){
     if(turnOrder.length < 2){
         Enemy = createEnemy(100, "assets/enemy.png" , 10, 10);

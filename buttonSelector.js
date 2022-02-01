@@ -48,6 +48,7 @@ function weaponMenu(weapon){
   button.appendChild(buttonText); 
   container.appendChild(button);
   document.getElementById("special").addEventListener("click", runAttack);
+
 }
 
 
@@ -58,6 +59,41 @@ function removeButton(){
     container.removeChild(container.firstChild);
 }
 }
+
+
+function startMenu(){
+  removeButton();
+  //shop
+  let button = document.createElement("button");
+  let buttonText = document.createTextNode("Shop");
+  button.style.width = "400px";
+  button.style.height = "150px";
+  button.style.fontSize = "100px";
+  button.id = "remove";
+  button.className = "button";
+  button.appendChild(buttonText); 
+  container.appendChild(button);
+  document.getElementById("remove").addEventListener("click", removeButton);
+
+  //attack button
+  button = document.createElement("button");
+  buttonText = document.createTextNode("Attack");
+  button.style.width = "400px";
+  button.style.height = "150px";
+  button.style.fontSize = "100px";
+  button.id = "attack";
+  button.className = "button";
+  button.appendChild(buttonText); 
+  container.appendChild(button);
+  document.getElementById("attack").addEventListener("click", runAttack);
+}
+
+
+
+
+
+
+
 
 
 document.getElementById("attack").addEventListener("click", attackMenu);

@@ -7,6 +7,7 @@ function createPlayer(hp, img, defense, attack){
     imgSrc:img,
     img: new Image(),
     weapons: [],
+    materials: {},
     defense:defense,
     attack:attack,
     specialCooldown: 0,
@@ -30,6 +31,47 @@ function createEnemy(hp, img, defense, attack){
   enemy.img.src = enemy.imgSrc;
   return enemy
 }
+
+
+
+
+//event handling
+  setInterval(update, 50);
+
+  function update(){
+    checkIfDead();
+  }
+
+
+
+  function checkIfDead(){
+    for(let i=0; i<turnOrder.length; i++){
+      let currentObject = turnOrder[i];
+      if(currentObject.type == "player" && currentObject.hp <= 0){
+        alert("you died");
+        location.reload();
+
+      } else if(currentObject.type == "enemy" && currentObject.hp <= 0){
+          turnOrder.splice(i);
+          enemyDrops(currentObject);
+          newEnemy(currentObject);
+        
+
+
+        }
+
+    }
+  }
+
+
+  function enemyDrops(object){
+
+  }
+
+
+  function newEnemy(){
+
+  }
 
 
 
