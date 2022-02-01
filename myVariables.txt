@@ -1,17 +1,32 @@
-                                                        VARIABLES and OBJECTS
+                                                        VARIABLES
 container: contains my buttons div class where all buttons/visual menu is kept
 allWeapons: an array that contains every weapon in the game 
 turnOrder: stores an array of all current enemys/players 
 currentTurn: stores an integer that tells what index of the turnOrder array is the enemy/player currently going
+                                                        CANVAS VARIABLES
+ctx: this stores the context of the top canvas this is what you use methods like drawImage and the such on.
+canvas: this stores the actual top canvas you can resize it and such
+width: is the width that all images on the canvas
+height: is the height of all the images on the canavas
+placments: an array of x positions for each image on the canvas
+hpBarSize: size of the health bar above every image
+hpRatio: the variable that helps display the green part of the health bar the backround is the red part
+numDice: this variable stores the number of dice that will be rolled on the bottom of the screen
+oldWindowWidth: this variable stores the last width the window was i will use this value for smoother drawing so that i dont have to redraw the image every 10ms instead it will only redraw them if the window size has changed.
+
+oldWindowHeight: this variable stores the last height the window was i will use this value for smoother drawing so that i dont have to redraw the image every 10ms instead it will only redraw them if the window size has changed.
+
+                                                        OBJECTS                                                 
+                                                      
 player{
-    Maxhp: maximum health points
+    maxHp: maximum health points
     hp: current hp
     imgSrc: this holds the string a string containing image loaction that will be used to get the image into img 
     weapons: holds the image the canvas will draw for the player
     type: this will be "player" use this to see what kind of object an object is.
     weapons: this holds a list of all the weapons the player has.
-    attack: damage you deal
-    defense: damage reduction
+    damage: base damage this player will deal will be added to the weapon damage when dealing damage
+    defense: damage reduction from damage taken this will be added to armor.
 }
 
 enemy{
@@ -36,3 +51,7 @@ enemy{
 
 
                                                         FUNCTIONS   
+                                                 
+                                                        
+                                                        
+                                                        
