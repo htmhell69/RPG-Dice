@@ -7,7 +7,7 @@ player{
     Maxhp: maximum health points
     hp: current hp
     imgSrc: this holds the string a string containing image loaction that will be used to get the image into img 
-    img: holds the image the canvas will draw for the player
+    weapons: holds the image the canvas will draw for the player
     type: this will be "player" use this to see what kind of object an object is.
     items: this holds a list of all the weapons the player has.
     attack: damage you deal
