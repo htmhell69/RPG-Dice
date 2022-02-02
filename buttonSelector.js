@@ -1,6 +1,5 @@
 let container = document.querySelector(".buttons");
 //this starts up the attack selectors
-alert("deez nuts");
 function attackMenu(event){
   if(turnOrder[currentTurn].type == "player"){
     let weapons = turnOrder[currentTurn].weapons;
