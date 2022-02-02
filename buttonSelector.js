@@ -51,7 +51,7 @@ function weaponMenu(weapon){
   button.className = "button";
   button.appendChild(buttonText); 
   container.appendChild(button);
-  document.getElementById("normal").addEventListener("click", runAttack);
+  document.getElementById("normal").addEventListener("click", attackMenu);
 
   //special
   button = document.createElement("button");
