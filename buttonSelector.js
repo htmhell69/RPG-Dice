@@ -101,7 +101,7 @@ function startMenu(){
   button.className = "button";
   button.appendChild(buttonText); 
   container.appendChild(button);
-  document.getElementById("attack").addEventListener("click", runAttack);
+  document.getElementById("attack").addEventListener("click", attackMenu);
 }
 
 
