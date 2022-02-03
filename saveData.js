@@ -1,7 +1,7 @@
 
 
 
-function(){
+function createNewSaveData(){
     
     if (typeof(Storage) !== "undefined") {
         localStorage = setItem("turns", turnOrder);
