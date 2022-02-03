@@ -26,7 +26,8 @@ function attackMenu(event){
       button.style.width = "200px";
       button.style.height = "105px";
       button.style.backgroundImage = "url('" + weapons[i].imgSrc + "')";
-      button.style.backgroundRepeat = "no-repeat"
+      button.style.backgroundRepeat = "no-repeat";
+      button.style.backgroundPosition="center";
       button.appendChild(buttonText); 
       button.id = i;
       button.className = "button";
