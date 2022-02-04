@@ -3,6 +3,7 @@
 function createNewSaveData(){
     
     if (typeof(Storage) !== "undefined") {
+        alert("yes");
         localStorage.clear();
         localStorage.setItem("entities",  turnOrder.stringify);
     } else {
