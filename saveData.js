@@ -3,6 +3,7 @@
 function createNewSaveData(){
     
     if (typeof(Storage) !== "undefined") {
+        localStorage.clear();
         localStorage.setItem("entities",  turnOrder.stringify);
     } else {
         alert("We are sorry for the inconvenience your browser will not allow us to save your game");
@@ -15,7 +16,6 @@ function readSaveData(){
         alert("you do not have any save data press the save button in the left hand corner of your screen to save");
     } else{
         alert(localStorage.getItem("entities"));
-        turnOrder = localStorage.getItem("entities").parse;
 
         startMenu();
     }
