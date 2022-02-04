@@ -114,7 +114,7 @@ function startMenu(){
     let buttonText = document.createTextNode("Load Save");
     button.style.width = "400px";
     button.style.height = "150px";
-    button.style.fontSize = "75px";
+    button.style.fontSize = "70px";
     button.id = "load";
     button.className = "button";
     button.appendChild(buttonText); 
