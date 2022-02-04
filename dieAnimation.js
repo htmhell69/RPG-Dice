@@ -128,6 +128,9 @@ function draw1(die){
 
 
   
-createDie(200,250,200,200,17);
+createDie(400,250,200,200,17);
 createDie(400,250,200,200,17);
 setInterval(rollDie,1000); 
+for(let i=0; i<Dice.length; i++){
+    Dice[i].x = window.window.innerWidth/2 - i *200;
+}

@@ -22,7 +22,7 @@ function attackMenu(){
     for(let i=0; i<weapons.length; i++){
       button = document.createElement("button");
       buttonText = document.createTextNode(weapons[i].name);
-      weapons[i].img.style.width = "10x";
+      weapons[i].img.style.width = "10px";
       weapons[i].img.style.height = "10px";
       button.style.width = "200px";
       button.style.height = "105px";

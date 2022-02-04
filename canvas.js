@@ -73,3 +73,8 @@ function getPosition(numOfPictures){
 
 }
 
+function addImageElement(Object){
+    Object.img = new Image();
+    Object.img.src = Object.imgSrc;
+}
+

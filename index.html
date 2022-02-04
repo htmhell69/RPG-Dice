@@ -2,7 +2,6 @@
 <html>
 <head>
 </head>
-  <!-- comment -->
   <link rel="stylesheet" href="fancyButtons.css">
 <body>
   <div class="save">
@@ -14,6 +13,7 @@
     
   </div>
   <canvas id="dieCanvas" width="1280" height="545" style="border:1px solid #000000;"></canvas>
+  
   <script src="saveData.js"></script>
   <script src="createWeapons.js"></script>
   <script src="playerEnemy.js"></script>
@@ -22,5 +22,10 @@
   <script src="buttonSelector.js"></script>
   <script src="canvas.js"></script>
   <script src="dieAnimation.js"></script>
+  <script>canvas.width = window.innerWidth;</script>
+  <script>canvas.height = window.innerHeight/1.5;</script>
+  <script>dieCanvas.width = window.innerWidth;</script>
+  <script>dieCanvas.height = window.innerHeight/1.5;</script>
+
 </body>
 </html>
