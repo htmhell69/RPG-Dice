@@ -2,8 +2,7 @@
 
 function createNewSaveData(){
     
-    if (typeof(Storage) !== "undefined") {
-        alert(i ran);
+    if (typeof(Storage) != "undefined") {
         localStorage.clear();
         localStorage.setItem("entities",  turnOrder.stringify);
     } else {
