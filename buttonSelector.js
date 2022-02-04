@@ -1,6 +1,7 @@
 let container = document.querySelector(".buttons");
+let save = document.querySelector(".save");
 //this starts up the attack selectors
-function attackMenu(event){
+function attackMenu(){
   if(turnOrder[currentTurn].type == "player"){
     let weapons = turnOrder[currentTurn].weapons;
     removeButton();
@@ -78,6 +79,7 @@ function removeButton(){
 
 
 function startMenu(){
+  gameStart = true;
   removeButton();
   //shop
   let button = document.createElement("button");
@@ -105,6 +107,37 @@ function startMenu(){
 }
 
 
+  function saveMenu(){
+    removeButton();
+    //load save data button
+    let button = document.createElement("button");
+    let buttonText = document.createTextNode("Load Save");
+    button.style.width = "400px";
+    button.style.height = "150px";
+    button.style.fontSize = "75px";
+    button.id = "load";
+    button.className = "button";
+    button.appendChild(buttonText); 
+    container.appendChild(button);
+    document.getElementById("load").addEventListener("click", readSaveData);
+
+
+    //new game
+    button = document.createElement("button");
+    buttonText = document.createTextNode("New Game");
+    button.style.width = "400px";
+    button.style.height = "150px";
+    button.style.fontSize = "75px";
+    button.id = "new";
+    button.className = "button";
+    button.appendChild(buttonText); 
+    container.appendChild(button);
+    document.getElementById("new").addEventListener("click", startMenu);
+  }
+
+
+saveMenu();
+  document.getElementById("saveGame").addEventListener("click", createNewSaveData);
 
 
 
@@ -112,5 +145,3 @@ function startMenu(){
 
 
 
-document.getElementById("attack").addEventListener("click", attackMenu);
-document.getElementById("remove").addEventListener("click", removeButton);
