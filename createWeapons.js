@@ -53,15 +53,14 @@ function getWeapon(name){
 }
 
 //create generic weapon
-createWeapon("generic","none","assets/item.png", "normal", 10, "10 damage", "special", 20, 2, "20 damage 2 turn cooldown");
+createWeapon("generic","none","assets/item.png", "normal", 10, "10 damage", "special", 20, 2, "20 damage 2 turn cooldown", function(){}, function(){},
+function(){
+    alert("generic weapon is running normal attack");
+});
 
 //create complex item
-createWeapon("complex","none","assets/item.png", "normal", 10, "10 damage", "special", 20, 3, "20 damage 3 turn cooldown", function(){}, function(){},function(){},
+createWeapon("complex","none","assets/item.png", "normal", 10, "10 damage", "special", 20, 3, "20 damage 3 turn cooldown", function(){}, function(){},function(){});
 //special initilization
-function(){
 
-}
-
-);
 
 
