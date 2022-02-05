@@ -15,6 +15,8 @@ function createPlayer(hp, img, defense, attack){
   };
   player.img.src = player.imgSrc;
   player.weapons.push(getWeapon("generic"));
+
+
   return player;
 }
 
@@ -72,6 +74,10 @@ function createEnemy(hp, img, defense, attack){
   function newEnemy(){
 
   }
+
+
+
+
 
 
 

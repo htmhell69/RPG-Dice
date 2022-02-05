@@ -79,6 +79,7 @@ function removeButton(){
 
 
 function startMenu(){
+  beginTurn();
   gameStart = true;
   removeButton();
   //shop
@@ -92,7 +93,7 @@ function startMenu(){
   button.appendChild(buttonText); 
   container.appendChild(button);
   document.getElementById("remove").addEventListener("click", removeButton);
-
+  
   //attack button
   button = document.createElement("button");
   buttonText = document.createTextNode("Attack");
@@ -136,7 +137,7 @@ function startMenu(){
   }
 
 
-saveMenu();
+  saveMenu();
   document.getElementById("saveGame").addEventListener("click", createNewSaveData);
 
 

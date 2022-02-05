@@ -13,7 +13,6 @@ hpBarSize: size of the health bar above every image
 hpRatio: the variable that helps display the green part of the health bar the backround is the red part
 numDice: this variable stores the number of dice that will be rolled on the bottom of the screen
 oldWindowWidth: this variable stores the last width the window was i will use this value for smoother drawing so that i dont have to redraw the image every 10ms instead it will only redraw them if the window size has changed.
-
 oldWindowHeight: this variable stores the last height the window was i will use this value for smoother drawing so that i dont have to redraw the image every 10ms instead it will only redraw them if the window size has changed.
 
                                                         OBJECTS                                                 

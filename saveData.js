@@ -3,10 +3,23 @@
 function createNewSaveData(){
     
     if (typeof(Storage) !== "undefined") {
-        alert("yes");
         localStorage.clear();
-        localStorage.setItem("entities",  JSON.stringify(turnOrder));
-        alert(JSON.stringify(turnOrder));
+        let data = turnOrder;
+        //converting the weapon object into a string name to store in localStorage
+        for(let entityI=0; entityI<data.length; entityI++){
+            alert("ran");
+            if(data[entityI].type == "player"){
+                alert("player");
+                for(let i=0; i<data[entityI].weapons.length; i++){
+                    alert("item");
+                    data[entityI].weapons[i] = data[entityI].weapons[i].name;
+                }
+            }
+        }
+
+
+        localStorage.setItem("entities",  JSON.stringify(data));
+        alert(JSON.stringify(data));
     } else {
         alert("We are sorry for the inconvenience your browser will not allow us to save your game");
     }
@@ -21,11 +34,20 @@ function readSaveData(){
         for(let objectI =0; objectI<data.length; objectI++){
             //giving the entites their image
             addImageElement(data[objectI]);
-            //giving the player there weapons image
+            //giving the player their weapons image
+
+
+
             if(data[objectI].type == "player"){
+                let weaponsToAdd = [];
                 for (let weaponI=0; weaponI<data[objectI].weapons.length; weaponI++){
-                    addImageElement(data[objectI].weapons[weaponI]);
+                    alert(data[objectI].weapons[weaponI]);
+                    weaponsToAdd.push(getWeapon(data[objectI].weapons[weaponI]));
+                    alert();
                 }
+                
+                data[objectI].weapons = weaponsToAdd; 
+                
                     
             }
         }
