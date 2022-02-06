@@ -141,8 +141,3 @@ function startMenu(){
   document.getElementById("saveGame").addEventListener("click", createNewSaveData);
 
 
-
-
-
-
-
