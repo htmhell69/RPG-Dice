@@ -37,7 +37,7 @@ function createEnemy(hp, img, defense, attack){
 
 
 //event handling
-  setInterval(update, 50);
+ 
 
   function update(){
     checkIfDead();

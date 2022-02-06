@@ -8,20 +8,21 @@ var ctx;
 var dieCanvas;
 var dieCtx;
 
+canvas = document.getElementById("canvas");
+ctx = canvas.getContext("2d");
+dieCanvas = document.getElementById("dieCanvas");
+dieCtx = dieCanvas.getContext("2d");
 
-        function singlePlayer(newGame){
-            canvas = document.getElementById("canvas");
-            ctx = canvas.getContext("2d");
-            dieCanvas = document.getElementById("dieCanvas");
-            dieCtx = dieCanvas.getContext("2d");
-            setInterval(checkIfNoEnemy, 50);
-            checkIfNoEnemy();
-            startMenu();
+
+        function singlePlayer(event, newGame = true){
             if(newGame){
                 let player = createPlayer(100, "assets/player.png", 0, 0);
                 turnOrder.push(player);
             }
-
+            setInterval(checkIfNoEnemy, 50);
+            checkIfNoEnemy();
+            setInterval(update, 50);
+            startMenu();
         }
 
         

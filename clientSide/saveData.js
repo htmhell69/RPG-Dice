@@ -41,13 +41,11 @@ function readSaveData(){
                     weaponsToAdd.push(getWeapon(data[objectI].weapons[weaponI]));
                 }
                 
-                data[objectI].weapons = weaponsToAdd; 
-                
-                    
+                data[objectI].weapons = weaponsToAdd;        
             }
         }
         turnOrder = data;
-	    singlePlayer(false);
+	    singlePlayer(null, false);
         
     }
     

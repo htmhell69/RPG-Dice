@@ -133,7 +133,7 @@ function startMenu(){
     button.className = "button";
     button.appendChild(buttonText); 
     container.appendChild(button);
-    document.getElementById("new").addEventListener("click", startMenu);
+    document.getElementById("new").addEventListener("click", singlePlayer);
   }
 
 
