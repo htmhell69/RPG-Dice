@@ -47,7 +47,8 @@ function readSaveData(){
             }
         }
         turnOrder = data;
-        startMenu();
+	    singlePlayer(false);
+        
     }
     
     
