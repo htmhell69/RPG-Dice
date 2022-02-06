@@ -1,33 +1,39 @@
 <!DOCTYPE html>
 <html>
-<head>
-</head>
-  <link rel="stylesheet" href="fancyButtons.css">
-<body>
-  <div class="save">
-    <button id="saveGame">Save Game</button>
-  </div>
-  <canvas id="canvas" width="1280" height="545" style="border:1px solid #000000;"></canvas>
-  <br>
-  <div class="buttons" style="text-align: center;">
-    
-  </div>
-  <canvas id="dieCanvas" width="1280" height="545" style="border:1px solid #000000;"></canvas>
-  
-  <script src="saveData.js"></script>
-  <script src="createWeapons.js"></script>
-  <script src="playerEnemy.js"></script>
-  <script src="playerAttack.js"></script>
-  <script src="startAttack.js"></script>
-  <script src="buttonSelector.js"></script>
-  <script src="canvas.js"></script>
-  <script src="dieAnimation.js"></script>
-  <script>
-  canvas.width = window.innerWidth;
-  canvas.height = window.innerHeight/1.5;
-  dieCanvas.width = window.innerWidth;
-  dieCanvas.height = window.innerHeight/1.5;
-</script>
+  <head> </head>
+  <link rel="stylesheet" href="clientSide/fancyButtons.css" />
+  <body>
+    <div class="save">
+      <button id="saveGame">Save Game</button>
+    </div>
+    <canvas
+      id="canvas"
+      width="1280"
+      height="545"
+      style="border: 1px solid #000000"
+    ></canvas>
+    <br />
+    <div class="buttons" style="text-align: center"></div>
+    <canvas
+      id="dieCanvas"
+      width="1280"
+      height="545"
+      style="border: 1px solid #000000"
+    ></canvas>
 
-</body>
+    <script src="clientSide/saveData.js"></script>
+    <script src="clientSide/createWeapons.js"></script>
+    <script src="clientSide/playerEnemy.js"></script>
+    <script src="clientSide/playerAttack.js"></script>
+    <script src="clientSide/startAttack.js"></script>
+    <script src="clientSide/buttonSelector.js"></script>
+    <script src="clientSide/canvas.js"></script>
+    <script src="clientSide/dieAnimation.js"></script>
+    <script>
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight / 1.5;
+      dieCanvas.width = window.innerWidth;
+      dieCanvas.height = window.innerHeight / 1.5;
+    </script>
+  </body>
 </html>
