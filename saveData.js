@@ -7,11 +7,8 @@ function createNewSaveData(){
         let data = turnOrder;
         //converting the weapon object into a string name to store in localStorage
         for(let entityI=0; entityI<data.length; entityI++){
-            alert("ran");
             if(data[entityI].type == "player"){
-                alert("player");
                 for(let i=0; i<data[entityI].weapons.length; i++){
-                    alert("item");
                     data[entityI].weapons[i] = data[entityI].weapons[i].name;
                 }
             }
@@ -41,9 +38,7 @@ function readSaveData(){
             if(data[objectI].type == "player"){
                 let weaponsToAdd = [];
                 for (let weaponI=0; weaponI<data[objectI].weapons.length; weaponI++){
-                    alert(data[objectI].weapons[weaponI]);
                     weaponsToAdd.push(getWeapon(data[objectI].weapons[weaponI]));
-                    alert();
                 }
                 
                 data[objectI].weapons = weaponsToAdd; 

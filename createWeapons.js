@@ -50,7 +50,6 @@ function getWeapon(name){
     for (let i=0; i < allWeapons.length; i++){
         if(name == allWeapons[i].name){
             weaponIndex = allWeapons[i];
-            alert(weaponIndex.imgSrc);
             let Weapon = weaponConstructor(false, weaponIndex.name, weaponIndex.type, weaponIndex.imgSrc, weaponIndex.normal.name, weaponIndex.normal.damage, weaponIndex.normal.description,
                 weaponIndex.special.name,weaponIndex.special.damage,weaponIndex.special.cooldown,weaponIndex.special.description,weaponIndex.normal.initilization,weaponIndex.normal.onBeginTurn,
                 weaponIndex.normal.beforeStrike,weaponIndex.normal.afterStrike,weaponIndex.special.initilization,weaponIndex.special.onBeginTurn,weaponIndex.special.beforeStrike,weaponIndex.special.afterStrike
