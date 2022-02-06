@@ -15,8 +15,9 @@ function createPlayer(hp, img, defense, attack){
   };
   player.img.src = player.imgSrc;
   player.weapons.push(getWeapon("generic"));
-
-
+  player.weapons[0].number = 1;
+  alert(player.weapons[0].number);
+  alert(getWeapon("generic").number);
   return player;
 }
 

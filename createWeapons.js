@@ -1,12 +1,10 @@
 //base weapon
 let allWeapons = [];
-function createWeapon(name,type,img,normalName, normalDamage, normalDescription, specialName, specialDamage, cooldown, specialDescription, 
+function weaponConstructor(addToArray,name,type,img,normalName, normalDamage, normalDescription, specialName, specialDamage, cooldown, specialDescription, 
     normalInitilization = function(){}, normalTurnStart = function(){}, normalBeforeStrike = function(){}, normalAfterStrike = function(){}, 
     specialInitilization = function(){}, specialTurnStart = function(){}, specialBeforeStrike = function(){}, specialAfterStrike = function(){}, )
     {
-
-
-    Weapon = {
+    newWeapon = {
         name: name,
         type: type,
         imgSrc: img,
@@ -36,8 +34,14 @@ function createWeapon(name,type,img,normalName, normalDamage, normalDescription,
 
         
     }
-    Weapon.img.src = Weapon.imgSrc;
-    allWeapons.push(Weapon);
+        newWeapon.img.src = newWeapon.imgSrc;   
+
+        if(addToArray){
+            allWeapons.push(newWeapon);
+        } else{
+            return newWeapon;
+        }
+    
 }
 
 
@@ -45,21 +49,30 @@ function createWeapon(name,type,img,normalName, normalDamage, normalDescription,
 function getWeapon(name){
     for (let i=0; i < allWeapons.length; i++){
         if(name == allWeapons[i].name){
-            allWeapons[i].normal.initilization();
-            allWeapons[i].special.initilization();
-            return allWeapons[i];
+            weaponIndex = allWeapons[i];
+            alert(weaponIndex.imgSrc);
+            let Weapon = weaponConstructor(false, weaponIndex.name, weaponIndex.type, weaponIndex.imgSrc, weaponIndex.normal.name, weaponIndex.normal.damage, weaponIndex.normal.description,
+                weaponIndex.special.name,weaponIndex.special.damage,weaponIndex.special.cooldown,weaponIndex.special.description,weaponIndex.normal.initilization,weaponIndex.normal.onBeginTurn,
+                weaponIndex.normal.beforeStrike,weaponIndex.normal.afterStrike,weaponIndex.special.initilization,weaponIndex.special.onBeginTurn,weaponIndex.special.beforeStrike,weaponIndex.special.afterStrike
+                );
+            Weapon.normal.initilization();
+            Weapon.special.initilization();
+            return Weapon;
         }
     }
 }
 
+
+
+
 //create generic weapon
-createWeapon("generic","none","assets/item.png", "normal", 10, "10 damage", "special", 20, 2, "20 damage 2 turn cooldown", function(){}, function(){},
+weaponConstructor(true,"generic","none","assets/item.png", "normal", 10, "10 damage", "special", 20, 2, "20 damage 2 turn cooldown", function(){}, function(){},
 function(){
     alert("generic weapon is running normal attack");
 });
 
 //create complex item
-createWeapon("complex","none","assets/item.png", "normal", 10, "10 damage", "special", 20, 3, "20 damage 3 turn cooldown", function(){}, function(){},function(){});
+weaponConstructor(true, "complex","none","assets/item.png", "normal", 10, "10 damage", "special", 20, 3, "20 damage 3 turn cooldown", function(){}, function(){},function(){});
 //special initilization
 
 
