@@ -8,8 +8,8 @@ function attackMenu(){
     //back
     let button = document.createElement("button");
     let buttonText = document.createTextNode("Back");
-    button.style.width = "200px";
-    button.style.height = "105px";
+    button.style.width = "100px";
+    button.style.height = "25px";
     button.style.backgroundColor = "orange";
     
     button.appendChild(buttonText); 
@@ -24,8 +24,8 @@ function attackMenu(){
       buttonText = document.createTextNode(weapons[i].name);
       weapons[i].img.style.width = "10px";
       weapons[i].img.style.height = "10px";
-      button.style.width = "200px";
-      button.style.height = "105px";
+      button.style.width = "100px";
+      button.style.height = "25px";
       button.style.backgroundImage = "url('" + weapons[i].imgSrc + "')";
       button.style.backgroundRepeat = "no-repeat";
       button.style.backgroundPosition="center";
@@ -47,8 +47,8 @@ function weaponMenu(weapon){
   //normal button
   let button = document.createElement("button");
   let buttonText = document.createTextNode(normal.name);
-  button.style.width = "290px";
-  button.style.height = "150px";
+  button.style.width = "100px";
+  button.style.height = "25px";
   button.id = "normal";
   button.className = "button";
   button.appendChild(buttonText); 
@@ -58,8 +58,8 @@ function weaponMenu(weapon){
   //special
   button = document.createElement("button");
   buttonText = document.createTextNode(special.name);
-  button.style.width = "290px";
-  button.style.height = "150px";
+  button.style.width = "100px";
+  button.style.height = "25px";
   button.id = "special";
   button.className = "button2";
   button.appendChild(buttonText); 
@@ -85,9 +85,9 @@ function startMenu(){
   //shop
   let button = document.createElement("button");
   let buttonText = document.createTextNode("Shop");
-  button.style.width = "400px";
-  button.style.height = "150px";
-  button.style.fontSize = "100px";
+  button.style.width = "100px";
+  button.style.height = "50px";
+  button.style.fontSize = "10px";
   button.id = "remove";
   button.className = "button";
   button.appendChild(buttonText); 
@@ -97,9 +97,9 @@ function startMenu(){
   //attack button
   button = document.createElement("button");
   buttonText = document.createTextNode("Attack");
-  button.style.width = "400px";
-  button.style.height = "150px";
-  button.style.fontSize = "100px";
+  button.style.width = "100px";
+  button.style.height = "50px";
+  button.style.fontSize = "10px";
   button.id = "attack";
   button.className = "button";
   button.appendChild(buttonText); 
@@ -113,9 +113,9 @@ function startMenu(){
     //load save data button
     let button = document.createElement("button");
     let buttonText = document.createTextNode("Load Save");
-    button.style.width = "400px";
-    button.style.height = "150px";
-    button.style.fontSize = "70px";
+    button.style.width = "100px";
+    button.style.height = "50px";
+    button.style.fontSize = "10px";
     button.id = "load";
     button.className = "button";
     button.appendChild(buttonText); 
@@ -126,9 +126,9 @@ function startMenu(){
     //new game
     button = document.createElement("button");
     buttonText = document.createTextNode("New Game");
-    button.style.width = "400px";
-    button.style.height = "150px";
-    button.style.fontSize = "75px";
+    button.style.width = "100px";
+    button.style.height = "50px";
+    button.style.fontSize = "10px";
     button.id = "new";
     button.className = "button";
     button.appendChild(buttonText); 
