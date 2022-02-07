@@ -42,7 +42,6 @@ body{
   float: left;
   background-color: rgba(16,16,16,0.6);
   color: white;
-  transform: translateY(-75x);
 }
 
 .description{
@@ -62,5 +61,4 @@ body{
   float: right;
   background-color: rgba(16,16,16,0.6);
   color: white;
-  transform: translateY(-150px);
 }
