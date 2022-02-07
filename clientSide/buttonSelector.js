@@ -1,4 +1,4 @@
-let container = document.querySelector(".buttons");
+let container = document.querySelector(".menu");
 let save = document.querySelector(".save");
 //this starts up the attack selectors
 function attackMenu(){
