@@ -42,7 +42,7 @@ body{
   float: left;
   background-color: rgba(16,16,16,0.6);
   color: white;
-  white-space: nowrap;
+  transform: translateY(100px);
 }
 
 .description{
@@ -53,7 +53,6 @@ body{
   margin: auto;
   background-color: rgba(16,16,16,0.6);
   color: white;
-  white-space: nowrap;
 }
 
 .rightMenu{
@@ -63,5 +62,5 @@ body{
   float: right;
   background-color: rgba(16,16,16,0.6);
   color: white;
-  white-space: nowrap;
+  transform: translateY(100px);
 }
