@@ -137,7 +137,6 @@ function startMenu(){
   }
 
 
-  saveMenu();
   document.getElementById("saveGame").addEventListener("click", createNewSaveData);
 
 
