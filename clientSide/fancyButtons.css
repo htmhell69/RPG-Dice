@@ -44,3 +44,11 @@ html, body {
     color: #fff;
     transform: translateY(-7px);
   }
+
+
+
+.buttons{
+  height: "50%px";
+  width: "500px";
+  border: 4px dotted blue;
+}
