@@ -17,6 +17,7 @@ function createNewSaveData(){
 
         localStorage.setItem("entities",  JSON.stringify(data));
         alert(JSON.stringify(data));
+	location.reload();
     } else {
         alert("We are sorry for the inconvenience your browser will not allow us to save your game");
     }
