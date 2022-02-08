@@ -25,9 +25,8 @@ body {
 }
 
 .button2:hover {
-  box-shadow: 0px 15px 20px rgb(190, 0, 242);
-  color: #fff;
-  transform: translateY(-7px);
+  background-color: rgb(224, 5, 224);
+  color: black;
 }
 
 .menu {
