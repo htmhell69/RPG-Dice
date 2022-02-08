@@ -87,7 +87,8 @@ function startMenu(){
   let buttonText = document.createTextNode("Shop");
   button.style.width = "100px";
   button.style.height = "50px";
-  button.style.fontSize = "10px";
+  button.style.fontSize = "15px";
+  button.style.fontWeight = "bold";
   button.id = "remove";
   button.className = "button";
   button.appendChild(buttonText); 
@@ -99,7 +100,8 @@ function startMenu(){
   buttonText = document.createTextNode("Attack");
   button.style.width = "100px";
   button.style.height = "50px";
-  button.style.fontSize = "10px";
+  button.style.fontSize = "15px";
+  button.style.fontWeight = "bold";
   button.id = "attack";
   button.className = "button";
   button.appendChild(buttonText); 
@@ -115,7 +117,8 @@ function startMenu(){
     let buttonText = document.createTextNode("Load Save");
     button.style.width = "100px";
     button.style.height = "50px";
-    button.style.fontSize = "10px";
+    button.style.fontSize = "15px";
+    button.style.fontWeight = "bold";
     button.id = "load";
     button.className = "button";
     button.appendChild(buttonText); 
@@ -128,7 +131,8 @@ function startMenu(){
     buttonText = document.createTextNode("New Game");
     button.style.width = "100px";
     button.style.height = "50px";
-    button.style.fontSize = "10px";
+    button.style.fontSize = "15px";
+    button.style.fontWeight = "bold";
     button.id = "new";
     button.className = "button";
     button.appendChild(buttonText); 
