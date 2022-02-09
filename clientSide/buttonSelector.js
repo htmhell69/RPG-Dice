@@ -17,7 +17,8 @@ function attackMenu() {
     button.className = "button";
     button.id = "back";
     container.appendChild(button);
-    document.getElementById("back").addEventListener("click", startMenu);
+    $("#back").click(startMenu);
+    $("#back").mouseover(description);
 
     for (let i = 0; i < weapons.length; i++) {
       button = document.createElement("button");
@@ -25,14 +26,13 @@ function attackMenu() {
       button.style.width = "100%";
       button.style.height = "15%";
       button.style.fontSize = "90%";
-      button.style.backgroundImage = "url('" + weapons[i].imgSrc + "')";
-      button.style.backgroundRepeat = "no-repeat";
-      button.style.backgroundPosition = "center";
       button.appendChild(buttonText);
       button.id = i;
       button.className = "button";
       container.appendChild(button);
       document.getElementById(i).addEventListener("click", startAttack);
+      $("#" + i).click(startAttack);
+      $("#" + i).mouseover(description);
     }
   }
 }
@@ -52,7 +52,8 @@ function weaponMenu(weapon) {
   button.className = "button";
   button.appendChild(buttonText);
   container.appendChild(button);
-  document.getElementById("normal").addEventListener("click", runAttack);
+  $("#normal").click(runAttack);
+  $("#normal").mouseover(description);
 
   //special
   button = document.createElement("button");
@@ -64,7 +65,8 @@ function weaponMenu(weapon) {
   button.className = "button2";
   button.appendChild(buttonText);
   container.appendChild(button);
-  document.getElementById("special").addEventListener("click", runAttack);
+  $("#special").click(runAttack);
+  $("#special").mouseover(description);
 }
 
 function removeButton() {
@@ -84,11 +86,12 @@ function startMenu() {
   button.style.height = "40%";
   button.style.fontSize = "90%";
   button.style.fontWeight = "bold";
-  button.id = "remove";
+  button.id = "shop";
   button.className = "button";
   button.appendChild(buttonText);
   container.appendChild(button);
-  document.getElementById("remove").addEventListener("click", removeButton);
+  $("#shop").click(removeButton);
+  $("#shop").mouseover(description);
 
   //attack button
   button = document.createElement("button");
@@ -101,7 +104,8 @@ function startMenu() {
   button.className = "button";
   button.appendChild(buttonText);
   container.appendChild(button);
-  document.getElementById("attack").addEventListener("click", attackMenu);
+  $("#attack").click(attackMenu);
+  $("#attack").mouseover(description);
 }
 
 function saveMenu() {
@@ -117,8 +121,8 @@ function saveMenu() {
   button.className = "button";
   button.appendChild(buttonText);
   container.appendChild(button);
-  document.getElementById("load").addEventListener("click", readSaveData);
-
+  $("#load").click(readSaveData);
+  $("#load").mouseover(description);
   //new game
   button = document.createElement("button");
   buttonText = document.createTextNode("New Game");
@@ -130,7 +134,8 @@ function saveMenu() {
   button.className = "button";
   button.appendChild(buttonText);
   container.appendChild(button);
-  document.getElementById("new").addEventListener("click", singlePlayer);
+  $("#new").click(singlePlayer);
+  $("#new").mouseover(description);
 }
 
 document
