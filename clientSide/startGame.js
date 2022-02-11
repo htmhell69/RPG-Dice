@@ -24,7 +24,6 @@ function singlePlayer(event, newGame = true) {
   startMenu();
 }
 
-
 function checkIfNoEnemy() {
   if (turnOrder.length < 2 && gameType == "singlePlayer") {
     Enemy = createEnemy(100, "assets/enemy.png", 10, 10);

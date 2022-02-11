@@ -63,6 +63,7 @@ body {
   margin-right: auto;
   margin-left: 0;
   overflow: scroll;
+  overflow: hidden;
 }
 
 .buttons {
