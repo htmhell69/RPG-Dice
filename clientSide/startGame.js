@@ -25,10 +25,10 @@ function singlePlayer(event, newGame = true) {
 }
 
 function localMultiPlayer(event) {
-  for (let i = 1; i < 2; i++) {
     let player = createPlayer(100, "assets/player.png", 0, 0);
     turnOrder.push(player);
-  }
+    player = createPlayer(100, "assets/player.png", 0, 0);
+    turnOrder.push(player);
   setInterval(update, 50);
   startMenu();
 }
