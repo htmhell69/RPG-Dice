@@ -134,7 +134,7 @@ function saveMenu() {
   button.className = "button";
   button.appendChild(buttonText);
   container.appendChild(button);
-  $("#new").click(localMultiPlayer);
+  $("#new").click(singlePlayer);
   $("#new").mouseover(description);
 }
 
