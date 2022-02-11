@@ -24,14 +24,6 @@ function singlePlayer(event, newGame = true) {
   startMenu();
 }
 
-function localMultiPlayer(event) {
-    let player = createPlayer(100, "assets/player.png", 0, 0);
-    turnOrder.push(player);
-    player = createPlayer(100, "assets/player.png", 0, 0);
-    turnOrder.push(player);
-  setInterval(update, 50);
-  startMenu();
-}
 
 function checkIfNoEnemy() {
   if (turnOrder.length < 2 && gameType == "singlePlayer") {
