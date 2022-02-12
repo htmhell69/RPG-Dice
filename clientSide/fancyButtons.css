@@ -34,7 +34,7 @@ body {
   width: 8vw;
   height: 10vh;
   border: 5px solid black;
-  background-color: rgba(16, 16, 16, 0.6);
+  background-color: #046985;
   color: white;
   margin-left: auto;
   margin-right: 0;
@@ -47,7 +47,7 @@ body {
   height: 10vw;
   border: 5px solid black;
   text-align: center;
-  background-color: rgba(16, 16, 16, 0.6);
+  background-color: #046985;
   color: white;
   overflow: scroll;
 }
@@ -57,7 +57,7 @@ body {
   width: 8vw;
   height: 10vh;
   border: 5px solid black;
-  background-color: rgba(16, 16, 16, 0.6);
+  background-color: #046985;
   color: white;
   margin-right: auto;
   margin-left: 0;
