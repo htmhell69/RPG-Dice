@@ -47,11 +47,15 @@ function checkIfDead() {
     } else if (currentObject.type == "enemy" && currentObject.hp <= 0) {
       turnOrder.splice(i);
       enemyDrops(currentObject);
-      newEnemy(currentObject);
+      difficulty += 1;
+      newEnemy();
     }
   }
 }
 
 function enemyDrops(object) {}
 
-function newEnemy() {}
+function newEnemy() {
+  Enemy = createEnemy(100, "assets/enemy.png", 10, 10);
+  turnOrder.push(Enemy);
+}
