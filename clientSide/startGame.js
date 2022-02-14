@@ -18,8 +18,9 @@ function singlePlayer(event, newGame = true) {
   if (newGame) {
     let player = createPlayer(100, "assets/player.png", 0, 0);
     turnOrder.push(player);
+    newEnemy();
   }
-  newEnemy();
+  startGame = true;
   setInterval(update, 50);
   startMenu();
 }
