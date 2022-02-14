@@ -4,11 +4,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   </head>
   <link rel="stylesheet" href="clientSide/fancyButtons.css" />
-  <body>
+  <body id="body">
     <button
       class="online"
       style="width: 50px; height: 50px; font-weight: bold; font-size: 90%"
-    ></button>
+    >
+      <img src="assets/online.png" width="100%" height="100%" />
+    </button>
 
     <canvas id="canvas" width="1280" height="545"></canvas>
     <br />
@@ -33,22 +35,22 @@
       </div>
     </div>
     <canvas id="dieCanvas" width="1280" height="545"></canvas>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-    <script src="clientSide/descriptions.js"></script>
-    <script src="clientSide/saveData.js"></script>
-    <script src="clientSide/createWeapons.js"></script>
-    <script src="clientSide/playerEnemy.js"></script>
-    <script src="clientSide/playerAttack.js"></script>
-    <script src="clientSide/startGame.js"></script>
-    <script src="clientSide/buttonSelector.js"></script>
-    <script src="clientSide/canvas.js"></script>
-    <script src="clientSide/dieAnimation.js"></script>
-
-    <script>
-      canvas.width = window.innerWidth;
-      canvas.height = window.innerHeight / 1.5;
-      dieCanvas.width = window.innerWidth;
-      dieCanvas.height = window.innerHeight / 1.5;
-    </script>
   </body>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+  <script src="clientSide/descriptions.js"></script>
+  <script src="clientSide/saveData.js"></script>
+  <script src="clientSide/createWeapons.js"></script>
+  <script src="clientSide/playerEnemy.js"></script>
+  <script src="clientSide/playerAttack.js"></script>
+  <script src="clientSide/startGame.js"></script>
+  <script src="clientSide/buttonSelector.js"></script>
+  <script src="clientSide/canvas.js"></script>
+  <script src="clientSide/dieAnimation.js"></script>
+
+  <script>
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight / 1.5;
+    dieCanvas.width = window.innerWidth;
+    dieCanvas.height = window.innerHeight / 1.5;
+  </script>
 </html>

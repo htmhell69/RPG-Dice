@@ -73,5 +73,28 @@
 
 .online {
   transform: translateX(100vw);
-  background-image: url("/assets/online.png");
+  background-color: white;
+  border: none;
+}
+
+.online:hover {
+  background-color: lightgreen;
+}
+
+.cloud {
+  position: relative;
+  top: 50%;
+  left: 25%;
+  animation-name: enlargeImage;
+  animation-duration: 5s;
+}
+@keyframes enlargeImage {
+  from {
+    width: 5vw;
+    height: 5vh;
+  }
+  to {
+    width: 50vw;
+    height: 50vh;
+  }
 }

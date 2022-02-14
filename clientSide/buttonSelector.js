@@ -137,8 +137,13 @@ function saveMenu() {
   $("#new").click(singlePlayer);
   $("#new").mouseover(description);
 }
-
+//online menus
+function onlineMenu() {
+  document.body.innerHTML = "";
+  document.body.innerHTML = "<img src='assets/online.png' class='cloud'>";
+}
 document
   .getElementById("saveGame")
   .addEventListener("click", createNewSaveData);
+$(".online").click(onlineMenu);
 saveMenu();
