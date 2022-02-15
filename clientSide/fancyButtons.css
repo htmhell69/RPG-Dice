@@ -99,6 +99,19 @@
   }
 }
 
+.logbtn {
+  background-color: #04AA6D;
+  color: white;
+  padding: 16px;
+  font-size: 16px;
+  border: none;
+}
+
+.log {
+  position: relative;
+  display: inline-block;
+}
+
 .log-content {
   display: none;
   position: absolute;
@@ -108,8 +121,17 @@
   z-index: 1;
 }
 
-log-content a:hover {background-color: #ddd;}
+.log-content a {
+  color: black;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+}
 
-log:hover .log-content {display: block;}
+.log-content a:hover {background-color: #ddd;}
+
+.log:hover .log-content {display: block;}
+
+.logdown:hover .logbtn {background-color: #3e8e41;}
 
 
