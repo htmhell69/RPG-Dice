@@ -19,12 +19,12 @@ function resizingCanvas() {
       oldWindowWidth = window.innerWidth;
       oldWindowHeight = window.innerHeight;
       width =
-        (window.innerWidth / (turnOrder.length + 0.5) +
-          window.innerHeight / (turnOrder.length + 0.5)) /
+        (window.innerWidth / (turnOrder.length + 1) +
+          window.innerHeight / (turnOrder.length + 1)) /
         2;
       height =
-        (window.innerWidth / turnOrder.length +
-          window.innerHeight / turnOrder.length) /
+        (window.innerWidth / (turnOrder.length + 0.25) +
+          window.innerHeight / (turnOrder.length + 0.25)) /
         2;
       canvas.height = window.innerHeight / 1.5;
       canvas.width = window.innerWidth;
@@ -82,3 +82,4 @@ function addImageElement(Object) {
   Object.img = new Image();
   Object.img.src = Object.imgSrc;
 }
+
