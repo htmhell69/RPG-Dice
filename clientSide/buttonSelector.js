@@ -1,5 +1,7 @@
 let container = document.querySelector(".menu");
 let save = document.querySelector(".save");
+let log = document.querySelector(".log-content");
+
 //this starts up the attack selectors
 function attackMenu() {
   if (turnOrder[currentTurn].type == "player") {
@@ -142,6 +144,11 @@ function onlineMenu() {
   document.body.innerHTML = "";
   document.body.innerHTML = "<img src='assets/online.png' class='cloud'>";
 }
+
+function addLog(source, message) {
+  log.append("something");
+}
+
 document
   .getElementById("saveGame")
   .addEventListener("click", createNewSaveData);
