@@ -146,7 +146,7 @@ function onlineMenu() {
 }
 
 function addLog(source, message) {
-  log.append(source + ": " + message);
+  log.append(source + ": " + message + "/n");
 }
 
 document
