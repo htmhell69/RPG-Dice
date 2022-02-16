@@ -84,9 +84,11 @@ function getWeapon(name) {
         weaponIndex.special.afterStrike
       );
       addLog("turn" + (currentTurn + 1), "got a generic weapon");
+      alert("turn" + (currentTurn + 1), "got a generic weapon");
       Weapon.normal.initilization();
       Weapon.special.initilization();
       return Weapon;
+       
     }
   }
 }
