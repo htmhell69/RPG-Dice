@@ -146,8 +146,7 @@ function onlineMenu() {
 }
 
 function addLog(source, message) {
-  alert("message logged");
-  log.append("something");
+  log.append(source + ": " + message);
 }
 
 document
