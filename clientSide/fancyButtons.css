@@ -100,9 +100,7 @@
 }
 
 .logbtn {
-  background-color: #04AA6D;
   color: white;
-  padding: 16px;
   font-size: 16px;
   border: none;
 }
@@ -115,23 +113,27 @@
 .log-content {
   display: none;
   position: absolute;
+  width: 30vw;
+  height: 30vw;
   background-color: #f1f1f1;
-  min-width: 160px;
-  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
   z-index: 1;
 }
 
 .log-content a {
   color: black;
-  padding: 12px 16px;
   text-decoration: none;
   display: block;
 }
 
-.log-content a:hover {background-color: #ddd;}
+.log-content a:hover {
+  background-color: #ddd;
+}
 
-.log:hover .log-content {display: block;}
+.log:hover .log-content {
+  display: block;
+}
 
-.logdown:hover .logbtn {background-color: #3e8e41;}
-
-
+.logdown:hover .logbtn {
+  background-color: #3e8e41;
+}
