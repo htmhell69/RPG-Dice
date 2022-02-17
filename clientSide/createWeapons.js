@@ -58,7 +58,7 @@ function weaponConstructor(
 }
 
 //function to give the player a certain weapon
-function getWeapon(name) {
+function getWeapon(name, log = true) {
   for (let i = 0; i < allWeapons.length; i++) {
     if (name == allWeapons[i].name) {
       weaponIndex = allWeapons[i];
