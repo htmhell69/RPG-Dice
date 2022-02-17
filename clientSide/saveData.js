@@ -43,7 +43,7 @@ function readSaveData() {
           weaponI < data[objectI].weapons.length;
           weaponI++
         ) {
-          weaponsToAdd.push(getWeapon(data[objectI].weapons[weaponI]));
+          weaponsToAdd.push(getWeapon(data[objectI].weapons[weaponI]), false);
         }
 
         data[objectI].weapons = weaponsToAdd;
