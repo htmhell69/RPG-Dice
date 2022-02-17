@@ -146,7 +146,9 @@ function onlineMenu() {
 }
 
 function addLog(source, message) {
-  log.append(source + ": " + message + "/n");
+  let newEntry = document.createElement("P");
+  newEntry.innerHTML = source + ": " + message + "<br>";
+  log.append(newEntry);
 }
 
 document
@@ -154,3 +156,10 @@ document
   .addEventListener("click", createNewSaveData);
 $(".online").click(onlineMenu);
 saveMenu();
+
+if (localStorage.getItem("name") == null) {
+  localStorage.setItem(
+    "name",
+    window.prompt("enter the name you want to use ingame")
+  );
+}
