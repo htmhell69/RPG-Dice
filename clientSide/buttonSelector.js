@@ -147,7 +147,7 @@ function onlineMenu() {
 
 function addLog(source, message) {
   let newEntry = document.createElement("P");
-  newEntry.innerHTML = source + ": " + message + "<br>";
+  newEntry.innerHTML = source + ": " + message;
   log.append(newEntry);
 }
 

@@ -1,6 +1,7 @@
 //this js file creates the functions needed to make the player/enemy objects
-function createPlayer(hp, img, defense, attack) {
+function createPlayer(name, hp, img, defense, attack) {
   let player = {
+    name: name,
     maxHp: hp,
     hp: 3,
     imgSrc: img,
@@ -13,13 +14,12 @@ function createPlayer(hp, img, defense, attack) {
     type: "player",
   };
   player.img.src = player.imgSrc;
-  player.weapons.push(getWeapon("generic"));
-  player.weapons[0].number = 1;
   return player;
 }
 
-function createEnemy(hp, img, defense, attack) {
+function createEnemy(name, hp, img, defense, attack) {
   let enemy = {
+    name: name,
     maxHp: hp,
     hp: hp,
     imgSrc: img,
@@ -56,6 +56,6 @@ function checkIfDead() {
 function enemyDrops(object) {}
 
 function newEnemy() {
-  Enemy = createEnemy(100, "assets/enemy.png", 10, 10);
+  Enemy = createEnemy("boring enemy", 100, "assets/enemy.png", 10, 10);
   turnOrder.push(Enemy);
 }

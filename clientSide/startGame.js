@@ -16,7 +16,13 @@ dieCtx = dieCanvas.getContext("2d");
 
 function singlePlayer(event, newGame = true) {
   if (newGame) {
-    let player = createPlayer(100, "assets/player.png", 0, 0);
+    let player = createPlayer(
+      localStorage.getItem("name"),
+      100,
+      "assets/player.png",
+      0,
+      0
+    );
     turnOrder.push(player);
     newEnemy();
   }
@@ -28,9 +34,14 @@ function singlePlayer(event, newGame = true) {
 function beginTurn() {
   let entity = turnOrder[currentTurn];
   if (entity.type == "player") {
+    if (entity.weapons.length == 0) {
+      entity.weapons.push(getWeapon("generic"));
+      entity.weapons[0].number = 1;
+    }
     if (entity.specialCooldown >= 1) {
       entity.specialCooldown--;
     }
+
     for (let i = 0; i < entity.weapons.length; i++) {
       entity.weapons[i].normal.onBeginTurn();
       entity.weapons[i].special.onBeginTurn();

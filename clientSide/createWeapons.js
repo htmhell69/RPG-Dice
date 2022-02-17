@@ -14,12 +14,12 @@ function weaponConstructor(
   specialDescription,
   normalInitilization = function () {},
   normalTurnStart = function () {},
-  normalBeforeStrike = function () {},
-  normalAfterStrike = function () {},
+  normalBeforeStrike = function (target) {},
+  normalAfterStrike = function (target) {},
   specialInitilization = function () {},
   specialTurnStart = function () {},
-  specialBeforeStrike = function () {},
-  specialAfterStrike = function () {}
+  specialBeforeStrike = function (target) {},
+  specialAfterStrike = function (target) {}
 ) {
   newWeapon = {
     name: name,
@@ -83,7 +83,7 @@ function getWeapon(name) {
         weaponIndex.special.beforeStrike,
         weaponIndex.special.afterStrike
       );
-      addLog(localStorage.getItem("name"), "got a generic weapon");
+      addLog(turnOrder[currentTurn].name, "got the weapon " + name);
       Weapon.normal.initilization();
       Weapon.special.initilization();
       return Weapon;
@@ -106,8 +106,8 @@ weaponConstructor(
   "20 damage 2 turn cooldown",
   function () {},
   function () {},
-  function () {
-    alert("generic weapon is running normal attack");
+  function (target) {
+    addLog(turnOrder[currentTurn].name, "dealt 20 damage to " + target);
   }
 );
 
