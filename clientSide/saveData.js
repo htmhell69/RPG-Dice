@@ -1,6 +1,6 @@
 function createNewSaveData() {
   if (typeof Storage !== "undefined") {
-    localStorage.clear();
+    localStorage.removeItem("entities");
     let data = turnOrder;
     //converting the weapon object into a string name to store in localStorage
     for (let entityI = 0; entityI < data.length; entityI++) {
