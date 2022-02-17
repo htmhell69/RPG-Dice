@@ -84,7 +84,6 @@ function getWeapon(name, log = true) {
         weaponIndex.special.afterStrike
       );
       if(log){
-        alert("i ran");
         addLog(turnOrder[currentTurn].name, "got the weapon " + name);
       }
       Weapon.normal.initilization();
