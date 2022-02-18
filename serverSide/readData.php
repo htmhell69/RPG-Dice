@@ -58,7 +58,7 @@ class MyDB extends SQLite3 {
         getData(true, $namePeram, $passwordPeram);
     } else{
         $db = new MyDB;
-        getData(true, "Teddy", "654321");
+        getData(true, $namePeram, $passwordPeram);
 
     }
 
