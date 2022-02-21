@@ -141,7 +141,7 @@
           .then((response) => response.json())
           .then((data) => {
             if (data.NAME == name && data.PASSWORD == password) {
-              alert("correct");
+              window.location.replace("game.html?name=" + name);
             }
           })
           .catch(function (err) {

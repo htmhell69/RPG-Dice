@@ -157,13 +157,6 @@ document
 $(".online").click(onlineMenu);
 saveMenu();
 
-if (
-  localStorage.getItem("name") == null ||
-  localStorage.getItem("name") == "null"
-) {
-  alert("i love debugging");
-  localStorage.setItem(
-    "name",
-    window.prompt("enter the name you want to use ingame")
-  );
-}
+url = new URL(window.location);
+var playerName = url.searchParams.get("name");
+localStorage.setItem("name", playerName);
