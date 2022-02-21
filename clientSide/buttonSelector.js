@@ -157,7 +157,10 @@ document
 $(".online").click(onlineMenu);
 saveMenu();
 
-if (localStorage.getItem("name") == null || localStorage.getItem("name") == "null") {
+if (
+  localStorage.getItem("name") == null ||
+  localStorage.getItem("name") == "null"
+) {
   alert("i love debugging");
   localStorage.setItem(
     "name",

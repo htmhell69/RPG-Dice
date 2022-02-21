@@ -25,33 +25,28 @@ class MyDB extends SQLite3 {
     $passwordPeram = stringInputCleaner($_GET["password"]);
     $type = $_GET["type"];
 
-   function getData($debug, $name = "", $password = ""){ 
-       global $db, $type;
-       if($type == "both"){
+   function getData($debug, $name = ""){ 
+       global $db;
        $sql = "SELECT * FROM ACCOUNTS
-        WHERE NAME=" . "'" . $name . "'" . " AND PASSWORD=" . "'" . $password . "'";
-       } else {
-        $sql = "SELECT * FROM ACCOUNTS 
         WHERE NAME=" . "'" . $name . "'";
-       }
+
         if($debug){
             echo($sql . "<br>");
         }
         $ret = $db->query($sql);
-        while($row = $ret->fetchArray(SQLITE3_ASSOC) ) {
-            if($debug){
-                echo "NAME = ". $row['NAME'] ."<br>";
-                echo "PASSWORD = ". $row['PASSWORD'] ."<br>";
-            } else{
-                echo json_encode($row);
-            }
+        if(gettype($ret->fetchArray(SQLITE3_ASSOC)) == "boolean"){
+            echo "false";
+        } else{
+            echo "true";
         }
+        
 
         if($debug){
             echo "Operation done successfully<br>";
         }
         $db->close();
     }
+
 
 
    function createDatabase($debug){
@@ -84,10 +79,10 @@ class MyDB extends SQLite3 {
     if(!file_exists('playerData.db')){
         $db = new MyDB;
         createDatabase($doDebug);
-        getData($doDebug, $namePeram, $passwordPeram);
+        getData($doDebug, $namePeram);
     } else{
         $db = new MyDB;
-        getData($doDebug, $namePeram, $passwordPeram);
+        getData($doDebug, $namePeram);
 
     }
 
