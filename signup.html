@@ -139,7 +139,22 @@
     <script>
       $("#signin-from-homepage").submit(function (event) {
         event.preventDefault();
-        checkIfName(this.name.value, this.pscd.value);
+
+        if (
+          this.name.value.indexOf(" ") == -1 &&
+          this.pscd.value.indexOf(" ") == -1
+        ) {
+          checkIfName(this.name.value, this.pscd.value);
+        } else {
+          let error = document.createElement("P");
+          error.style.color = "red";
+          error.innerHTML =
+            "&#9888; you cannot have spaces in the name or password";
+          //appending it to the div
+          let div = $(".signin-text");
+          div.empty();
+          div.append(error);
+        }
       });
     </script>
   </body>
