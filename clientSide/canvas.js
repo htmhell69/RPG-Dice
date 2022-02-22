@@ -5,8 +5,8 @@ var hpBarSize;
 var hpGone;
 var hpRatio;
 var numDice = 1;
-var oldWindowWidth = window.innerWidth;
-var oldWindowHeight = window.innerHeight;
+var oldWindowWidth;
+var oldWindowHeight;
 var gameStart = false;
 setInterval(resizingCanvas, 10);
 
@@ -57,16 +57,7 @@ function resizingDieCanvas() {
       oldWindowWidth != dieCanvas.width ||
       Math.floor(oldWindowHeight / 1.5) != dieCanvas.height
     ) {
-      oldWindowWidth = window.innerWidth;
-      oldWindowHeight = window.innerHeight;
-      dieCanvas.height = window.innerHeight / 1.5;
-      dieCanvas.width = window.innerWidth;
-      for (let i = 0; i < Dice.length; i++) {
-        Dice[i].x = window.innerWidth / 2 - i * Dice[i].width;
-        Dice[i].y = Dice[i].height / 2;
-        Dice[i].height = (window.width + window.height) / 2 / 4;
-        Dice[i].width = (window.width + window.height) / 2 / 4;
-      }
+      updateDie();
     }
   }
 }
@@ -85,4 +76,17 @@ function getPosition(numOfPictures) {
 function addImageElement(Object) {
   Object.img = new Image();
   Object.img.src = Object.imgSrc;
+}
+
+function updateDie() {
+  oldWindowWidth = window.innerWidth;
+  oldWindowHeight = window.innerHeight;
+  dieCanvas.height = window.innerHeight / 1.5;
+  dieCanvas.width = window.innerWidth;
+  for (let i = 0; i < Dice.length; i++) {
+    Dice[i].x = window.innerWidth / 2 - i * Dice[i].width;
+    Dice[i].y = Dice[i].height / 2;
+    Dice[i].height = (window.width + window.height) / 2 / 4;
+    Dice[i].width = (window.width + window.height) / 2 / 4;
+  }
 }

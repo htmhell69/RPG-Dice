@@ -3,7 +3,6 @@ var canvasHeight = dieCanvas.getBoundingClientRect().height;
 var canvasWidth = dieCanvas.getBoundingClientRect().width;
 var Dice = [];
 var ch;
-
 function draw1(die) {
   dieCtx.beginPath();
   let dotX = die.x + 0.5 * die.width;
@@ -15,8 +14,8 @@ function draw1(die) {
 
 function draw2(die) {
   dieCtx.beginPath();
-  let dotX = die.x + 3 * die.dotSize;
-  let dotY = die.y + 3 * die.dotSize;
+  var dotX = die.x + 3 * die.dotSize;
+  var dotY = die.y + 3 * die.dotSize;
   dieCtx.arc(dotX, dotY, die.dotSize, 0, Math.PI * 2);
   dotX = die.x + die.width - 3 * die.dotSize;
   dotY = die.y + die.height - 3 * die.dotSize;
@@ -29,8 +28,8 @@ function draw4(die) {
   //2 diagonal dots
   dieCtx.beginPath();
   //top left
-  let dotX = die.x + 3 * die.dotSize;
-  let dotY = die.y + 3 * die.dotSize;
+  var dotX = die.x + 3 * die.dotSize;
+  var dotY = die.y + 3 * die.dotSize;
   dieCtx.arc(dotX, dotY, die.dotSize, 0, Math.PI * 2, true);
   //bottom right
   dotX = die.x + die.width - 3 * die.dotSize;
@@ -56,8 +55,8 @@ function draw4(die) {
 
 function draw2mid(die) {
   dieCtx.beginPath();
-  let dotX = die.x + 3 * die.dotSize;
-  let dotY = die.y + 0.5 * die.height;
+  var dotX = die.x + 3 * die.dotSize;
+  var dotY = die.y + 0.5 * die.height;
   dieCtx.arc(dotX, dotY, die.dotSize, 0, Math.PI * 2);
   dotX = die.x + die.width - 3 * die.dotSize;
   dotY = die.y + 0.5 * die.height;
@@ -67,20 +66,26 @@ function draw2mid(die) {
 }
 
 function rollDie() {
+  var totalNum = 0;
+  updateDie();
   dieCtx.clearRect(0, 0, canvasWidth, canvasHeight);
   for (let i = 0; i < Dice.length; i++) {
     ch = Math.floor(1 + Math.random() * 6);
+    Dice[i].lastRoll = ch;
+    totalNum += ch;
     drawDots(ch, Dice[i]);
   }
+  return totalNum;
 }
 
 function createDie(x, y, height, width, dotSize) {
-  let die = {
+  var die = {
     x: x,
     y: y,
     height: height,
     width: width,
     dotSize: dotSize,
+    lastRoll: null,
   };
 
   Dice.push(die);
@@ -118,7 +123,6 @@ function drawDots(num, die) {
 
 createDie(400, 250, 100, 100, 8.5);
 createDie(400, 250, 100, 100, 8.5);
-setInterval(rollDie, 1000);
 for (let i = 0; i < Dice.length; i++) {
   Dice[i].x = window.window.innerWidth / 2 - i * 200;
 }

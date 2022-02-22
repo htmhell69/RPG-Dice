@@ -108,8 +108,21 @@ weaponConstructor(
   "20 damage 2 turn cooldown",
   function () {},
   function () {},
-  function (target) {
-    addLog(turnOrder[currentTurn].name, "dealt 10 damage to " + target);
+  function () {},
+  function (target, damage) {
+    addLog(
+      turnOrder[currentTurn].name,
+      "dealt " + damage + " damage to " + target
+    );
+  },
+  function () {},
+  function () {},
+  function () {},
+  function (target, damage) {
+    addLog(
+      turnOrder[currentTurn].name,
+      "dealt " + damage + " damage to " + target
+    );
   }
 );
 
