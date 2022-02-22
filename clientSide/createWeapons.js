@@ -14,12 +14,22 @@ function weaponConstructor(
   specialDescription,
   normalInitilization = function () {},
   normalTurnStart = function () {},
-  normalBeforeStrike = function (target) {},
-  normalAfterStrike = function (target) {},
+  normalBeforeStrike = function (target, damage) {},
+  normalAfterStrike = function (target, damage) {
+    addLog(
+      turnOrder[currentTurn].name,
+      "dealt " + damage + " damage to " + target
+    );
+  },
   specialInitilization = function () {},
   specialTurnStart = function () {},
-  specialBeforeStrike = function (target) {},
-  specialAfterStrike = function (target) {}
+  specialBeforeStrike = function (target, damage) {},
+  specialAfterStrike = function (target, damage) {
+    addLog(
+      turnOrder[currentTurn].name,
+      "dealt " + damage + " damage to " + target
+    );
+  }
 ) {
   newWeapon = {
     name: name,
@@ -105,25 +115,7 @@ weaponConstructor(
   "special",
   20,
   2,
-  "20 damage 2 turn cooldown",
-  function () {},
-  function () {},
-  function () {},
-  function (target, damage) {
-    addLog(
-      turnOrder[currentTurn].name,
-      "dealt " + damage + " damage to " + target
-    );
-  },
-  function () {},
-  function () {},
-  function () {},
-  function (target, damage) {
-    addLog(
-      turnOrder[currentTurn].name,
-      "dealt " + damage + " damage to " + target
-    );
-  }
+  "20 damage 2 turn cooldown"
 );
 
 //create complex item

@@ -145,20 +145,11 @@ function onlineMenu() {
   document.body.innerHTML = "<img src='assets/online.png' class='cloud'>";
 }
 
-function addLog(source, message) {
-  let newEntry = document.createElement("P");
-  newEntry.innerHTML = source + ": " + message;
-  log.append(newEntry);
-}
-
 document
   .getElementById("saveGame")
   .addEventListener("click", createNewSaveData);
 $(".online").click(onlineMenu);
-saveMenu();
 
-url = new URL(window.location);
-var playerName = url.searchParams.get("name");
-var playerPassword = url.searchParams.get("password");
-sessionStorage.setItem("name", playerName);
-sessionStorage.setItem("password", playerPassword);
+$(".erase").click(clearLogs);
+
+saveMenu();
