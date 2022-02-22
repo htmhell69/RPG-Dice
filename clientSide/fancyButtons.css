@@ -72,7 +72,7 @@
 }
 
 .online {
-  transform: translateX(100vw);
+  transform: translateX(90vw);
   background-color: white;
   border: none;
 }

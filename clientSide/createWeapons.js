@@ -83,7 +83,7 @@ function getWeapon(name, log = true) {
         weaponIndex.special.beforeStrike,
         weaponIndex.special.afterStrike
       );
-      if(log){
+      if (log) {
         addLog(turnOrder[currentTurn].name, "got the weapon " + name);
       }
       Weapon.normal.initilization();
@@ -109,7 +109,7 @@ weaponConstructor(
   function () {},
   function () {},
   function (target) {
-    addLog(turnOrder[currentTurn].name, "dealt 20 damage to " + target);
+    addLog(turnOrder[currentTurn].name, "dealt 10 damage to " + target);
   }
 );
 

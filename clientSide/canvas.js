@@ -61,8 +61,12 @@ function resizingDieCanvas() {
       oldWindowHeight = window.innerHeight;
       dieCanvas.height = window.innerHeight / 1.5;
       dieCanvas.width = window.innerWidth;
-      for (let i = 0; i < Dice.length; i++)
-        Dice[i].x = window.window.innerWidth / 2 - i * 200;
+      for (let i = 0; i < Dice.length; i++) {
+        Dice[i].x = window.innerWidth / 2 - i * Dice[i].width;
+        Dice[i].y = Dice[i].height / 2;
+        Dice[i].height = (window.width + window.height) / 2 / 4;
+        Dice[i].width = (window.width + window.height) / 2 / 4;
+      }
     }
   }
 }
@@ -82,4 +86,3 @@ function addImageElement(Object) {
   Object.img = new Image();
   Object.img.src = Object.imgSrc;
 }
-
