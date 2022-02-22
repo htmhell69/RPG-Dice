@@ -25,7 +25,7 @@ function createNewSaveData() {
 function readSaveData() {
   //if you dont have save data
   fetch(
-    "serverside/readData.php?name=" +
+    "serverSide/readData.php?name=" +
       sessionStorage.getItem("name") +
       "&password=" +
       sessionStorage.getItem("password")
