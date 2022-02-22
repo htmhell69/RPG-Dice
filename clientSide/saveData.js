@@ -32,27 +32,28 @@ function readSaveData() {
   )
     .then((response) => response.json())
     .then((data) => {
-      let save = data.SAVE1;
+      let save = JSON.parse(data.SAVE1);
       alert(save);
       for (let objectI = 0; objectI < save.length; objectI++) {
         //giving the entites their image
         addImageElement(save[objectI]);
         //giving the player their weapons image
 
-        if (data[objectI].type == "player") {
+        if (save[objectI].type == "player") {
           let weaponsToAdd = [];
           for (
             let weaponI = 0;
-            weaponI < data[objectI].weapons.length;
+            weaponI < save[objectI].weapons.length;
             weaponI++
           ) {
-            weaponsToAdd.push(getWeapon(data[objectI].weapons[weaponI], false));
+            weaponsToAdd.push(getWeapon(save[objectI].weapons[weaponI], false));
           }
 
-          data[objectI].weapons = weaponsToAdd;
+          save[objectI].weapons = weaponsToAdd;
         }
       }
-      turnOrder = data;
+      turnOrder = save;
+      alert("i ran ");
       singlePlayer(null, false);
     })
     .catch((error) => {
