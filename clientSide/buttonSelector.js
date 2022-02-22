@@ -159,4 +159,6 @@ saveMenu();
 
 url = new URL(window.location);
 var playerName = url.searchParams.get("name");
+var playerPassword = url.searchParams.get("password");
 sessionStorage.setItem("name", playerName);
+sessionStorage.setItem("password", playerPassword);
