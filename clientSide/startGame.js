@@ -17,7 +17,7 @@ dieCtx = dieCanvas.getContext("2d");
 function singlePlayer(event, newGame = true) {
   if (newGame) {
     let player = createPlayer(
-      localStorage.getItem("name"),
+      sessionStorage.getItem("name"),
       100,
       "assets/player.png",
       0,

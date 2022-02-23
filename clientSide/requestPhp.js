@@ -1,14 +1,23 @@
-function httpRequest() {
-    var xhr = new XMLHttpRequest();
-    xhr.addEventListener("load", xhtmlLoad, false);
-    xhr.open('GET', "serverSide/index.php");
-    xhr.send();
+function addAccount(name, password) {
+  fetch("serverSide/checkIfName.php?name=" + name)
+    .then((response) => response.text())
+    .then((data) => {
+      if (data == "true") {
+        //creating error message
+        let error = document.createElement("P");
+        error.style.color = "red";
+        error.innerHTML = "&#9888; this name already exists";
+        //appending it to the div
+        let div = $(".signin-text");
+        div.empty();
+        div.append(error);
+      } else {
+        createPlayerData(name, password);
+      }
+    });
 }
 
-function xhtmlLoad(xhr){
-    data = xhr.target.responseText;
-    alert(data);
-
+function createPlayerData(name, password) {
+  fetch("serverSide/addData.php?name=" + name + "&password=" + password);
+  alert("successfully added player data " + name + " " + password);
 }
-
-httpRequest();

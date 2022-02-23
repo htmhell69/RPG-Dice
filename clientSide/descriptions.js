@@ -47,3 +47,15 @@ function description(event) {
       }
   }
 }
+
+function addLog(source, message) {
+  let newEntry = document.createElement("P");
+  newEntry.innerHTML = source + ": " + message;
+  log.append(newEntry);
+}
+
+function clearLogs() {
+  while (log.firstChild) {
+    log.removeChild(log.lastChild);
+  }
+}

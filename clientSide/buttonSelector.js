@@ -145,22 +145,11 @@ function onlineMenu() {
   document.body.innerHTML = "<img src='assets/online.png' class='cloud'>";
 }
 
-function addLog(source, message) {
-  let newEntry = document.createElement("P");
-  newEntry.innerHTML = source + ": " + message;
-  log.append(newEntry);
-}
-
 document
   .getElementById("saveGame")
   .addEventListener("click", createNewSaveData);
 $(".online").click(onlineMenu);
-saveMenu();
 
-if (localStorage.getItem("name") == null) {
-  alert("i love debugging");
-  localStorage.setItem(
-    "name",
-    window.prompt("enter the name you want to use ingame")
-  );
-}
+$(".erase").click(clearLogs);
+
+saveMenu();

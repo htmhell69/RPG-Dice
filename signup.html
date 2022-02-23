@@ -7,7 +7,6 @@
         margin: 0;
       }
 
-      .signin-modal,
       .signup-modal {
         position: fixed;
         top: 0;
@@ -21,7 +20,6 @@
         align-items: center;
       }
 
-      .signin-modal-inner,
       .signup-modal-inner {
         width: 50vh;
         padding: 4vh 6vh;
@@ -31,7 +29,6 @@
         box-shadow: 0 0 0.2vh #888;
       }
 
-      .signin-modal-inner h2,
       .signup-modal-inner h2 {
         margin: 1vh 0 3vh 0;
         font-family: sans-serif;
@@ -95,13 +92,20 @@
         -webkit-box-shadow: 0 0 0px 1000px #e8e8e8 inset;
         transition: background-color 5000s ease-in-out 0s;
       }
+
+      .error {
+        color: white;
+        justify-content: center;
+        align-items: center;
+        background-color: rgb(255, 0, 0);
+      }
     </style>
   </head>
   <body>
-    <div class="signin-modal">
-      <div class="signin-modal-inner">
-        <h2>Sign In</h2>
-        <p class="signin-text">Welcome back!</p>
+    <div class="signup-modal">
+      <div class="signup-modal-inner">
+        <h2>Sign Up</h2>
+        <p class="signin-text">Welcome to RPG-Dice make an account right now</p>
         <form method="POST" id="signin-from-homepage">
           <input
             class="input-text"
@@ -124,39 +128,16 @@
           />
         </form>
         <br />
-        <a href="signup.html" class="menu-option">
-          Don't have an account? Create one!
-        </a>
+        <a href="index.html" class="menu-option"> Back to sign in </a>
       </div>
     </div>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script src="clientSide/requestPhp.js"></script>
     <script>
       $("#signin-from-homepage").submit(function (event) {
-        let name = this.name.value;
-        let password = this.pscd.value;
         event.preventDefault();
-        //fetch call to get data from database
-        fetch("serverSide/readData.php?name=" + name + "&password=" + password)
-          .then((response) => response.json())
-          .then((data) => {
-            if (data.NAME == name && data.PASSWORD == password) {
-              //starting game and sending name and password as parameters
-              window.location.replace(
-                "game.html?name=" + name + "&password=" + password
-              );
-            }
-          })
-          //if username or password is incorrect will display error message
-          .catch(function (err) {
-            let error = document.createElement("P");
-            error.style.color = "red";
-            error.innerHTML = "&#9888; your password or username is incorrect";
-            //appending it to the div
-            let div = $(".signin-text");
-            div.empty();
-            div.append(error);
-          });
+        //this function will add a player account using the input they gave
+        addingAccount(this.name.value, this.pscd.value);
       });
     </script>
   </body>

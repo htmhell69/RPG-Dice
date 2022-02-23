@@ -39,6 +39,7 @@
 }
 
 .description {
+  position: absolute;
   transform: translateX(15%);
   position: relative;
   width: 30vw;
@@ -72,7 +73,8 @@
 }
 
 .online {
-  transform: translateX(100vw);
+  position: absolute;
+  right: 0;
   background-color: white;
   border: none;
 }
@@ -127,4 +129,13 @@
 
 .logdown:hover .logbtn {
   background-color: #3e8e41;
+}
+
+.erase {
+  position: absolute;
+  bottom: 0;
+  width: 5vw;
+  height: 5vw;
+  right: 0;
+  border: none;
 }
