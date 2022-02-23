@@ -141,11 +141,13 @@
           .then((response) => response.json())
           .then((data) => {
             if (data.NAME == name && data.PASSWORD == password) {
+              //starting game and sending name and password as parameters
               window.location.replace(
                 "game.html?name=" + name + "&password=" + password
               );
             }
           })
+          //if username or password is incorrect will display error message
           .catch(function (err) {
             let error = document.createElement("P");
             error.style.color = "red";

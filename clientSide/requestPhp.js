@@ -1,4 +1,4 @@
-function checkIfName(name, password) {
+function addAccount(name, password) {
   fetch("serverSide/checkIfName.php?name=" + name)
     .then((response) => response.text())
     .then((data) => {

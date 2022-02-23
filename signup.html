@@ -7,7 +7,6 @@
         margin: 0;
       }
 
-      .signin-modal,
       .signup-modal {
         position: fixed;
         top: 0;
@@ -21,7 +20,6 @@
         align-items: center;
       }
 
-      .signin-modal-inner,
       .signup-modal-inner {
         width: 50vh;
         padding: 4vh 6vh;
@@ -31,7 +29,6 @@
         box-shadow: 0 0 0.2vh #888;
       }
 
-      .signin-modal-inner h2,
       .signup-modal-inner h2 {
         margin: 1vh 0 3vh 0;
         font-family: sans-serif;
@@ -105,8 +102,8 @@
     </style>
   </head>
   <body>
-    <div class="signin-modal">
-      <div class="signin-modal-inner">
+    <div class="signup-modal">
+      <div class="signup-modal-inner">
         <h2>Sign Up</h2>
         <p class="signin-text">Welcome to RPG-Dice make an account right now</p>
         <form method="POST" id="signin-from-homepage">
@@ -139,7 +136,8 @@
     <script>
       $("#signin-from-homepage").submit(function (event) {
         event.preventDefault();
-        checkIfName(this.name.value, this.pscd.value);
+        //this function will add a player account using the input they gave
+        addingAccount(this.name.value, this.pscd.value);
       });
     </script>
   </body>
