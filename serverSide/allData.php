@@ -37,7 +37,7 @@ class MyDB extends SQLite3 {
                 echo "NAME = ". $row['NAME'] ."<br>";
                 echo "PASSWORD = ". $row['PASSWORD'] ."<br>";
             } else{
-                echo json_encode($row . "<br>");
+                echo json_encode($row . "<br> <br>");
             
         }
 
