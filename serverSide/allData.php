@@ -30,14 +30,14 @@ class MyDB extends SQLite3 {
        $sql = "SELECT * FROM ACCOUNTS";
     
         if($debug){
-            echo($sql . "<br> <br>");
+            echo($sql . "<br>");
         }
         $ret = $db->query($sql);
         while($row = $ret->fetchArray(SQLITE3_ASSOC) ) {
                 echo "NAME = ". $row['NAME'] ."<br>";
                 echo "PASSWORD = ". $row['PASSWORD'] ."<br>";
             } else{
-                echo json_encode($row . "<br> <br>");
+                echo json_encode($row);
             
         }
 
