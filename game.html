@@ -2,26 +2,23 @@
 <html>
   <head>
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons+Round">
+    <link rel="stylesheet" href="clientSide/fancyButtons.css">
+    <title>RPG-Dice Game</title>
   </head>
-  <link rel="stylesheet" href="clientSide/fancyButtons.css" />
   <body id="body">
     <div class="log">
-      <button
-        class="logbtn"
-        style="width: 50px; height: 50px; font-weight: bold; font-size: 90%"
-      >
-        <img src="assets/Message.png" width="100%" height="100%" />
+      <button class="logbtn" style="font-weight: bold; font-size: 90%" >
+        <i class="material-icons-round" style="font-size: 50px;">chat</i>
       </button>
-      <div class="log-content">game: THE GAME HAS STARTED THATS INSANE 
+      <div class="log-content">
+         <div class="log-item">game: THE GAME HAS STARTED THATS INSANE </div>
         <button class="erase"><img src="assets/erase.png" height="100%" width="100%" class="eraseimg"></img></button>
       </div>
     </div>
 
-    <button
-      class="online"
-      style="width: 50px; height: 50px; font-weight: bold; font-size: 90%"
-    >
-      <img src="assets/online.png" width="100%" height="100%" />
+    <button class="online" style="width: 50px; height: 50px; font-weight: bold; font-size: 90%">
+      <i class="material-icons-round" style="font-size: 50px;">cloud</i>
     </button>
 
     <canvas id="canvas" width="1280" height="545"></canvas>
