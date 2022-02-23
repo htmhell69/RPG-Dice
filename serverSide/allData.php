@@ -30,7 +30,7 @@ class MyDB extends SQLite3 {
        $sql = "SELECT * FROM ACCOUNTS";
     
         if($debug){
-            echo($sql . "<br>");
+            echo($sql . "<br> <br>");
         }
         $ret = $db->query($sql);
         while($row = $ret->fetchArray(SQLITE3_ASSOC) ) {
