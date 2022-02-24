@@ -55,7 +55,7 @@ function resizingDieCanvas() {
   if (gameStart) {
     if (
       oldWindowWidth != dieCanvas.width ||
-      Math.floor(oldWindowHeight / 1.5) != dieCanvas.height
+      Math.floor(oldWindowHeight / 6.5) != dieCanvas.height
     ) {
       updateDie();
     }
@@ -81,11 +81,12 @@ function addImageElement(Object) {
 function updateDie() {
   oldWindowWidth = window.innerWidth;
   oldWindowHeight = window.innerHeight;
-  dieCanvas.height = window.innerHeight / 1.5;
+  dieCanvas.height = window.innerHeight / 6.5;
   dieCanvas.width = window.innerWidth;
+  dieCanvas;
   for (let i = 0; i < Dice.length; i++) {
     Dice[i].x = window.innerWidth / 2 - i * Dice[i].width;
-    Dice[i].y = Dice[i].height / 2;
+    Dice[i].y = Dice[i].height / 6.75;
     Dice[i].height = (window.width + window.height) / 2 / 4;
     Dice[i].width = (window.width + window.height) / 2 / 4;
   }

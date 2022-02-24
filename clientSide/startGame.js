@@ -13,7 +13,6 @@ canvas = document.getElementById("canvas");
 ctx = canvas.getContext("2d");
 dieCanvas = document.getElementById("dieCanvas");
 dieCtx = dieCanvas.getContext("2d");
-
 function singlePlayer(event, newGame = true) {
   if (newGame) {
     let player = createPlayer(

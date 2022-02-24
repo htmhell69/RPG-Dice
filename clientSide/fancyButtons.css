@@ -73,6 +73,7 @@
 /* That cloud thing */
 .online {
   position: absolute;
+  top: 0px;
   right: 20px;
   background-color: white;
   border: none;
@@ -110,7 +111,7 @@
 }
 
 .log {
-  position: relative;
+  position: absolute;
   display: inline-block;
 }
 
