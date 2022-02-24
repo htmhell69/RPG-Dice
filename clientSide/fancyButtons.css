@@ -5,61 +5,65 @@
 ================================================*/
 
 .buttons {
-   position: fixed;
-   bottom: 0;
-   right: 0;
-   left: 0;
-   display: grid;
-   grid-template-columns: auto auto auto;
-   /* background-color: #efefef; */
-   background-image: url("/assets/wood.png");
+  position: fixed;
+  bottom: 0;
+  right: 0;
+  left: 0;
+  display: grid;
+  grid-template-columns: auto auto auto;
+  /* background-color: #efefef; */
+  background-image: url("../assets/wood.png");
 }
 
-.menu, .rightMenu, .description {
-   position: relative;
-   width: 15vw;
-   height: 22vh;
-   margin: 15px;
-   padding: 15px;
-   /* background-color: #fff; */
-   background-color: #00000030;
-   color: #eee;
-   border-radius: 8px;
-   overflow: auto;
-   font-size: calc((1.5vw + 1.5vh) / 2);
-   box-sizing: border-box;
-   transition: .25s;
-}
- 
-.menu:hover, .rightMenu:hover, .description:hover {
-   background-color: #00000040;
-}
- 
+.menu,
+.rightMenu,
 .description {
-   width: 60vw;
-   margin: 15px 0;
-   text-align: center;
-   border-radius: 8px;
+  position: relative;
+  width: 15vw;
+  height: 22vh;
+  margin: 15px;
+  padding: 15px;
+  /* background-color: #fff; */
+  background-color: #00000030;
+  color: #eee;
+  border-radius: 8px;
+  overflow: auto;
+  font-size: calc((1.5vw + 1.5vh) / 2);
+  box-sizing: border-box;
+  transition: 0.25s;
+}
+
+.menu:hover,
+.rightMenu:hover,
+.description:hover {
+  background-color: #00000040;
+}
+
+.description {
+  width: 60vw;
+  margin: 15px 0;
+  text-align: center;
+  border-radius: 8px;
 }
 
 /* (I still thing circular buttons would be nice, but this works for now) */
 .button {
-   all: unset;
-   margin: 5px 0;
-   padding: 5px 15px;
-   font-family: "Roboto", serif;
-   letter-spacing: 2.5px;
-   font-weight: 500;
-   border-radius: 8px;
-   box-sizing: border-box;
-   background-color: #00000060;
-   transition: .15s;
+  all: unset;
+  margin: 5px 0;
+  padding: 5px 15px;
+  font-family: "Roboto", serif;
+  letter-spacing: 2.5px;
+  font-weight: 500;
+  border-radius: 8px;
+  box-sizing: border-box;
+  background-color: #00000060;
+  transition: 0.15s;
 }
- 
+
 .button:hover {
-   background-color: #00000080;
+  background-color: #00000080;
 }
- 
+
 /*================================================
 //
 // Other
@@ -121,7 +125,7 @@
   border-radius: 4px;
   z-index: 1;
   overflow: auto;
-  transition: .2s;
+  transition: 0.2s;
 }
 
 .log:hover .log-content {
@@ -147,4 +151,14 @@
   height: 5vw;
   right: 0;
   border: none;
+}
+
+@media only screen and (max-width: 600px) {
+  .buttons button {
+    padding: 2px 5px;
+    margin: 2px;
+  }
+  .menu {
+    padding: 5px;
+  }
 }
