@@ -1,0 +1,125 @@
+                                        VARIABLES
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                                        OBJECTS
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                                      HTML ELEMENTS
+index.html{
+   .signin-modal: the entire sign in used for styling mostly
+   .signin-modal-inner: signin-modal but used diffrently for styling
+   .menu-option: used for styling the buttons enter account and dont have an account create one
+   .signin-text: the text that will be displayed on the top of the screen which is where the errors will be placed
+   .input-text: the password and name text feilds
+   .input-submit: the enter account button
+   pscd: the name of the password text feild to be used in javascript
+   name: the name of the name text feild to be used in javascript
+   DESCRIPTION: this is the first page you will see upon starting the game this is where you will 
+   enter your username and password the enter account button will start the game if you have the correct
+   username and password if not will give back an error where the welcome is. There is also a link 
+   under the enter account where you will go to create an account.
+}
+
+signup.html{
+   .signup-modal: the entire sign in used for styling mostly
+   .signup-modal-inner: signin-modal but used diffrently for styling
+   .menu-option: used for styling the buttons enter account and back to sign in
+   .signin-text: the text that will be displayed on the top of the screen which is where the errors will be placed
+   .input-text: the password and name text feilds
+   .input-submit: the enter account button
+   pscd: the name of the password text feild to be used in javascript
+   name: the name of the name text feild to be used in javascript
+   
+   DESCRIPTION: This is where you would go to add your account to the database which will allow you
+   to sign in and start playing all your data will be saved in that account so you can access it from
+   any device.
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                                        FUNCTIONS
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                                           FILES
+
+
+index.html: this file is the sign in here there will be a link to the sign up page 
+if you have put in your name and password correctly then you will be brought to game start
+
+signup.html: this file is the signup page in here there will be a link to the sign in page or index.html
+you can also put in a username or password this will be sent to the database under your account.

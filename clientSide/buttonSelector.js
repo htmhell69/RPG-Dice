@@ -64,7 +64,7 @@ function weaponMenu(weapon) {
   button.style.height = "40%";
   button.style.fontSize = "90%";
   button.id = "special";
-  button.className = "button2";
+  button.className = "button";
   button.appendChild(buttonText);
   container.appendChild(button);
   $("#special").click(runAttack);
