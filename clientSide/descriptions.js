@@ -50,6 +50,7 @@ function description(event) {
 
 function addLog(source, message) {
   let newEntry = document.createElement("P");
+  newEntry.className = "log-item";
   newEntry.innerHTML = source + ": " + message;
   log.append(newEntry);
 }

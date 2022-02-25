@@ -86,8 +86,9 @@ function updateDie() {
   dieCanvas;
   for (let i = 0; i < Dice.length; i++) {
     Dice[i].x = window.innerWidth / 2 - i * Dice[i].width;
-    Dice[i].y = Dice[i].height / 6.75;
+    Dice[i].y = Dice[i].height / 30;
     Dice[i].height = (window.width + window.height) / 2 / 4;
     Dice[i].width = (window.width + window.height) / 2 / 4;
+    Dice[i].dotSize = (Dice[i].height + Dice[i].width) / 2 / 10;
   }
 }

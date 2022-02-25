@@ -92,8 +92,10 @@ function createDie(x, y, height, width, dotSize) {
 }
 
 function drawDots(num, die) {
-  dieCtx.lineWidth = 5;
   dieCtx.clearRect(die.x, die.y, die.width, die.height);
+  dieCtx.fillStyle = "white";
+  dieCtx.fillRect(die.x, die.y, die.width, die.height);
+  dieCtx.lineWidth = 5;
   dieCtx.strokeRect(die.x, die.y, die.width, die.height);
   dieCtx.fillStyle = "#009966";
   switch (num) {
