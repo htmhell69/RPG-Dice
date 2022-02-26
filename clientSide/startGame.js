@@ -34,7 +34,7 @@ function beginTurn() {
   let entity = turnOrder[currentTurn];
   if (entity.type == "player") {
     if (entity.weapons.length == 0) {
-      entity.weapons.push(getWeapon("generic"));
+      entity.weapons.push(getWeapon("rusty broadsword"));
     }
     if (entity.specialCooldown >= 1) {
       entity.specialCooldown--;

@@ -58,6 +58,7 @@
   box-sizing: border-box;
   background-color: #00000060;
   transition: 0.15s;
+  overflow: auto;
 }
 
 .button:hover {

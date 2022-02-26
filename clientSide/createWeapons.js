@@ -5,6 +5,7 @@ function weaponConstructor(
   name,
   type,
   img,
+  description,
   normalName,
   normalDamage,
   normalAccuracy,
@@ -37,6 +38,7 @@ function weaponConstructor(
     name: name,
     type: type,
     imgSrc: img,
+    description: description,
     img: new Image(),
     justUsed: false,
     normal: {
@@ -81,6 +83,7 @@ function getWeapon(name, log = true) {
         weaponIndex.name,
         weaponIndex.type,
         weaponIndex.imgSrc,
+        weaponIndex.description,
         weaponIndex.normal.name,
         weaponIndex.normal.damage,
         weaponIndex.normal.accuracy,
@@ -115,11 +118,14 @@ weaponConstructor(
   "rusty broadsword",
   "none",
   "assets/item.png",
+  "",
   "normal",
   10,
+  3,
   "10 damage",
   "special",
   20,
+  4,
   2,
   "20 damage 2 turn cooldown"
 );
