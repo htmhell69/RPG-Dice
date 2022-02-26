@@ -7,9 +7,11 @@ function weaponConstructor(
   img,
   normalName,
   normalDamage,
+  normalAccuracy,
   normalDescription,
   specialName,
   specialDamage,
+  specialAccuracy,
   cooldown,
   specialDescription,
   normalInitilization = function () {},
@@ -40,6 +42,7 @@ function weaponConstructor(
     normal: {
       name: normalName,
       damage: normalDamage,
+      accuracy: normalAccuracy,
       description: normalDescription,
       initilization: normalInitilization,
       onBeginTurn: normalTurnStart,
@@ -50,6 +53,7 @@ function weaponConstructor(
     special: {
       name: specialName,
       damage: specialDamage,
+      accuracy: specialAccuracy,
       cooldown: cooldown,
       description: specialDescription,
       initilization: specialInitilization,
@@ -79,9 +83,11 @@ function getWeapon(name, log = true) {
         weaponIndex.imgSrc,
         weaponIndex.normal.name,
         weaponIndex.normal.damage,
+        weaponIndex.normal.accuracy,
         weaponIndex.normal.description,
         weaponIndex.special.name,
         weaponIndex.special.damage,
+        weaponIndex.special.accuracy,
         weaponIndex.special.cooldown,
         weaponIndex.special.description,
         weaponIndex.normal.initilization,
@@ -106,7 +112,7 @@ function getWeapon(name, log = true) {
 //create generic weapon
 weaponConstructor(
   true,
-  "generic",
+  "rusty broadsword",
   "none",
   "assets/item.png",
   "normal",

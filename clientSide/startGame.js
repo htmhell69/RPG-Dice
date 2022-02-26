@@ -35,7 +35,6 @@ function beginTurn() {
   if (entity.type == "player") {
     if (entity.weapons.length == 0) {
       entity.weapons.push(getWeapon("generic"));
-      entity.weapons[0].number = 1;
     }
     if (entity.specialCooldown >= 1) {
       entity.specialCooldown--;

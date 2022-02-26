@@ -79,10 +79,6 @@
   border: none;
 }
 
-.online:hover {
-  background-color: lightgreen;
-}
-
 .cloud {
   position: relative;
   top: 50%;
