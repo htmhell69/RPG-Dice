@@ -42,8 +42,8 @@
 .description {
   width: 60vw;
   margin: 15px 0;
-  text-align: center;
   border-radius: 8px;
+  text-align: center;
 }
 
 /* (I still thing circular buttons would be nice, but this works for now) */
@@ -63,6 +63,14 @@
 
 .button:hover {
   background-color: #00000080;
+}
+
+.description img {
+  display: inline;
+}
+
+.description p {
+  display: inline;
 }
 
 /*================================================

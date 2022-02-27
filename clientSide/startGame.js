@@ -19,8 +19,10 @@ function singlePlayer(event, newGame = true) {
       sessionStorage.getItem("name"),
       100,
       "assets/player.png",
-      0,
-      0
+      2,
+      5,
+      1,
+      { basic: 2, stealth: 0, heavy: 3, range: 0 }
     );
     turnOrder.push(player);
     newEnemy();

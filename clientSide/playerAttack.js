@@ -14,7 +14,7 @@ function startAttack(event) {
 }
 
 function runAttack(event) {
-  let entity = turnOrder[currentTurn];
+  var entity = turnOrder[currentTurn];
   //setting just used value
   for (let i = 0; i < entity.weapons.length; i++) {
     entity.weapons[i].justUsed = false;
@@ -24,19 +24,26 @@ function runAttack(event) {
   //running attack
   if (event.target.id == "normal") {
     currentWeapon.normal.beforeStrike(currentTarget.name);
-    let roll = rollDie();
-    currentTarget.hp -= currentWeapon.normal.damage * (roll / 10 + 1);
-    currentWeapon.normal.afterStrike(
-      currentTarget.name,
-      currentWeapon.normal.damage * (roll / 10 + 1)
+    var damage = calculateDamage(
+      "normal",
+      currentWeapon,
+      entity,
+      currentTarget
     );
+    currentTarget.hp -= damage;
+    currentWeapon.normal.afterStrike(currentTarget.name, damage);
     addLog(currentTarget.name, "current hp is " + currentTarget.hp);
     startMenu();
   } else if (event.target.id == "special") {
     if (entity.specialCooldown == 0) {
       currentWeapon.special.beforeStrike(currentTarget.name);
-      let roll = rollDie();
-      currentTarget.hp -= currentWeapon.special.damage * (roll / 10 + 1);
+      var damage = calculateDamage(
+        "special",
+        currentWeapon,
+        entity,
+        currentTarget
+      );
+      currentTarget.hp -= damage;
       entity.specialCooldown = currentWeapon.special.cooldown;
       currentWeapon.special.afterStrike(
         currentTarget.name,
@@ -70,5 +77,58 @@ function runAttack(event) {
         );
       }
     }
+  }
+}
+
+function calculateDamage(type, weapon, attacker, target) {
+  //check if hit
+  var usedSkill = weapon.type;
+  var hitRoll = rollDie();
+  alert("weapon accuracy is " + weapon[type].accuracy);
+  alert("base hit roll is " + hitRoll);
+  hitRoll += attacker.speed + attacker.skills[usedSkill];
+  alert(
+    "attacker speed = " +
+      attacker.speed +
+      " attacker prof = " +
+      attacker.skills[usedSkill]
+  );
+  alert("new hit roll is " + hitRoll);
+  hitRoll -= target.speed + target.skills[usedSkill];
+  alert(
+    "target speed = " +
+      target.speed +
+      " target prof = " +
+      target.skills[usedSkill]
+  );
+  alert("new hit roll is " + hitRoll);
+
+  if (weapon[type].accuracy <= hitRoll) {
+    alert("hit");
+    var attackRoll = rollDie();
+    alert("base damage is " + weapon[type].damage);
+    var damage = weapon[type].damage * (attackRoll / 10 + 1);
+    alert("attack multiplier from dice is " + (attackRoll / 10 + 1));
+    alert("new damage is " + damage);
+    damage += attacker.damage * (attacker.skills[usedSkill] / 2.5 + 1);
+    alert(
+      "attacker damage = " +
+        attacker.damage +
+        " attacker pref = " +
+        attacker.skills[usedSkill]
+    );
+    alert("new damage = " + damage);
+    damage -= target.defense * (target.skills[usedSkill] / 2.5 + 1);
+    alert(
+      "target damage = " +
+        target.damage +
+        " target pref = " +
+        target.skills[usedSkill]
+    );
+    alert("new damage = " + damage);
+    //calculate damage
+    return Math.round(damage);
+  } else {
+    alert("miss no damage done");
   }
 }

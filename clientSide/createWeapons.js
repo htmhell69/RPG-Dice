@@ -116,9 +116,9 @@ function getWeapon(name, log = true) {
 weaponConstructor(
   true,
   "rusty broadsword",
-  "none",
+  "basic",
   "assets/item.png",
-  "",
+  "a weapon that can be used to wipe a donkeys ass dont even try cleaning it",
   "normal",
   10,
   3,

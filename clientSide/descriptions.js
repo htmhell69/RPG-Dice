@@ -38,9 +38,13 @@ function description(event) {
     default:
       if (!isNaN(id)) {
         des.append(
-          "<p><img src=" +
+          "<h1>" +
+            turnOrder[currentTurn].weapons[id].name +
+            "</h1>" +
+            "<img src=" +
             turnOrder[currentTurn].weapons[id].imgSrc +
             "><img>" +
+            "<p>" +
             turnOrder[currentTurn].weapons[id].description +
             "</p>"
         );
