@@ -23,7 +23,6 @@ function runAttack(event) {
 
   //running attack
   if (event.target.id == "normal") {
-    currentWeapon.normal.beforeStrike(currentTarget.name);
     var damage = calculateDamage(
       "normal",
       currentWeapon,
@@ -31,12 +30,11 @@ function runAttack(event) {
       currentTarget
     );
     currentTarget.hp -= damage;
-    currentWeapon.normal.afterStrike(currentTarget.name, damage);
+    currentWeapon.normal.afterStrike(currentTarget, damage);
     addLog(currentTarget.name, "current hp is " + currentTarget.hp);
     startMenu();
   } else if (event.target.id == "special") {
     if (entity.specialCooldown == 0) {
-      currentWeapon.special.beforeStrike(currentTarget.name);
       var damage = calculateDamage(
         "special",
         currentWeapon,
@@ -46,7 +44,7 @@ function runAttack(event) {
       currentTarget.hp -= damage;
       entity.specialCooldown = currentWeapon.special.cooldown;
       currentWeapon.special.afterStrike(
-        currentTarget.name,
+        currentTarget,
         currentWeapon.special.damage * (roll / 10 + 1)
       );
       if (entity.specialCooldown - 1 == 1) {
@@ -127,6 +125,7 @@ function calculateDamage(type, weapon, attacker, target) {
     );
     alert("new damage = " + damage);
     //calculate damage
+    currentWeapon[type].beforeStrike(currentTarget);
     return Math.round(damage);
   } else {
     alert("miss no damage done");
