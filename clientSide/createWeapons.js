@@ -21,7 +21,7 @@ function weaponConstructor(
   normalAfterStrike = function (target, damage) {
     addLog(
       turnOrder[currentTurn].name,
-      "dealt " + damage + " damage to " + target
+      "dealt " + damage + " damage to " + target.name
     );
   },
   specialInitilization = function () {},
@@ -30,7 +30,7 @@ function weaponConstructor(
   specialAfterStrike = function (target, damage) {
     addLog(
       turnOrder[currentTurn].name,
-      "dealt " + damage + " damage to " + target
+      "dealt " + damage + " damage to " + target.name
     );
   }
 ) {
