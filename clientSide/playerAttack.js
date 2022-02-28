@@ -45,7 +45,7 @@ function runAttack(event) {
       entity.specialCooldown = currentWeapon.special.cooldown;
       currentWeapon.special.afterStrike(
         currentTarget,
-        currentWeapon.special.damage * (roll / 10 + 1)
+        damage
       );
       if (entity.specialCooldown - 1 == 1) {
         addLog(
