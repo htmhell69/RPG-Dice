@@ -1,8 +1,14 @@
 //die face drawings
+var keyPressed = false;
 var canvasHeight = dieCanvas.getBoundingClientRect().height;
 var canvasWidth = dieCanvas.getBoundingClientRect().width;
 var Dice = [];
 var ch;
+var dieResultFunc;
+var damageDie;
+var accuracyDie;
+var diePaused = false;
+
 function draw1(die) {
   dieCtx.beginPath();
   let dotX = die.x + 0.5 * die.width;
@@ -66,16 +72,24 @@ function draw2mid(die) {
 }
 
 function rollDie() {
-  var totalNum = 0;
-  updateDie();
-  dieCtx.clearRect(0, 0, canvasWidth, canvasHeight);
-  for (let i = 0; i < Dice.length; i++) {
-    ch = Math.floor(1 + Math.random() * 6);
-    Dice[i].lastRoll = ch;
-    totalNum += ch;
-    drawDots(ch, Dice[i]);
+  if (diePaused == false) {
+    console.log(attackState + " " + keyPressed);
+    let dieResult = 0;
+    updateDie();
+    dieCtx.clearRect(0, 0, canvasWidth, canvasHeight);
+    for (let i = 0; i < Dice.length; i++) {
+      ch = Math.floor(1 + Math.random() * 6);
+      Dice[i].lastRoll = ch;
+      dieResult += ch;
+      drawDots(ch, Dice[i]);
+    }
+
+    if (!keyPressed) {
+      setTimeout(rollDie, 10);
+    } else {
+      dieResultFunc(dieResult);
+    }
   }
-  return totalNum;
 }
 
 function createDie(x, y, height, width, dotSize) {
@@ -128,3 +142,10 @@ createDie(400, 250, 100, 100, 8.5);
 for (let i = 0; i < Dice.length; i++) {
   Dice[i].x = window.window.innerWidth / 2 - i * 200;
 }
+
+document.onkeydown = function () {
+  keyPressed = true;
+  setTimeout(function () {
+    keyPressed = false;
+  }, 25);
+};
