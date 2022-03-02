@@ -8,6 +8,8 @@ var dieResultFunc;
 var damageDie;
 var accuracyDie;
 var diePaused = false;
+var dieLooping = false;
+var dieLoop;
 
 function draw1(die) {
   dieCtx.beginPath();
@@ -71,7 +73,13 @@ function draw2mid(die) {
   dieCtx.fill();
 }
 
-function rollDie() {
+function rollDie(resultFunc) {
+  if (!dieLooping) {
+    dieLoop = setInterval(function () {
+      dieLooping = true;
+      rollDie(resultFunc);
+    }, 10);
+  }
   if (diePaused == false) {
     console.log(attackState + " " + keyPressed);
     let dieResult = 0;
@@ -84,10 +92,11 @@ function rollDie() {
       drawDots(ch, Dice[i]);
     }
 
-    if (!keyPressed) {
-      setTimeout(rollDie, 10);
-    } else {
-      dieResultFunc(dieResult);
+    if (keyPressed) {
+      dieLooping = false;
+      clearInterval(dieLoop);
+      alert(dieLoop);
+      resultFunc(dieResult);
     }
   }
 }

@@ -33,13 +33,32 @@ function runAttack(event) {
     currentWeapon.justUsed = true;
     attackState = 1;
     currentAttackType = event.target.id;
-    dieResultFunc = function (result) {
+    let resultFunc = function (result) {
       if (attackState == 1) {
         accuracyDie = result;
         diePaused = true;
         setTimeout(function () {
           diePaused = false;
-          rollDie();
+          rollDie(function (result) {
+            if (attackState == 1) {
+              accuracyDie = result;
+              diePaused = true;
+              setTimeout(function () {
+                diePaused = false;
+                rollDie(resultFunc);
+                attackState = 2;
+              }, 1000);
+            } else if (attackState == 2) {
+              damageDie = result;
+              attackState = 0;
+              calculateDamage(
+                currentAttackType,
+                currentWeapon,
+                turnOrder[currentTurn],
+                currentTarget
+              );
+            }
+          });
           attackState = 2;
         }, 1000);
       } else if (attackState == 2) {
@@ -53,7 +72,7 @@ function runAttack(event) {
         );
       }
     };
-    rollDie();
+    rollDie(resultFunc);
   }
 }
 
