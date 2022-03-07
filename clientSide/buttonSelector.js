@@ -1,10 +1,10 @@
 let container = document.querySelector(".menu");
 let save = document.querySelector(".save");
 let log = document.querySelector(".log-content");
-
 //this starts up the attack selectors
 function attackMenu() {
   if (turnOrder[currentTurn].type == "player") {
+    currentMenu = "weaponSelect";
     let weapons = turnOrder[currentTurn].weapons;
     removeButton();
     //back
@@ -41,6 +41,7 @@ function attackMenu() {
 
 //this shows you the attacks you can preform with that weapon
 function weaponMenu(weapon) {
+  currentMenu = "attackSelect";
   removeButton();
   let normal = weapon.normal;
   let special = weapon.special;
@@ -78,6 +79,7 @@ function removeButton() {
 }
 
 function startMenu() {
+  currentMenu = "start";
   beginTurn();
   gameStart = true;
   removeButton();
@@ -108,9 +110,25 @@ function startMenu() {
   container.appendChild(button);
   $("#attack").click(attackMenu);
   $("#attack").mouseover(description);
+  //harvest button
+  if (gameType != "singlePlayer") {
+    button = document.createElement("button");
+    buttonText = document.createTextNode("Harvest");
+    button.style.width = "100%";
+    button.style.height = "40%";
+    button.style.fontSize = "90%";
+    button.style.fontWeight = "bold";
+    button.id = "harvest";
+    button.className = "button";
+    button.appendChild(buttonText);
+    container.appendChild(button);
+    $("#attack").click(harvest);
+    $("#harvest").mouseover(description);
+  }
 }
 
 function saveMenu() {
+  currentMenu = "main";
   removeButton();
   //load save data button
   let button = document.createElement("button");

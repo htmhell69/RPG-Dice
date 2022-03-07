@@ -95,7 +95,6 @@ function rollDie(resultFunc) {
     if (keyPressed) {
       dieLooping = false;
       clearInterval(dieLoop);
-      alert(dieLoop);
       resultFunc(dieResult);
     }
   }

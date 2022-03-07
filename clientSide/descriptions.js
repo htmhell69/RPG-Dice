@@ -1,5 +1,5 @@
-let des = $(".description");
-
+var des = $(".description");
+var inventoryDisplay = false;
 function description(event) {
   des.empty();
   let id = event.target.id;
@@ -37,17 +37,19 @@ function description(event) {
       break;
     default:
       if (!isNaN(id)) {
-        des.append(
-          "<h1>" +
-            turnOrder[currentTurn].weapons[id].name +
-            "</h1>" +
-            "<img src=" +
-            turnOrder[currentTurn].weapons[id].imgSrc +
-            "><img>" +
-            "<p>" +
-            turnOrder[currentTurn].weapons[id].description +
-            "</p>"
-        );
+        if (currentMenu == "weaponSelect") {
+          des.append(
+            "<h1>" +
+              turnOrder[currentTurn].weapons[id].name +
+              "</h1>" +
+              "<img src=" +
+              turnOrder[currentTurn].weapons[id].imgSrc +
+              "><img>" +
+              "<p>" +
+              turnOrder[currentTurn].weapons[id].description +
+              "</p>"
+          );
+        }
       }
   }
 }
@@ -64,3 +66,33 @@ function clearLogs() {
     log.removeChild(log.lastChild);
   }
 }
+
+$("#Inventory").click(function () {
+  let container = document.getElementById("Inventory");
+  if (inventoryDisplay) {
+    inventoryDisplay = false;
+    document.getElementById("Inventory-content").style.display = "none";
+    container.removeChild(container.lastChild);
+    let newEntry = document.createElement("P");
+    newEntry.innerHTML = "Open Inventory";
+    container.append(newEntry);
+  } else {
+    inventoryDisplay = true;
+    document.getElementById("Inventory-content").style.display = "inline-block";
+    container.removeChild(container.lastChild);
+    let newEntry = document.createElement("P");
+    newEntry.innerHTML = "Close Inventory";
+    container.append(newEntry);
+  }
+});
+
+function addToInventory(type, content, description) {
+  alert("i ran");
+  let container = document.getElementsByClassName("Inventory-" + type)[0];
+  content.className = "Inventory-item";
+  content.title = description;
+  container.append(content);
+}
+let image = new Image();
+image.src = "assets/backButton.png";
+addToInventory("weapons", image, "Weapon.description", amount);

@@ -2,7 +2,7 @@ var turnOrder = [];
 var currentTurn = 0;
 var Enemy;
 var enemyImage;
-var gameType = "singlePlayer";
+var gameType;
 var canvas;
 var ctx;
 var dieCanvas;
@@ -14,6 +14,7 @@ ctx = canvas.getContext("2d");
 dieCanvas = document.getElementById("dieCanvas");
 dieCtx = dieCanvas.getContext("2d");
 function singlePlayer(event, newGame = true) {
+  gameType = "singlePlayer";
   if (newGame) {
     let player = createPlayer(
       sessionStorage.getItem("name"),
@@ -24,6 +25,7 @@ function singlePlayer(event, newGame = true) {
       1,
       { basic: 2, stealth: 0, heavy: 3, range: 0 }
     );
+    getMaterial("wood", player, 5);
     turnOrder.push(player);
     newEnemy();
   }

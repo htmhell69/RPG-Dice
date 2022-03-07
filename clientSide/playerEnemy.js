@@ -7,6 +7,7 @@ function createPlayer(name, hp, img, defense, damage, speed, skills) {
     imgSrc: img,
     img: new Image(),
     weapons: [],
+    tools: [],
     materials: {},
     defense: defense,
     damage: damage,

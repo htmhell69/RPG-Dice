@@ -105,6 +105,9 @@ function getWeapon(name, log = true) {
       if (log) {
         addLog(turnOrder[currentTurn].name, "got the weapon " + name);
       }
+      let image = new Image();
+      image.src = Weapon.imgSrc;
+      addToInventory("weapons", image, Weapon.description);
       Weapon.normal.initilization();
       Weapon.special.initilization();
       return Weapon;
