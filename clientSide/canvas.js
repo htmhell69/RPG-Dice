@@ -23,8 +23,8 @@ function resizingCanvas() {
           window.innerHeight / (turnOrder.length + 1)) /
         2;
       height =
-        (window.innerWidth / (turnOrder.length + 0.25) +
-          window.innerHeight / (turnOrder.length + 0.25)) /
+        (window.innerWidth / (turnOrder.length + 0.5) +
+          window.innerHeight / (turnOrder.length + 0.5)) /
         2;
       canvas.height = window.innerHeight / 1.5;
       canvas.width = window.innerWidth;
