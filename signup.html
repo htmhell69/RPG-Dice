@@ -4,6 +4,8 @@
     <title>RPG Dice</title>
 
     <link rel="icon" type="image/x-icon" href="assets/icon.png" />
+    <link rel="preconnect" href="https://www.google.com" />
+    <link rel="preconnect" href="https://www.gstatic.com" crossorigin />
     <style>
       * {
         padding: 0;
@@ -126,7 +128,9 @@
             required
           /><br />
           <input
-            class="input-submit menu-option"
+            name="submit"
+            class="input-submit menu-option g-recaptcha"
+            id="submitForm"
             type="submit"
             value="Enter Account"
           />
@@ -135,13 +139,47 @@
         <a href="index.html" class="menu-option"> Back to sign in </a>
       </div>
     </div>
+    <script
+      async
+      src="https://www.google.com/recaptcha/api.js?render=6LfT48MeAAAAACnhcmiQY8HQpsjxjdqG-uLOPyua"
+    ></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script src="clientSide/requestPhp.js"></script>
     <script>
       $("#signin-from-homepage").submit(function (event) {
         event.preventDefault();
         //this function will add a player account using the input they gave
-        addAccount(this.name.value, this.pscd.value);
+        let password = this.pscd.value;
+        let username = this.name.value;
+        grecaptcha.ready(function () {
+          // do request for recaptcha token
+          // response is promise with passed token
+          grecaptcha
+            .execute("6LfT48MeAAAAACnhcmiQY8HQpsjxjdqG-uLOPyua", {
+              action: "create_comment",
+            })
+            .then(function (token) {
+              // add token to form
+              $("#signin-from-homepage").prepend(
+                '<input type="hidden" name="g-recaptcha-response" value="' +
+                  token +
+                  '">'
+              );
+              $.post(
+                "serverSide/checkIfBot.php",
+                { token: token },
+                function (result) {
+                  console.log(result);
+                  if (result.success) {
+                    form = document.getElementById("signin-from-homepage");
+                    addAccount(form.name.value, form.pscd.value);
+                  } else {
+                    alert("You are spammer ! Get the @$%K out.");
+                  }
+                }
+              );
+            });
+        });
       });
     </script>
   </body>
