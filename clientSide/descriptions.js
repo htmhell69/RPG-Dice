@@ -86,13 +86,14 @@ $("#Inventory").click(function () {
   }
 });
 
-function addToInventory(type, content, description) {
+function addToInventory(type, content, description, amount) {
   alert("i ran");
   let container = document.getElementsByClassName("Inventory-" + type)[0];
   content.className = "Inventory-item";
   content.title = description;
   container.append(content);
 }
+
 let image = new Image();
 image.src = "assets/backButton.png";
-addToInventory("weapons", image, "Weapon.description", amount);
+addToInventory("weapons", image, "Weapon.description");

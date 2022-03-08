@@ -3,6 +3,10 @@
 // Menu bar
 //
 ================================================*/
+* {
+  margin: 0;
+  padding: 0;
+}
 body {
   background-size: cover;
   background-position: center;

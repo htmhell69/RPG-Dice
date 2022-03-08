@@ -149,13 +149,21 @@
               window.location.replace(
                 "game.html?name=" + name + "&password=" + password
               );
+            } else {
+              let error = document.createElement("P");
+              error.style.color = "red";
+              error.innerHTML = "&#9888; your password is incorrect";
+              //appending it to the div
+              let div = $(".signin-text");
+              div.empty();
+              div.append(error);
             }
           })
           //if username or password is incorrect will display error message
           .catch(function (err) {
             let error = document.createElement("P");
             error.style.color = "red";
-            error.innerHTML = "&#9888; your password or username is incorrect";
+            error.innerHTML = "&#9888; your username is incorrect";
             //appending it to the div
             let div = $(".signin-text");
             div.empty();
