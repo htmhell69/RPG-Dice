@@ -87,7 +87,6 @@ $("#Inventory").click(function () {
 });
 
 function addToInventory(type, content, description, amount) {
-  alert("i ran");
   let container = document.getElementsByClassName("Inventory-" + type)[0];
   content.className = "Inventory-item";
   content.title = description;

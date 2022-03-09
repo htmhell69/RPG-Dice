@@ -9,6 +9,7 @@ function createNewSaveData() {
       }
     }
   }
+  data = JSON.stringify(data);
 
   grecaptcha.ready(function () {
     // do request for recaptcha token
@@ -19,7 +20,6 @@ function createNewSaveData() {
       })
       .then(function (token) {
         // add token to form
-
         $.post("serverSide/addData.php", {
           token: token,
           save: data,
@@ -61,7 +61,6 @@ function readSaveData() {
         }
       }
       turnOrder = save;
-      alert("i ran ");
       singlePlayer(null, false);
     })
     .catch((error) => {

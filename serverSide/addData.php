@@ -54,7 +54,6 @@
     $passwordPeram = stringInputCleaner($_POST["password"]);
     $savePeram = $_POST["save"];
     $type = $_POST["type"];
-    echo($savePeram);
 
 
     function createDatabase($debug){
