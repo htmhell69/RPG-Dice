@@ -10,18 +10,26 @@ function createNewSaveData() {
     }
   }
 
-  fetch(
-    "serverSide/addData.php?save=" +
-      JSON.stringify(data) +
-      "&type=save" +
-      "&name=" +
-      sessionStorage.getItem("name") +
-      "&password=" +
-      sessionStorage.getItem("password")
-  );
-  alert(JSON.stringify(data));
-}
+  grecaptcha.ready(function () {
+    // do request for recaptcha token
+    // response is promise with passed token
+    grecaptcha
+      .execute("6LfT48MeAAAAACnhcmiQY8HQpsjxjdqG-uLOPyua", {
+        action: "create_comment",
+      })
+      .then(function (token) {
+        // add token to form
 
+        $.post("serverSide/addData.php", {
+          token: token,
+          save: data,
+          name: playerName,
+          password: playerPassword,
+          type: "save",
+        });
+      });
+  });
+}
 function readSaveData() {
   //if you dont have save data
   fetch(

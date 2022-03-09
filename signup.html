@@ -160,27 +160,42 @@
             })
             .then(function (token) {
               // add token to form
-              $("#signin-from-homepage").prepend(
-                '<input type="hidden" name="g-recaptcha-response" value="' +
-                  token +
-                  '">'
-              );
+
               $.post(
-                "serverSide/checkIfBot.php",
-                { token: token },
-                function (result) {
-                  console.log(result);
-                  if (result.success) {
-                    form = document.getElementById("signin-from-homepage");
-                    addAccount(form.name.value, form.pscd.value);
-                  } else {
-                    alert("You are spammer ! Get the @$%K out.");
-                  }
+                "serverSide/addData.php",
+                {
+                  token: token,
+                  name: form.name.value,
+                  password: form.pscd.value,
+                },
+                function (result, status) {},
+                "json"
+              ).fail(function (error) {
+                //idk why it just always fails
+                if (error.responseText.includes("Warning")) {
+                  //creating error message
+                  let error = document.createElement("P");
+                  error.style.color = "red";
+                  error.innerHTML = "&#9888; this name already exists";
+                  //appending it to the div
+                  let div = $(".signin-text");
+                  div.empty();
+                  div.append(error);
+                } else {
+                  let success = document.createElement("P");
+                  success.style.color = "green";
+                  success.innerHTML =
+                    "&#10004; you successfully made an account";
+                  //appending it to the div
+                  let div = $(".signin-text");
+                  div.empty();
+                  div.append(success);
                 }
-              );
+              });
             });
         });
       });
+      let form = document.getElementById("signin-from-homepage");
     </script>
   </body>
 </html>
