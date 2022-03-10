@@ -34,44 +34,45 @@ function runAttack(event) {
     attackState = 1;
     currentAttackType = event.target.id;
     let resultFunc = function (result) {
+      //doing some calculations on hitDie to see if it hits
       if (attackState == 1) {
         accuracyDie = result;
         diePaused = true;
-        setTimeout(function () {
+        accuracyDie = result;
+        let hitRoll = accuracyDie;
+        hitRoll +=
+          turnOrder[currentTurn].speed +
+          turnOrder[currentTurn].skills[currentWeapon.type];
+
+        hitRoll -=
+          currentTarget.speed + currentTarget.skills[currentWeapon.type];
+        //check if hit
+        if (currentWeapon[currentAttackType].accuracy <= hitRoll) {
+          setTimeout(function () {
+            diePaused = false;
+            rollDie(function (result) {
+              if (attackState == 2) {
+                damageDie = result;
+                attackState = 0;
+                calculateDamage(
+                  currentAttackType,
+                  currentWeapon,
+                  turnOrder[currentTurn],
+                  currentTarget
+                );
+              }
+            });
+            attackState = 2;
+          }, 1000);
+        } else {
           diePaused = false;
-          rollDie(function (result) {
-            if (attackState == 1) {
-              accuracyDie = result;
-              diePaused = true;
-              setTimeout(function () {
-                diePaused = false;
-                rollDie(resultFunc);
-                attackState = 2;
-              }, 1000);
-            } else if (attackState == 2) {
-              damageDie = result;
-              attackState = 0;
-              calculateDamage(
-                currentAttackType,
-                currentWeapon,
-                turnOrder[currentTurn],
-                currentTarget
-              );
-            }
-          });
-          attackState = 2;
-        }, 1000);
-      } else if (attackState == 2) {
-        damageDie = result;
-        attackState = 0;
-        calculateDamage(
-          currentAttackType,
-          currentWeapon,
-          turnOrder[currentTurn],
-          currentTarget
-        );
+          currentWeapon[currentAttackType].beforeStrike(currentTarget);
+          addLog(turnOrder[currentTurn].name, "your attack missed");
+          startMenu();
+        }
       }
-    };
+    }; //end of function im creating
+    //calling the roll die with this function
     rollDie(resultFunc);
   }
 }
@@ -125,18 +126,11 @@ function calculateDamage(type, weapon, attacker, target) {
   //check if hit
   var usedSkill = weapon.type;
   //waiting for hit roll to be finalized
-  hitRoll = accuracyDie;
-  hitRoll += attacker.speed + attacker.skills[usedSkill];
-  hitRoll -= target.speed + target.skills[usedSkill];
-  if (weapon[type].accuracy <= hitRoll) {
-    var damage = weapon[type].damage * (damageDie / 10 + 1);
-    damage += attacker.damage * (attacker.skills[usedSkill] / 2.5 + 1);
-    damage -= target.defense * (target.skills[usedSkill] / 2.5 + 1);
-    //calculate damage
-    currentWeapon[type].beforeStrike(currentTarget);
-    endAttack(damage);
-  } else {
-    currentWeapon[type].beforeStrike(currentTarget);
-    addLog(attacker.name, "your attack missed");
-  }
+
+  var damage = weapon[type].damage * (damageDie / 10 + 1);
+  damage += attacker.damage * (attacker.skills[usedSkill] / 2.5 + 1);
+  damage -= target.defense * (target.skills[usedSkill] / 2.5 + 1);
+  //calculate damage
+  currentWeapon[type].beforeStrike(currentTarget);
+  endAttack(damage);
 }

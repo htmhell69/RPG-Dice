@@ -19,6 +19,7 @@ function createNewSaveData() {
         action: "create_comment",
       })
       .then(function (token) {
+        alert(token);
         // add token to form
         $.post("serverSide/addData.php", {
           token: token,
