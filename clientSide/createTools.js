@@ -12,7 +12,7 @@ function createTool(
     );
   }
 ) {
-  let Tool = {
+  let newTool = {
     name: name,
     imgSrc: img,
     img: new Image(),
@@ -21,11 +21,36 @@ function createTool(
     onUse: onUse,
   };
 
-  Tool.img.src = Tool.imgSrc;
+  newTool.img.src = newTool.imgSrc;
 
   if (addToArray == true) {
-    allTools.push(Tool);
+    allTools.push(newTool);
   } else {
-    return Tool;
+    return newTool;
   }
 }
+
+function getTool(toolName, give = true, reciever, log = true) {
+  for (let i = 0; i < allTools.length; i++) {
+    if (allTools[i].name == toolName) {
+      let tool = new createTool(
+        false,
+        allTools[i].name,
+        allTools[i].imgSrc,
+        allTools[i].type,
+        allTools[i].modifier,
+        allTools[i].onUse
+      );
+      if (give) {
+        if (log) {
+          addLog(reciever.name, "got the weapon " + toolName);
+        }
+        reciever.tools.push(tool);
+      } else {
+        return tool;
+      }
+    }
+  }
+}
+
+createTool(true, "crappy axe", "assets/crappyAxe.png", "axe", 2);

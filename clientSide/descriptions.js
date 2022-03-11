@@ -69,20 +69,24 @@ function clearLogs() {
 
 $("#Inventory").click(function () {
   let container = document.getElementById("Inventory");
-  if (inventoryDisplay) {
-    inventoryDisplay = false;
-    document.getElementById("Inventory-content").style.display = "none";
-    container.removeChild(container.lastChild);
-    let newEntry = document.createElement("P");
-    newEntry.innerHTML = "Open Inventory";
-    container.append(newEntry);
-  } else {
-    inventoryDisplay = true;
-    document.getElementById("Inventory-content").style.display = "inline-block";
-    container.removeChild(container.lastChild);
-    let newEntry = document.createElement("P");
-    newEntry.innerHTML = "Close Inventory";
-    container.append(newEntry);
+  if (turnOrder[currentTurn].type == "player") {
+    if (inventoryDisplay) {
+      inventoryDisplay = false;
+      document.getElementById("Inventory-content").style.display = "none";
+      container.removeChild(container.lastChild);
+      let newEntry = document.createElement("P");
+      newEntry.innerHTML = "Open Inventory";
+      container.append(newEntry);
+    } else {
+      inventoryDisplay = true;
+      resetInventoryDiv(turnOrder[currentTurn]);
+      document.getElementById("Inventory-content").style.display =
+        "inline-block";
+      container.removeChild(container.lastChild);
+      let newEntry = document.createElement("P");
+      newEntry.innerHTML = "Close Inventory";
+      container.append(newEntry);
+    }
   }
 });
 
@@ -93,6 +97,26 @@ function addToInventory(type, content, description, amount) {
   container.append(content);
 }
 
-let image = new Image();
-image.src = "assets/backButton.png";
-addToInventory("weapons", image, "Weapon.description");
+function clearInventoryDiv() {
+  let inventoryItems = document.getElementsByClassName("Inventory-item");
+  let amountOfElements = inventoryItems.length;
+  for (let i = 0; i < amountOfElements; i++) {
+    inventoryItems[0].remove();
+  }
+}
+
+function resetInventoryDiv(player = turnOrder[currentTurn]) {
+  //putting all weapons in inventory div
+  clearInventoryDiv();
+  for (let i = 0; i < player.weapons.length; i++) {
+    let image = new Image();
+    image.src = player.weapons[i].imgSrc;
+    addToInventory("weapons", image, player.weapons[i].description);
+  }
+  //putting all tools in inventory div
+  for (let i = 0; i < player.tools.length; i++) {
+    let image = new Image();
+    image.src = player.tools[i].imgSrc;
+    addToInventory("tools", image, player.tools[i].description);
+  }
+}

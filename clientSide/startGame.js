@@ -26,6 +26,8 @@ function singlePlayer(event, newGame = true) {
       { basic: 2, stealth: 0, heavy: 3, range: 0 }
     );
     getMaterial("wood", player, 5);
+    getWeapon("rusty broadsword", true, player, false);
+    getTool("crappy axe", true, player, false);
     turnOrder.push(player);
     newEnemy();
   }
@@ -37,9 +39,6 @@ function singlePlayer(event, newGame = true) {
 function beginTurn() {
   let entity = turnOrder[currentTurn];
   if (entity.type == "player") {
-    if (entity.weapons.length == 0) {
-      entity.weapons.push(getWeapon("rusty broadsword"));
-    }
     if (entity.specialCooldown >= 1) {
       entity.specialCooldown--;
     }

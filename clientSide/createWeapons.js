@@ -74,9 +74,9 @@ function weaponConstructor(
 }
 
 //function to give the player a certain weapon
-function getWeapon(name, log = true) {
+function getWeapon(weaponName, give = true, reciever, log = true) {
   for (let i = 0; i < allWeapons.length; i++) {
-    if (name == allWeapons[i].name) {
+    if (weaponName == allWeapons[i].name) {
       weaponIndex = allWeapons[i];
       let Weapon = weaponConstructor(
         false,
@@ -102,15 +102,19 @@ function getWeapon(name, log = true) {
         weaponIndex.special.beforeStrike,
         weaponIndex.special.afterStrike
       );
-      if (log) {
-        addLog(turnOrder[currentTurn].name, "got the weapon " + name);
+      if (give) {
+        if (log) {
+          addLog(reciever.name, "got the weapon " + weaponName);
+        }
+        let image = new Image();
+        image.src = Weapon.imgSrc;
+        addToInventory("weapons", image, Weapon.description);
+        Weapon.normal.initilization();
+        Weapon.special.initilization();
+        reciever.weapons.push(Weapon);
+      } else {
+        return Weapon;
       }
-      let image = new Image();
-      image.src = Weapon.imgSrc;
-      addToInventory("weapons", image, Weapon.description);
-      Weapon.normal.initilization();
-      Weapon.special.initilization();
-      return Weapon;
     }
   }
 }
