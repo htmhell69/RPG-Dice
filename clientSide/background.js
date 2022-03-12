@@ -38,12 +38,12 @@ background = setBackground(false, "forest");
 
 var allMaterials = [];
 
-function createMaterial(addToArray, name, img, descrpition) {
+function createMaterial(addToArray, name, img, description) {
   let newMaterial = {
     name: name,
     imgSrc: img,
     img: new Image(),
-    descrpition: descrpition,
+    description: description,
   };
   newMaterial.img.src = newMaterial.imgSrc;
   if (addToArray) {
@@ -59,12 +59,20 @@ function getMaterial(material, reciever, amount) {
       if (reciever.materials[material] == undefined) {
         reciever.materials[material] = amount;
       } else {
-        reciever.materials[material] = amount;
+        reciever.materials[material] += amount;
       }
+      addToInventory(
+        "resources",
+        allMaterials[i].img,
+        allMaterials[i].description,
+        "set",
+        amount,
+        allMaterials[i].name
+      );
     }
   }
 }
 
-createMaterial(true, "wood", "assets/fineMetalResource.png", "wood");
-createMaterial(true, "fineMetal", "assets/woodResource.png", "fineMetal");
+createMaterial(true, "wood", "assets/logResource.png", "wood");
+createMaterial(true, "fineMetal", "assets/fineMetalResource.png", "fineMetal");
 createMaterial(true, "metal", "assets/scrapMetalResource.png", "metal");

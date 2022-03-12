@@ -79,7 +79,6 @@ $("#Inventory").click(function () {
       container.append(newEntry);
     } else {
       inventoryDisplay = true;
-      resetInventoryDiv(turnOrder[currentTurn]);
       document.getElementById("Inventory-content").style.display =
         "inline-block";
       container.removeChild(container.lastChild);
@@ -90,11 +89,33 @@ $("#Inventory").click(function () {
   }
 });
 
-function addToInventory(type, content, description, amount) {
-  let container = document.getElementsByClassName("Inventory-" + type)[0];
-  content.className = "Inventory-item";
-  content.title = description;
-  container.append(content);
+function addToInventory(
+  inventoryGroup,
+  content,
+  description,
+  amount = "no",
+  amountNum,
+  nameOfInventoryItem
+) {
+  let container = document.getElementsByClassName(
+    "Inventory-" + inventoryGroup
+  )[0];
+  if (amount != "modify") {
+    content.className = "Inventory-item";
+    content.title = description;
+    container.append(content);
+  }
+  if (amount == "set") {
+    let text = document.createElement("P");
+    text.TEXT_NODE = amountNum;
+    alert(text.TEXT_NODE);
+    text.className = nameOfInventoryItem;
+    text.id = amountNum;
+    container.append(text);
+  } else if (amount == "modify") {
+    let text = document.getElementsByClassName(nameOfInventoryItem)[0];
+    text.TEXT_NODE = parseInt(text.id) + amountNum;
+  }
 }
 
 function clearInventoryDiv() {

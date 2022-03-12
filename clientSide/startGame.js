@@ -26,6 +26,7 @@ function singlePlayer(event, newGame = true) {
       { basic: 2, stealth: 0, heavy: 3, range: 0 }
     );
     getMaterial("wood", player, 5);
+
     getWeapon("rusty broadsword", true, player, false);
     getTool("crappy axe", true, player, false);
     turnOrder.push(player);

@@ -157,3 +157,10 @@ document.onkeydown = function () {
     keyPressed = false;
   }, 25);
 };
+
+document.onmousedown = function () {
+  keyPressed = true;
+  setTimeout(function () {
+    keyPressed = false;
+  }, 25);
+};
