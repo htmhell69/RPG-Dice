@@ -1,11 +1,39 @@
 <?php
-
+    
     class MyDB extends SQLite3 {
         function __construct() {
             $this->open('playerData.db');
         }
     }
 
+    
+    //checking if bot
+    $captcha;
+    $captcha = filter_input(INPUT_POST, 'token', FILTER_SANITIZE_STRING);
+    $secretKey = "6LfT48MeAAAAAOI3m-yrPcNVehRtBei1Cw-_Cr7w";
+    $ip = $_SERVER['REMOTE_ADDR'];
+  
+    // post request to server
+    $url = 'https://www.google.com/recaptcha/api/siteverify';
+    $data = array('secret' => $secretKey, 'response' => $captcha);
+  
+    $options = array(
+      'http' => array(
+        'header'  => "Content-type: application/x-www-form-urlencoded\r\n",
+        'method'  => 'POST',
+        'content' => http_build_query($data)
+      )
+    );
+    $context  = stream_context_create($options);
+    $response = file_get_contents($url, false, $context);
+    $responseKeys = json_decode($response,true);
+    header('Content-type: application/json');
+    if($responseKeys["success"]) {
+      $isBot = false;
+    } else {
+      $isBot = true;
+    }
+    
     function stringInputCleaner($data){
     //remove space before and after
     $data = trim($data); 
@@ -15,18 +43,17 @@
     return $data;
     } 
 
-    $doDebug = $_GET["debug"];
+    $doDebug = $_POST["debug"];
     if($doDebug == "true"){
         $doDebug = true;
     } else {
         $doDebug = false;
     }
     
-    $namePeram = stringInputCleaner($_GET["name"]);
-    $passwordPeram = stringInputCleaner($_GET["password"]);
-    $savePeram = $_GET["save"];
-    $type = $_GET["type"];
-    echo($savePeram);
+    $namePeram = stringInputCleaner($_POST["name"]);
+    $passwordPeram = stringInputCleaner($_POST["password"]);
+    $savePeram = $_POST["save"];
+    $type = $_POST["type"];
 
 
     function createDatabase($debug){
@@ -84,7 +111,7 @@
         } 
     }
     
-
+if(!$isBot){
 if(!file_exists("playerData.db")){
     $db = new MyDB();
     createDatabase($doDebug);
@@ -93,6 +120,8 @@ if(!file_exists("playerData.db")){
 } else{
     $db = new MyDB();
     addData($doDebug,$namePeram,$passwordPeram, $savePeram);
+}
+
 }
    
 

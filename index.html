@@ -1,6 +1,9 @@
 <!DOCTYPE html>
 <html>
   <head>
+    <title>RPG Dice</title>
+
+    <link rel="icon" type="image/x-icon" href="assets/icon.png" />
     <style>
       * {
         padding: 0;
@@ -15,6 +18,7 @@
         left: 0;
         right: 0;
         background-color: #22222222;
+        background-image: url("assets/icon.png");
         backdrop-filter: blur(0.5vh);
         display: flex;
         justify-content: center;
@@ -145,13 +149,21 @@
               window.location.replace(
                 "game.html?name=" + name + "&password=" + password
               );
+            } else {
+              let error = document.createElement("P");
+              error.style.color = "red";
+              error.innerHTML = "&#9888; your password is incorrect";
+              //appending it to the div
+              let div = $(".signin-text");
+              div.empty();
+              div.append(error);
             }
           })
           //if username or password is incorrect will display error message
           .catch(function (err) {
             let error = document.createElement("P");
             error.style.color = "red";
-            error.innerHTML = "&#9888; your password or username is incorrect";
+            error.innerHTML = "&#9888; your username is incorrect";
             //appending it to the div
             let div = $(".signin-text");
             div.empty();

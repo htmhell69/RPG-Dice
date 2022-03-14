@@ -1,5 +1,5 @@
 //this js file creates the functions needed to make the player/enemy objects
-function createPlayer(name, hp, img, defense, attack) {
+function createPlayer(name, hp, img, defense, damage, speed, skills) {
   let player = {
     name: name,
     maxHp: hp,
@@ -7,9 +7,12 @@ function createPlayer(name, hp, img, defense, attack) {
     imgSrc: img,
     img: new Image(),
     weapons: [],
+    tools: [],
     materials: {},
     defense: defense,
-    attack: attack,
+    damage: damage,
+    speed: speed,
+    skills: skills,
     specialCooldown: 0,
     type: "player",
   };
@@ -17,7 +20,7 @@ function createPlayer(name, hp, img, defense, attack) {
   return player;
 }
 
-function createEnemy(name, hp, img, defense, attack) {
+function createEnemy(name, hp, img, defense, damage, speed, skills) {
   let enemy = {
     name: name,
     maxHp: hp,
@@ -25,7 +28,9 @@ function createEnemy(name, hp, img, defense, attack) {
     imgSrc: img,
     img: new Image(),
     defense: defense,
-    attack: attack,
+    damage: damage,
+    speed: speed,
+    skills: skills,
     type: "enemy",
   };
   enemy.img.src = enemy.imgSrc;
@@ -48,14 +53,19 @@ function checkIfDead() {
       turnOrder.splice(i);
       enemyDrops(currentObject);
       difficulty += 1;
-      newEnemy();
+      newEnemy(false);
     }
   }
 }
 
 function enemyDrops(object) {}
 
-function newEnemy() {
-  Enemy = createEnemy("boring enemy", 100, "assets/enemy.png", 10, 10);
+function newEnemy(heal) {
+  Enemy = createEnemy("boring enemy", 100, "assets/enemy.png", 10, 10, 2, {
+    basic: 2,
+    stealth: 3,
+    heavy: 1,
+    range: 1,
+  });
   turnOrder.push(Enemy);
 }

@@ -2,7 +2,7 @@ var turnOrder = [];
 var currentTurn = 0;
 var Enemy;
 var enemyImage;
-var gameType = "singlePlayer";
+var gameType;
 var canvas;
 var ctx;
 var dieCanvas;
@@ -13,31 +13,39 @@ canvas = document.getElementById("canvas");
 ctx = canvas.getContext("2d");
 dieCanvas = document.getElementById("dieCanvas");
 dieCtx = dieCanvas.getContext("2d");
-
 function singlePlayer(event, newGame = true) {
+  gameType = "singlePlayer";
   if (newGame) {
+    alert("i ran");
     let player = createPlayer(
       sessionStorage.getItem("name"),
       100,
       "assets/player.png",
-      0,
-      0
+      2,
+      5,
+      1,
+      { basic: 2, stealth: 0, heavy: 3, range: 0 }
     );
+    getMaterial("wood", player, 5);
+    getMaterial("wood", player, 5);
+    getMaterial("fineMetal", player, 3);
+
+    getWeapon("rusty broadsword", true, player, false);
+    getTool("crappy axe", true, player, false);
     turnOrder.push(player);
     newEnemy();
   }
   startGame = true;
   setInterval(update, 50);
+  if (!newGame) {
+    resetInventoryDiv(turnOrder[currentTurn]);
+  }
   startMenu();
 }
 
 function beginTurn() {
   let entity = turnOrder[currentTurn];
   if (entity.type == "player") {
-    if (entity.weapons.length == 0) {
-      entity.weapons.push(getWeapon("generic"));
-      entity.weapons[0].number = 1;
-    }
     if (entity.specialCooldown >= 1) {
       entity.specialCooldown--;
     }

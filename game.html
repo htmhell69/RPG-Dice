@@ -1,49 +1,73 @@
 <!DOCTYPE html>
 <html>
   <head>
+    <title>RPG Dice</title>
+
+    <link rel="icon" type="image/x-icon" href="assets/icon.png" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons+Round">
-    <link rel="stylesheet" href="clientSide/fancyButtons.css">
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/icon?family=Material+Icons+Round"
+    />
+    <link rel="stylesheet" href="clientSide/fancyButtons.css" />
     <title>RPG-Dice Game</title>
   </head>
   <body id="body">
-    <div class="log">
-      <button class="logbtn" style="font-weight: bold; font-size: 90%" >
-        <i class="material-icons-round" style="font-size: 50px;">chat</i>
+    <div class="game-content">
+      <div class="log">
+        <button class="logbtn" style="font-weight: bold; font-size: 90%">
+          <i class="material-icons-round" style="font-size: 50px">chat</i>
+        </button>
+        <div class="log-content">
+          <div class="log-item">game: THE GAME HAS STARTED THATS INSANE</div>
+          <button class="erase">
+            <img
+              src="assets/erase.png"
+              height="100%"
+              width="100%"
+              class="eraseimg"
+            /><img />
+          </button>
+        </div>
+      </div>
+      <div class="Inventory-content" id="Inventory-content">
+        <div class="Inventory-weapons"><h1>Weapons</h1></div>
+        <div class="Inventory-tools"><h1>Tools</h1></div>
+        <div class="Inventory-resources"><h1>Resources<h1></div>
+      </div>
+      <canvas id="dieCanvas" width="500" height="545"></canvas>
+    </div>
+    <div class="game-ui">
+      <button
+        class="online"
+        style="width: 50px; height: 50px; font-weight: bold; font-size: 90%"
+      >
+        <i class="material-icons-round" style="font-size: 50px">cloud</i>
       </button>
-      <div class="log-content">
-         <div class="log-item">game: THE GAME HAS STARTED THATS INSANE </div>
-        <button class="erase"><img src="assets/erase.png" height="100%" width="100%" class="eraseimg"></img></button>
+
+      <canvas id="canvas" width="1280" height="545"></canvas>
+      <br />
+      <div class="buttons">
+        <div class="menu"></div>
+        <div class="description"></div>
+        <div class="rightMenu">
+          <button
+            class="button"
+            id="saveGame"
+            style="width: 100%; height: 37%; font-weight: bold; font-size: 90%"
+          >
+            Save Game
+          </button>
+          <button
+            class="button"
+            id="Inventory"
+            style="width: 100%; height: 37%; font-weight: bold; font-size: 90%"
+          >
+            Open Inventory
+          </button>
+        </div>
       </div>
     </div>
-
-    <button class="online" style="width: 50px; height: 50px; font-weight: bold; font-size: 90%">
-      <i class="material-icons-round" style="font-size: 50px;">cloud</i>
-    </button>
-
-    <canvas id="canvas" width="1280" height="545"></canvas>
-    <br />
-    <div class="buttons">
-      <div class="menu"></div>
-      <div class="description"></div>
-      <div class="rightMenu">
-        <button
-          class="button"
-          id="saveGame"
-          style="width: 100%; height: 37%; font-weight: bold; font-size: 90%"
-        >
-          Save Game
-        </button>
-        <button
-          class="button"
-          id="inventory"
-          style="width: 100%; height: 37%; font-weight: bold; font-size: 90%"
-        >
-          Open Inventory
-        </button>
-      </div>
-    </div>
-    <canvas id="dieCanvas" width="1280" height="545"></canvas>
   </body>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
   <script src="clientSide/descriptions.js"></script>
@@ -51,11 +75,17 @@
   <script src="clientSide/createWeapons.js"></script>
   <script src="clientSide/playerEnemy.js"></script>
   <script src="clientSide/playerAttack.js"></script>
+  <script src="clientSide/background.js"></script>
+  <script src="clientSide/createTools.js"></script>
   <script src="clientSide/startGame.js"></script>
   <script src="clientSide/buttonSelector.js"></script>
   <script src="clientSide/canvas.js"></script>
   <script src="clientSide/dieAnimation.js"></script>
   <script src="clientSide/requestPhp.js"></script>
+  <script
+    async
+    src="https://www.google.com/recaptcha/api.js?render=6LfT48MeAAAAACnhcmiQY8HQpsjxjdqG-uLOPyua"
+  ></script>
 
   <script>
     canvas.width = window.innerWidth;

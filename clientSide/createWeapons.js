@@ -5,11 +5,14 @@ function weaponConstructor(
   name,
   type,
   img,
+  description,
   normalName,
   normalDamage,
+  normalAccuracy,
   normalDescription,
   specialName,
   specialDamage,
+  specialAccuracy,
   cooldown,
   specialDescription,
   normalInitilization = function () {},
@@ -18,7 +21,7 @@ function weaponConstructor(
   normalAfterStrike = function (target, damage) {
     addLog(
       turnOrder[currentTurn].name,
-      "dealt " + damage + " damage to " + target
+      "dealt " + damage + " damage to " + target.name
     );
   },
   specialInitilization = function () {},
@@ -27,7 +30,7 @@ function weaponConstructor(
   specialAfterStrike = function (target, damage) {
     addLog(
       turnOrder[currentTurn].name,
-      "dealt " + damage + " damage to " + target
+      "dealt " + damage + " damage to " + target.name
     );
   }
 ) {
@@ -35,11 +38,13 @@ function weaponConstructor(
     name: name,
     type: type,
     imgSrc: img,
+    description: description,
     img: new Image(),
     justUsed: false,
     normal: {
       name: normalName,
       damage: normalDamage,
+      accuracy: normalAccuracy,
       description: normalDescription,
       initilization: normalInitilization,
       onBeginTurn: normalTurnStart,
@@ -50,6 +55,7 @@ function weaponConstructor(
     special: {
       name: specialName,
       damage: specialDamage,
+      accuracy: specialAccuracy,
       cooldown: cooldown,
       description: specialDescription,
       initilization: specialInitilization,
@@ -68,20 +74,23 @@ function weaponConstructor(
 }
 
 //function to give the player a certain weapon
-function getWeapon(name, log = true) {
+function getWeapon(weaponName, give = true, reciever, log = true) {
   for (let i = 0; i < allWeapons.length; i++) {
-    if (name == allWeapons[i].name) {
+    if (weaponName == allWeapons[i].name) {
       weaponIndex = allWeapons[i];
       let Weapon = weaponConstructor(
         false,
         weaponIndex.name,
         weaponIndex.type,
         weaponIndex.imgSrc,
+        weaponIndex.description,
         weaponIndex.normal.name,
         weaponIndex.normal.damage,
+        weaponIndex.normal.accuracy,
         weaponIndex.normal.description,
         weaponIndex.special.name,
         weaponIndex.special.damage,
+        weaponIndex.special.accuracy,
         weaponIndex.special.cooldown,
         weaponIndex.special.description,
         weaponIndex.normal.initilization,
@@ -93,12 +102,19 @@ function getWeapon(name, log = true) {
         weaponIndex.special.beforeStrike,
         weaponIndex.special.afterStrike
       );
-      if (log) {
-        addLog(turnOrder[currentTurn].name, "got the weapon " + name);
+      if (give) {
+        if (log) {
+          addLog(reciever.name, "got the weapon " + weaponName);
+        }
+        let image = new Image();
+        image.src = Weapon.imgSrc;
+        addToInventory("weapons", image, Weapon.description);
+        Weapon.normal.initilization();
+        Weapon.special.initilization();
+        reciever.weapons.push(Weapon);
+      } else {
+        return Weapon;
       }
-      Weapon.normal.initilization();
-      Weapon.special.initilization();
-      return Weapon;
     }
   }
 }
@@ -106,14 +122,17 @@ function getWeapon(name, log = true) {
 //create generic weapon
 weaponConstructor(
   true,
-  "generic",
-  "none",
+  "rusty broadsword",
+  "basic",
   "assets/item.png",
+  "a weapon that can be used to wipe a donkeys ass dont even try cleaning it",
   "normal",
   10,
+  3,
   "10 damage",
   "special",
   20,
+  4,
   2,
   "20 damage 2 turn cooldown"
 );

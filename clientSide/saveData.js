@@ -9,19 +9,27 @@ function createNewSaveData() {
       }
     }
   }
+  data = JSON.stringify(data);
 
-  fetch(
-    "serverSide/addData.php?save=" +
-      JSON.stringify(data) +
-      "&type=save" +
-      "&name=" +
-      sessionStorage.getItem("name") +
-      "&password=" +
-      sessionStorage.getItem("password")
-  );
-  alert(JSON.stringify(data));
+  grecaptcha.ready(function () {
+    // do request for recaptcha token
+    // response is promise with passed token
+    grecaptcha
+      .execute("6LfT48MeAAAAACnhcmiQY8HQpsjxjdqG-uLOPyua", {
+        action: "create_comment",
+      })
+      .then(function (token) {
+        // add token to form
+        $.post("serverSide/addData.php", {
+          token: token,
+          save: data,
+          name: playerName,
+          password: playerPassword,
+          type: "save",
+        });
+      });
+  });
 }
-
 function readSaveData() {
   //if you dont have save data
   fetch(
@@ -48,19 +56,21 @@ function readSaveData() {
           ) {
             weaponsToAdd.push(getWeapon(save[objectI].weapons[weaponI], false));
           }
+          toolsToAdd = [];
+          for (let toolI = 0; toolI < save[objectI].tools.length; toolI++) {
+            toolsToAdd.push(getTool(save[objectI].tools[toolI], false));
+          }
 
           save[objectI].weapons = weaponsToAdd;
         }
       }
       turnOrder = save;
-      alert("i ran ");
+
       singlePlayer(null, false);
     })
     .catch((error) => {
       console.log(error);
     });
-
-  //if you do have save data
 }
 
 url = new URL(window.location);

@@ -1,5 +1,5 @@
-let des = $(".description");
-
+var des = $(".description");
+var inventoryDisplay = false;
 function description(event) {
   des.empty();
   let id = event.target.id;
@@ -37,19 +37,26 @@ function description(event) {
       break;
     default:
       if (!isNaN(id)) {
-        des.append(
-          "<p><img src=" +
-            turnOrder[currentTurn].weapons[id].imgSrc +
-            "><img>" +
-            turnOrder[currentTurn].weapons[id].description +
-            "</p>"
-        );
+        if (currentMenu == "weaponSelect") {
+          des.append(
+            "<h1>" +
+              turnOrder[currentTurn].weapons[id].name +
+              "</h1>" +
+              "<img src=" +
+              turnOrder[currentTurn].weapons[id].imgSrc +
+              "><img>" +
+              "<p>" +
+              turnOrder[currentTurn].weapons[id].description +
+              "</p>"
+          );
+        }
       }
   }
 }
 
 function addLog(source, message) {
   let newEntry = document.createElement("P");
+  newEntry.className = "log-item";
   newEntry.innerHTML = source + ": " + message;
   log.append(newEntry);
 }
@@ -57,5 +64,98 @@ function addLog(source, message) {
 function clearLogs() {
   while (log.firstChild) {
     log.removeChild(log.lastChild);
+  }
+}
+
+$("#Inventory").click(function () {
+  let container = document.getElementById("Inventory");
+  if (turnOrder[currentTurn].type == "player") {
+    if (inventoryDisplay) {
+      inventoryDisplay = false;
+      document.getElementById("Inventory-content").style.display = "none";
+      container.removeChild(container.lastChild);
+      let newEntry = document.createElement("P");
+      newEntry.innerHTML = "Open Inventory";
+      container.append(newEntry);
+    } else {
+      inventoryDisplay = true;
+      document.getElementById("Inventory-content").style.display =
+        "inline-block";
+      container.removeChild(container.lastChild);
+      let newEntry = document.createElement("P");
+      newEntry.innerHTML = "Close Inventory";
+      container.append(newEntry);
+    }
+  }
+});
+
+function addToInventory(
+  inventoryGroup,
+  content,
+  description,
+  amount = "no",
+  amountNum,
+  nameOfInventoryItem
+) {
+  let container = document.getElementsByClassName(
+    "Inventory-" + inventoryGroup
+  )[0];
+  if (amount != "modify") {
+    content.className = "Inventory-item";
+    content.title = description;
+    container.append(content);
+  }
+
+  if (amount == "set") {
+    let text = document.createElement("p");
+    text.innerHTML = "x" + amountNum;
+    text.className = nameOfInventoryItem;
+    text.id = amountNum;
+    container.append(text);
+  } else if (amount == "modify") {
+    let text = document.getElementsByClassName(nameOfInventoryItem)[0];
+    let newNumber = parseInt(text.id) + amountNum;
+    text.id = newNumber;
+    text.innerHTML = "x" + newNumber;
+  }
+}
+
+function clearInventoryDiv() {
+  let inventoryItems = document.getElementsByClassName("Inventory-item");
+  let amountOfElements = inventoryItems.length;
+  for (let i = 0; i < amountOfElements; i++) {
+    inventoryItems[0].remove();
+  }
+}
+
+function resetInventoryDiv(player = turnOrder[currentTurn]) {
+  if (player.type == "player") {
+    //putting all weapons in inventory div
+    clearInventoryDiv();
+    for (let i = 0; i < player.weapons.length; i++) {
+      let image = new Image();
+      image.src = player.weapons[i].imgSrc;
+      addToInventory("weapons", image, player.weapons[i].description);
+    }
+    //putting all tools in inventory div
+    for (let i = 0; i < player.tools.length; i++) {
+      let image = new Image();
+      image.src = player.tools[i].imgSrc;
+      addToInventory("tools", image, player.tools[i].description);
+    }
+    for (const property in player.materials) {
+      for (let i = 0; i < allMaterials.length; i++) {
+        if (allMaterials[i].name == property) {
+          addToInventory(
+            "resources",
+            allMaterials[i].img,
+            allMaterials[i].description,
+            "set",
+            player.materials[property],
+            property
+          );
+        }
+      }
+    }
   }
 }

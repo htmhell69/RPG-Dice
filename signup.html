@@ -1,6 +1,11 @@
 <!DOCTYPE html>
 <html>
   <head>
+    <title>RPG Dice</title>
+
+    <link rel="icon" type="image/x-icon" href="assets/icon.png" />
+    <link rel="preconnect" href="https://www.google.com" />
+    <link rel="preconnect" href="https://www.gstatic.com" crossorigin />
     <style>
       * {
         padding: 0;
@@ -14,6 +19,7 @@
         left: 0;
         right: 0;
         background-color: #22222222;
+        background-image: url("assets/icon.png");
         backdrop-filter: blur(0.5vh);
         display: flex;
         justify-content: center;
@@ -122,7 +128,9 @@
             required
           /><br />
           <input
-            class="input-submit menu-option"
+            name="submit"
+            class="input-submit menu-option g-recaptcha"
+            id="submitForm"
             type="submit"
             value="Enter Account"
           />
@@ -131,14 +139,64 @@
         <a href="index.html" class="menu-option"> Back to sign in </a>
       </div>
     </div>
+    <script
+      async
+      src="https://www.google.com/recaptcha/api.js?render=6LfT48MeAAAAACnhcmiQY8HQpsjxjdqG-uLOPyua"
+    ></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script src="clientSide/requestPhp.js"></script>
     <script>
       $("#signin-from-homepage").submit(function (event) {
         event.preventDefault();
         //this function will add a player account using the input they gave
-        addAccount(this.name.value, this.pscd.value);
+        let password = this.pscd.value;
+        let username = this.name.value;
+        grecaptcha.ready(function () {
+          // do request for recaptcha token
+          // response is promise with passed token
+          grecaptcha
+            .execute("6LfT48MeAAAAACnhcmiQY8HQpsjxjdqG-uLOPyua", {
+              action: "create_comment",
+            })
+            .then(function (token) {
+              // add token to form
+
+              $.post(
+                "serverSide/addData.php",
+                {
+                  token: token,
+                  name: form.name.value,
+                  password: form.pscd.value,
+                },
+                function (result, status) {},
+                "json"
+              ).fail(function (error) {
+                //idk why it just always fails
+                if (error.responseText.includes("Warning")) {
+                  //creating error message
+                  let error = document.createElement("P");
+                  error.style.color = "red";
+                  error.innerHTML = "&#9888; this name already exists";
+                  //appending it to the div
+                  let div = $(".signin-text");
+                  div.empty();
+                  div.append(error);
+                } else {
+                  console.log(error);
+                  let success = document.createElement("P");
+                  success.style.color = "green";
+                  success.innerHTML =
+                    "&#10004; you successfully made an account";
+                  //appending it to the div
+                  let div = $(".signin-text");
+                  div.empty();
+                  div.append(success);
+                }
+              });
+            });
+        });
       });
+      let form = document.getElementById("signin-from-homepage");
     </script>
   </body>
 </html>

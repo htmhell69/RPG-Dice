@@ -1,5 +1,13 @@
-let currentWeapon;
-let currentTarget;
+var currentWeapon;
+var currentTarget;
+var currentAttackType;
+var runningAttack = false;
+/* 0 = off
+ * 1 = accuracy roll
+ * 2 = damage roll
+ */
+
+var attackState;
 function startAttack(event) {
   if (turnOrder[currentTurn].type == "player") {
     if (turnOrder.length > currentTurn + 1) {
@@ -14,34 +22,74 @@ function startAttack(event) {
 }
 
 function runAttack(event) {
-  let entity = turnOrder[currentTurn];
-  //setting just used value
-  for (let i = 0; i < entity.weapons.length; i++) {
-    entity.weapons[i].justUsed = false;
-  }
-  currentWeapon.justUsed = true;
+  if (!runningAttack) {
+    runningAttack = true;
+    console.log("attack ran " + event.target.id);
+    var entity = turnOrder[currentTurn];
+    //setting just used value
+    for (let i = 0; i < entity.weapons.length; i++) {
+      entity.weapons[i].justUsed = false;
+    }
+    currentWeapon.justUsed = true;
+    attackState = 1;
+    currentAttackType = event.target.id;
+    let resultFunc = function (result) {
+      //doing some calculations on hitDie to see if it hits
+      if (attackState == 1) {
+        accuracyDie = result;
+        diePaused = true;
+        accuracyDie = result;
+        let hitRoll = accuracyDie;
+        hitRoll +=
+          turnOrder[currentTurn].speed +
+          turnOrder[currentTurn].skills[currentWeapon.type];
 
+        hitRoll -=
+          currentTarget.speed + currentTarget.skills[currentWeapon.type];
+        //check if hit
+        if (currentWeapon[currentAttackType].accuracy <= hitRoll) {
+          setTimeout(function () {
+            diePaused = false;
+            rollDie(function (result) {
+              if (attackState == 2) {
+                damageDie = result;
+                attackState = 0;
+                calculateDamage(
+                  currentAttackType,
+                  currentWeapon,
+                  turnOrder[currentTurn],
+                  currentTarget
+                );
+              }
+            });
+            attackState = 2;
+          }, 1000);
+        } else {
+          diePaused = false;
+          currentWeapon[currentAttackType].beforeStrike(currentTarget);
+          addLog(turnOrder[currentTurn].name, "your attack missed");
+          startMenu();
+        }
+      }
+    }; //end of function im creating
+    //calling the roll die with this function
+    rollDie(resultFunc);
+  }
+}
+
+function endAttack(damage) {
   //running attack
-  if (event.target.id == "normal") {
-    currentWeapon.normal.beforeStrike(currentTarget.name);
-    let roll = rollDie();
-    currentTarget.hp -= currentWeapon.normal.damage * (roll / 10 + 1);
-    currentWeapon.normal.afterStrike(
-      currentTarget.name,
-      currentWeapon.normal.damage * (roll / 10 + 1)
-    );
+  var entity = turnOrder[currentTurn];
+  if (currentAttackType == "normal") {
+    currentTarget.hp -= damage;
+    currentWeapon.normal.afterStrike(currentTarget, damage);
     addLog(currentTarget.name, "current hp is " + currentTarget.hp);
     startMenu();
-  } else if (event.target.id == "special") {
+  } else if (currentAttackType == "special") {
     if (entity.specialCooldown == 0) {
-      currentWeapon.special.beforeStrike(currentTarget.name);
-      let roll = rollDie();
-      currentTarget.hp -= currentWeapon.special.damage * (roll / 10 + 1);
+      currentTarget.hp -= damage;
       entity.specialCooldown = currentWeapon.special.cooldown;
-      currentWeapon.special.afterStrike(
-        currentTarget.name,
-        currentWeapon.special.damage * (roll / 10 + 1)
-      );
+      currentWeapon.special.afterStrike(currentTarget, damage);
       if (entity.specialCooldown - 1 == 1) {
         addLog(
           entity.name,
@@ -71,4 +119,18 @@ function runAttack(event) {
       }
     }
   }
+  runningAttack = false;
+}
+
+function calculateDamage(type, weapon, attacker, target) {
+  //check if hit
+  var usedSkill = weapon.type;
+  //waiting for hit roll to be finalized
+
+  var damage = weapon[type].damage * (damageDie / 10 + 1);
+  damage += attacker.damage * (attacker.skills[usedSkill] / 2.5 + 1);
+  damage -= target.defense * (target.skills[usedSkill] / 2.5 + 1);
+  //calculate damage
+  currentWeapon[type].beforeStrike(currentTarget);
+  endAttack(damage);
 }

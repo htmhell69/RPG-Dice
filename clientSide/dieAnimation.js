@@ -1,8 +1,16 @@
 //die face drawings
+var keyPressed = false;
 var canvasHeight = dieCanvas.getBoundingClientRect().height;
 var canvasWidth = dieCanvas.getBoundingClientRect().width;
 var Dice = [];
 var ch;
+var dieResultFunc;
+var damageDie;
+var accuracyDie;
+var diePaused = false;
+var dieLooping = false;
+var dieLoop;
+
 function draw1(die) {
   dieCtx.beginPath();
   let dotX = die.x + 0.5 * die.width;
@@ -65,17 +73,31 @@ function draw2mid(die) {
   dieCtx.fill();
 }
 
-function rollDie() {
-  var totalNum = 0;
-  updateDie();
-  dieCtx.clearRect(0, 0, canvasWidth, canvasHeight);
-  for (let i = 0; i < Dice.length; i++) {
-    ch = Math.floor(1 + Math.random() * 6);
-    Dice[i].lastRoll = ch;
-    totalNum += ch;
-    drawDots(ch, Dice[i]);
+function rollDie(resultFunc) {
+  if (!dieLooping) {
+    dieLoop = setInterval(function () {
+      dieLooping = true;
+      rollDie(resultFunc);
+    }, 10);
   }
-  return totalNum;
+  if (diePaused == false) {
+    console.log(attackState + " " + keyPressed);
+    let dieResult = 0;
+    updateDie();
+    dieCtx.clearRect(0, 0, canvasWidth, canvasHeight);
+    for (let i = 0; i < Dice.length; i++) {
+      ch = Math.floor(1 + Math.random() * 6);
+      Dice[i].lastRoll = ch;
+      dieResult += ch;
+      drawDots(ch, Dice[i]);
+    }
+
+    if (keyPressed) {
+      dieLooping = false;
+      clearInterval(dieLoop);
+      resultFunc(dieResult);
+    }
+  }
 }
 
 function createDie(x, y, height, width, dotSize) {
@@ -92,8 +114,10 @@ function createDie(x, y, height, width, dotSize) {
 }
 
 function drawDots(num, die) {
-  dieCtx.lineWidth = 5;
   dieCtx.clearRect(die.x, die.y, die.width, die.height);
+  dieCtx.fillStyle = "white";
+  dieCtx.fillRect(die.x, die.y, die.width, die.height);
+  dieCtx.lineWidth = 5;
   dieCtx.strokeRect(die.x, die.y, die.width, die.height);
   dieCtx.fillStyle = "#009966";
   switch (num) {
@@ -126,3 +150,18 @@ createDie(400, 250, 100, 100, 8.5);
 for (let i = 0; i < Dice.length; i++) {
   Dice[i].x = window.window.innerWidth / 2 - i * 200;
 }
+
+document.onkeydown = function () {
+  keyPressed = true;
+  harvest(true, getTool("crappy axe", false, null, false));
+  setTimeout(function () {
+    keyPressed = false;
+  }, 25);
+};
+
+document.onmousedown = function () {
+  keyPressed = true;
+  setTimeout(function () {
+    keyPressed = false;
+  }, 25);
+};
