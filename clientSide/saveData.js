@@ -56,18 +56,21 @@ function readSaveData() {
           ) {
             weaponsToAdd.push(getWeapon(save[objectI].weapons[weaponI], false));
           }
+          toolsToAdd = [];
+          for (let toolI = 0; toolI < save[objectI].tools.length; toolI++) {
+            toolsToAdd.push(getTool(save[objectI].tools[toolI], false));
+          }
 
           save[objectI].weapons = weaponsToAdd;
         }
       }
       turnOrder = save;
+
       singlePlayer(null, false);
     })
     .catch((error) => {
       console.log(error);
     });
-
-  //if you do have save data
 }
 
 url = new URL(window.location);

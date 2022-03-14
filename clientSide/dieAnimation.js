@@ -153,6 +153,7 @@ for (let i = 0; i < Dice.length; i++) {
 
 document.onkeydown = function () {
   keyPressed = true;
+  harvest(true, getTool("crappy axe", false, null, false));
   setTimeout(function () {
     keyPressed = false;
   }, 25);

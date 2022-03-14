@@ -16,6 +16,7 @@ dieCtx = dieCanvas.getContext("2d");
 function singlePlayer(event, newGame = true) {
   gameType = "singlePlayer";
   if (newGame) {
+    alert("i ran");
     let player = createPlayer(
       sessionStorage.getItem("name"),
       100,
@@ -26,6 +27,8 @@ function singlePlayer(event, newGame = true) {
       { basic: 2, stealth: 0, heavy: 3, range: 0 }
     );
     getMaterial("wood", player, 5);
+    getMaterial("wood", player, 5);
+    getMaterial("fineMetal", player, 3);
 
     getWeapon("rusty broadsword", true, player, false);
     getTool("crappy axe", true, player, false);
@@ -34,6 +37,9 @@ function singlePlayer(event, newGame = true) {
   }
   startGame = true;
   setInterval(update, 50);
+  if (!newGame) {
+    resetInventoryDiv(turnOrder[currentTurn]);
+  }
   startMenu();
 }
 

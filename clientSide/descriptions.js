@@ -105,16 +105,18 @@ function addToInventory(
     content.title = description;
     container.append(content);
   }
+
   if (amount == "set") {
-    let text = document.createElement("P");
-    text.TEXT_NODE = amountNum;
-    alert(text.TEXT_NODE);
+    let text = document.createElement("p");
+    text.innerHTML = "x" + amountNum;
     text.className = nameOfInventoryItem;
     text.id = amountNum;
     container.append(text);
   } else if (amount == "modify") {
     let text = document.getElementsByClassName(nameOfInventoryItem)[0];
-    text.TEXT_NODE = parseInt(text.id) + amountNum;
+    let newNumber = parseInt(text.id) + amountNum;
+    text.id = newNumber;
+    text.innerHTML = "x" + newNumber;
   }
 }
 
@@ -127,17 +129,33 @@ function clearInventoryDiv() {
 }
 
 function resetInventoryDiv(player = turnOrder[currentTurn]) {
-  //putting all weapons in inventory div
-  clearInventoryDiv();
-  for (let i = 0; i < player.weapons.length; i++) {
-    let image = new Image();
-    image.src = player.weapons[i].imgSrc;
-    addToInventory("weapons", image, player.weapons[i].description);
-  }
-  //putting all tools in inventory div
-  for (let i = 0; i < player.tools.length; i++) {
-    let image = new Image();
-    image.src = player.tools[i].imgSrc;
-    addToInventory("tools", image, player.tools[i].description);
+  if (player.type == "player") {
+    //putting all weapons in inventory div
+    clearInventoryDiv();
+    for (let i = 0; i < player.weapons.length; i++) {
+      let image = new Image();
+      image.src = player.weapons[i].imgSrc;
+      addToInventory("weapons", image, player.weapons[i].description);
+    }
+    //putting all tools in inventory div
+    for (let i = 0; i < player.tools.length; i++) {
+      let image = new Image();
+      image.src = player.tools[i].imgSrc;
+      addToInventory("tools", image, player.tools[i].description);
+    }
+    for (const property in player.materials) {
+      for (let i = 0; i < allMaterials.length; i++) {
+        if (allMaterials[i].name == property) {
+          addToInventory(
+            "resources",
+            allMaterials[i].img,
+            allMaterials[i].description,
+            "set",
+            player.materials[property],
+            property
+          );
+        }
+      }
+    }
   }
 }
