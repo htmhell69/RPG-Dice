@@ -15,6 +15,7 @@ function createPlayer(name, hp, img, defense, damage, speed, skills) {
     skills: skills,
     specialCooldown: 0,
     type: "player",
+    effects: {},
   };
   player.img.src = player.imgSrc;
   return player;
@@ -32,6 +33,7 @@ function createEnemy(name, hp, img, defense, damage, speed, skills) {
     speed: speed,
     skills: skills,
     type: "enemy",
+    effects: {},
   };
   enemy.img.src = enemy.imgSrc;
   return enemy;
@@ -68,4 +70,21 @@ function newEnemy(heal) {
     range: 1,
   });
   turnOrder.push(Enemy);
+}
+
+function applyEffect(
+  name = "",
+  target = turnOrder[currentTurn],
+  description = "",
+  onBeginTurn = function () {},
+  beforeAttack = function () {},
+  onAttackEnd = function () {},
+  onDamageTaken = function () {}
+) {
+  let effect = {};
+  effect.onBeginTurn = onBeginTurn;
+  effect.beforeAttack = beforeAttack;
+  effect.onAttackEnd = onAttackEnd;
+  effect.onDamageTaken = onDamageTaken;
+  target.effects[name] = effect;
 }

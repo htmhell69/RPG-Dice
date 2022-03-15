@@ -16,7 +16,6 @@ dieCtx = dieCanvas.getContext("2d");
 function singlePlayer(event, newGame = true) {
   gameType = "singlePlayer";
   if (newGame) {
-    alert("i ran");
     let player = createPlayer(
       sessionStorage.getItem("name"),
       100,
@@ -55,4 +54,8 @@ function beginTurn() {
       entity.weapons[i].special.onBeginTurn();
     }
   }
+  if (!jQuery.isEmptyObject(turnOrder[currentTurn].effects))
+    for (let effectName in turnOrder[currentTurn].effects) {
+      turnOrder[currentTurn].effects[effectName].onBeginTurn();
+    }
 }

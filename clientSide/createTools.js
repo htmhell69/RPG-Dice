@@ -46,6 +46,7 @@ function getTool(toolName, give = true, reciever, log = true) {
           addLog(reciever.name, "got the weapon " + toolName);
         }
         reciever.tools.push(tool);
+        addToInventory("tools", tool.img, tool.description);
       } else {
         return tool;
       }

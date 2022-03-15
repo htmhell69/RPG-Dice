@@ -17,22 +17,24 @@ function weaponConstructor(
   specialDescription,
   normalInitilization = function () {},
   normalTurnStart = function () {},
-  normalBeforeStrike = function (target, damage) {},
+  normalBeforeStrike = function (target, hit) {},
   normalAfterStrike = function (target, damage) {
     addLog(
       turnOrder[currentTurn].name,
       "dealt " + damage + " damage to " + target.name
     );
   },
+  normalOnDamageTaken = function () {},
   specialInitilization = function () {},
   specialTurnStart = function () {},
-  specialBeforeStrike = function (target, damage) {},
+  specialBeforeStrike = function (target, hit) {},
   specialAfterStrike = function (target, damage) {
     addLog(
       turnOrder[currentTurn].name,
       "dealt " + damage + " damage to " + target.name
     );
-  }
+  },
+  specialOnDamageTaken = function () {}
 ) {
   newWeapon = {
     name: name,
@@ -50,6 +52,7 @@ function weaponConstructor(
       onBeginTurn: normalTurnStart,
       beforeStrike: normalBeforeStrike,
       afterStrike: normalAfterStrike,
+      onDamageTaken: normalOnDamageTaken,
     },
 
     special: {
@@ -62,6 +65,7 @@ function weaponConstructor(
       onBeginTurn: specialTurnStart,
       beforeStrike: specialBeforeStrike,
       afterStrike: specialAfterStrike,
+      onDamageTaken: specialOnDamageTaken,
     },
   };
   newWeapon.img.src = newWeapon.imgSrc;
@@ -97,10 +101,12 @@ function getWeapon(weaponName, give = true, reciever, log = true) {
         weaponIndex.normal.onBeginTurn,
         weaponIndex.normal.beforeStrike,
         weaponIndex.normal.afterStrike,
+        weaponIndex.normal.onDamageTaken,
         weaponIndex.special.initilization,
         weaponIndex.special.onBeginTurn,
         weaponIndex.special.beforeStrike,
-        weaponIndex.special.afterStrike
+        weaponIndex.special.afterStrike,
+        weaponIndex.special.onDamageTaken
       );
       if (give) {
         if (log) {
