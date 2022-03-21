@@ -28,7 +28,6 @@ function runAttack(event) {
       event.target.id == "special"
     ) {
       runningAttack = false;
-      currentWeapon[type].beforeStrike(currentTarget, false);
       if (turnOrder[currentTurn].specialCooldown == 1) {
         alert("you cant use this move for " + 1 + " more turn");
       } else {
@@ -39,43 +38,75 @@ function runAttack(event) {
         );
       }
     } else {
+      currentAttackType = event.target.id;
       runningAttack = true;
       console.log("attack ran " + event.target.id);
       var entity = turnOrder[currentTurn];
-      //setting just used value
+      /*setting just used value
+      calling all weapons before attack*/
       for (let i = 0; i < entity.weapons.length; i++) {
-        entity.weapons[i].justUsed = false;
+        entity.weapons[i].normal.beforeAttack();
+        entity.weapons[i].special.beforeAttack();
+        entity.weapons[i][currentAttackType].justUsed = 0;
       }
-      currentWeapon.justUsed = true;
+      currentWeapon[currentAttackType].justUsed += 1;
       attackState = 1;
       currentAttackType = event.target.id;
       let resultFunc = function (result) {
         //doing some calculations on hitDie to see if it hits
         if (attackState == 1) {
-          accuracyDie = result;
           diePaused = true;
-          accuracyDie = result;
-          let hitRoll = accuracyDie;
-          hitRoll +=
-            turnOrder[currentTurn].speed +
-            turnOrder[currentTurn].skills[currentWeapon.type];
+          let hitRoll = result;
+          hitRoll = calculateHit(hitRoll, currentWeapon);
 
-          hitRoll -=
-            currentTarget.speed + currentTarget.skills[currentWeapon.type];
-          //check if hit
-          if (currentWeapon[currentAttackType].accuracy <= hitRoll) {
+          //go through effects and stuff to check if it is stopped by that
+          let canAttack;
+          if (
+            currentWeapon[currentAttackType].beforeStrike(
+              currentTarget,
+              hitRoll
+            ) != false
+          ) {
+            if (jQuery.isEmptyObject(turnOrder[currentTurn].effects)) {
+              canAttack = true;
+            } else {
+              let Results = [];
+              for (let effectName in turnOrder[currentTurn].effects) {
+                Results.push(
+                  turnOrder[currentTurn].effects[effectName].beforeAttack()
+                );
+              }
+              canAttack = true;
+              for (let i = 0; i < Results.length; i++) {
+                if (Results[i] == false) {
+                  canAttack = false;
+                }
+              }
+            }
+          } else {
+            canAttack = false;
+          }
+          if (
+            currentWeapon[currentAttackType].accuracy <= hitRoll &&
+            canAttack == true
+          ) {
             setTimeout(function () {
               diePaused = false;
               rollDie(function (result) {
+                diePaused = true;
                 if (attackState == 2) {
-                  damageDie = result;
                   attackState = 0;
-                  calculateDamage(
-                    currentAttackType,
+                  console.log(result);
+                  let damage = calculateDamage(
+                    result,
+                    true,
                     currentWeapon,
                     turnOrder[currentTurn],
-                    currentTarget
+                    currentTarget,
+                    currentAttackType
                   );
+                  endAttack(damage, result);
+                  diePaused = false;
                 }
               });
               attackState = 2;
@@ -83,7 +114,7 @@ function runAttack(event) {
           } else {
             runningAttack = false;
             diePaused = false;
-            currentWeapon[currentAttackType].beforeStrike(currentTarget);
+            currentWeapon[currentAttackType].afterStrike(currentTarget, false);
             addLog(turnOrder[currentTurn].name, "your attack missed");
             startMenu();
           }
@@ -95,22 +126,20 @@ function runAttack(event) {
   }
 }
 
-function endAttack(damage) {
+function endAttack(damage = new Number(), damageRoll = new Number()) {
   //running attack
   var entity = turnOrder[currentTurn];
   if (currentAttackType == "normal") {
     currentTarget.hp -= damage;
-    currentWeapon.normal.afterStrike(currentTarget, damage);
+    currentWeapon.normal.afterStrike(currentTarget, true, damage, damageRoll);
     if (!jQuery.isEmptyObject(turnOrder[currentTurn].effects))
       for (let effectName in turnOrder[currentTurn].effects) {
         turnOrder[currentTurn].effects[effectName].onAttackEnd();
       }
-    addLog(currentTarget.name, "current hp is " + currentTarget.hp);
-    startMenu();
   } else if (currentAttackType == "special") {
     currentTarget.hp -= damage;
     entity.specialCooldown = currentWeapon.special.cooldown;
-    currentWeapon.special.afterStrike(currentTarget, damage);
+    currentWeapon.special.afterStrike(currentTarget, true, damage, damageRoll);
     if (!jQuery.isEmptyObject(turnOrder[currentTurn].effects))
       for (let effectName in turnOrder[currentTurn].effects) {
         turnOrder[currentTurn].effects[effectName].onAttackEnd();
@@ -130,57 +159,54 @@ function endAttack(damage) {
           " more turns before you can use your special"
       );
     }
-    if (currentTarget.type == "player") {
-      for (let i = 0; i < currentTarget.weapons.length; i++) {
-        currentTarget.weapons[i].special.onDamageTaken();
-        currentTarget.weapons[i].normal.onDamageTaken();
-      }
-      if (!jQuery.isEmptyObject(turnOrder[currentTurn].effects)) {
-        for (let effectName in turnOrder[currentTurn].effects) {
-          turnOrder[currentTurn].effects[effectName].onDamageTaken();
-        }
+  }
+  if (currentTarget.type == "player") {
+    for (let i = 0; i < currentTarget.weapons.length; i++) {
+      currentTarget.weapons[i].special.onDamageTaken();
+      currentTarget.weapons[i].normal.onDamageTaken();
+    }
+    if (!jQuery.isEmptyObject(turnOrder[currentTurn].effects)) {
+      for (let effectName in turnOrder[currentTurn].effects) {
+        turnOrder[currentTurn].effects[effectName].onDamageTaken();
       }
     }
-    addLog(currentTarget.name, "current hp is " + currentTarget.hp);
-
-    startMenu();
   }
+
+  startMenu();
+
   runningAttack = false;
+  currentTurn += 1;
 }
 
-function calculateDamage(type, weapon, attacker, target) {
+function calculateDamage(
+  damageRoll = new Number(),
+  isPlayerAttack = new Boolean(),
+  attack = new Object(),
+  attacker = new Object(),
+  target = new Object(),
+  playerAttackType = ""
+) {
   //check if hit
-  var usedSkill = weapon.type;
+  var usedSkill = attack.type;
+  if (isPlayerAttack) {
+    var damage = attack[playerAttackType].damage * (damageRoll / 10 + 1);
+  } else {
+    var damage = attack.damage * (damageRoll / 10 + 1);
+  }
+
   //waiting for hit roll to be finalized
 
-  var damage = weapon[type].damage * (damageDie / 10 + 1);
   damage += attacker.damage * (attacker.skills[usedSkill] / 2.5 + 1);
   damage -= target.defense * (target.skills[usedSkill] / 2.5 + 1);
-  //calculate damage
 
-  if (currentWeapon[type].beforeStrike(currentTarget, true) != false) {
-    if (jQuery.isEmptyObject(attacker.effects)) {
-      endAttack(damage);
-    } else {
-      let Results = [];
-      for (let effectName in attacker.effects) {
-        Results.push(attacker.effects[effectName].beforeAttack());
-      }
-      let canAttack = true;
-      for (let i = 0; i < Results.length; i++) {
-        if (Results[i] == false) {
-          canAttack = false;
-        }
-      }
-      if (canAttack) {
-        endAttack(damage);
-      } else {
-        runningAttack = false;
-        startMenu();
-      }
-    }
-  } else {
-    runningAttack = false;
-    startMenu();
-  }
+  return Math.floor(damage);
+  //calculate damage
+}
+
+function calculateHit(hitRoll, move) {
+  let hit = hitRoll;
+  hit +=
+    turnOrder[currentTurn].speed + turnOrder[currentTurn].skills[move.type];
+  hit -= currentTarget.speed + currentTarget.skills[move.type];
+  return hit;
 }

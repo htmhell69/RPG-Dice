@@ -1,6 +1,6 @@
                                         VARIABLES
 
-
+attackTypes: basic, 
 
 
 

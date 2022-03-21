@@ -4,9 +4,6 @@ var canvasHeight = dieCanvas.getBoundingClientRect().height;
 var canvasWidth = dieCanvas.getBoundingClientRect().width;
 var Dice = [];
 var ch;
-var dieResultFunc;
-var damageDie;
-var accuracyDie;
 var diePaused = false;
 var dieLooping = false;
 var dieLoop;
@@ -78,7 +75,7 @@ function rollDie(resultFunc) {
     dieLoop = setInterval(function () {
       dieLooping = true;
       rollDie(resultFunc);
-    }, 10);
+    }, 50);
   }
   if (diePaused == false) {
     console.log(attackState + " " + keyPressed);
@@ -155,12 +152,12 @@ document.onkeydown = function () {
   keyPressed = true;
   setTimeout(function () {
     keyPressed = false;
-  }, 25);
+  }, 75);
 };
 
 document.onmousedown = function () {
   keyPressed = true;
   setTimeout(function () {
     keyPressed = false;
-  }, 25);
+  }, 75);
 };

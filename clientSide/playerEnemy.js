@@ -1,5 +1,13 @@
 //this js file creates the functions needed to make the player/enemy objects
-function createPlayer(name, hp, img, defense, damage, speed, skills) {
+function createPlayer(
+  name = new String(),
+  hp = new Number(),
+  img = new String(),
+  defense = new Number(),
+  damage = new Number(),
+  speed = new Number(),
+  skills = new Array()
+) {
   let player = {
     name: name,
     maxHp: hp,
@@ -21,7 +29,16 @@ function createPlayer(name, hp, img, defense, damage, speed, skills) {
   return player;
 }
 
-function createEnemy(name, hp, img, defense, damage, speed, skills) {
+function createEnemy(
+  name = new String(),
+  hp = new Number(),
+  img = new String(),
+  defense = new Number(),
+  damage = new Number(),
+  speed = new Number(),
+  skills = new Array(4),
+  moves = new Array(6)
+) {
   let enemy = {
     name: name,
     maxHp: hp,
@@ -33,6 +50,7 @@ function createEnemy(name, hp, img, defense, damage, speed, skills) {
     speed: speed,
     skills: skills,
     type: "enemy",
+    moves: moves,
     effects: {},
   };
   enemy.img.src = enemy.imgSrc;
@@ -41,8 +59,8 @@ function createEnemy(name, hp, img, defense, damage, speed, skills) {
 
 //event handling
 
-function update() {
-  checkIfDead();
+function update(updateFunction) {
+  updateFunction();
 }
 
 function checkIfDead() {
@@ -62,13 +80,22 @@ function checkIfDead() {
 
 function enemyDrops(object) {}
 
-function newEnemy(heal) {
-  Enemy = createEnemy("boring enemy", 100, "assets/enemy.png", 10, 10, 2, {
-    basic: 2,
-    stealth: 3,
-    heavy: 1,
-    range: 1,
-  });
+function newEnemy(heal = new Boolean()) {
+  Enemy = createEnemy(
+    "boring enemy",
+    100,
+    "assets/enemy.png",
+    10,
+    10,
+    2,
+    {
+      basic: 2,
+      stealth: 3,
+      heavy: 1,
+      range: 1,
+    },
+    [assignMove("ram", false, null, false)]
+  );
   turnOrder.push(Enemy);
 }
 

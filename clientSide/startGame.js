@@ -1,6 +1,5 @@
 var turnOrder = [];
 var currentTurn = 0;
-var Enemy;
 var enemyImage;
 var gameType;
 var canvas;
@@ -35,7 +34,12 @@ function singlePlayer(event, newGame = true) {
     newEnemy();
   }
   startGame = true;
-  setInterval(update, 50);
+  setInterval(function () {
+    update(function () {
+      checkIfDead();
+      startEnemyAttack();
+    });
+  }, 250);
   if (!newGame) {
     resetInventoryDiv(turnOrder[currentTurn]);
   }

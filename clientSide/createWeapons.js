@@ -17,22 +17,45 @@ function weaponConstructor(
   specialDescription,
   normalInitilization = function () {},
   normalTurnStart = function () {},
-  normalBeforeStrike = function (target, hit) {},
-  normalAfterStrike = function (target, damage) {
-    addLog(
-      turnOrder[currentTurn].name,
-      "dealt " + damage + " damage to " + target.name
-    );
+  normalBeforeAttack = function () {},
+  normalBeforeStrike = function (
+    target = new Object(),
+    hitRoll = new Number()
+  ) {},
+  normalAfterStrike = function (
+    target = new Object(),
+    hit = new Boolean(),
+    damage = new Number(),
+    damageRoll = new Number()
+  ) {
+    if (hit) {
+      addLog(
+        turnOrder[currentTurn].name,
+        "dealt " + damage + " damage to " + target.name
+      );
+
+      addLog(currentTarget.name, "current hp is " + currentTarget.hp);
+    }
   },
   normalOnDamageTaken = function () {},
   specialInitilization = function () {},
   specialTurnStart = function () {},
-  specialBeforeStrike = function (target, hit) {},
-  specialAfterStrike = function (target, damage) {
+  specialBeforeAttack = function () {},
+  specialBeforeStrike = function (
+    target = new Object(),
+    hitRoll = newNumber
+  ) {},
+  specialAfterStrike = function (
+    target = new Object(),
+    hit = new Boolean(),
+    damage = new Number(),
+    damageRoll = new Number()
+  ) {
     addLog(
       turnOrder[currentTurn].name,
       "dealt " + damage + " damage to " + target.name
     );
+    addLog(currentTarget.name, "current hp is " + currentTarget.hp);
   },
   specialOnDamageTaken = function () {}
 ) {
@@ -42,14 +65,15 @@ function weaponConstructor(
     imgSrc: img,
     description: description,
     img: new Image(),
-    justUsed: false,
     normal: {
       name: normalName,
       damage: normalDamage,
       accuracy: normalAccuracy,
       description: normalDescription,
+      justUsed: 0,
       initilization: normalInitilization,
       onBeginTurn: normalTurnStart,
+      beforeAttack: normalBeforeAttack,
       beforeStrike: normalBeforeStrike,
       afterStrike: normalAfterStrike,
       onDamageTaken: normalOnDamageTaken,
@@ -61,15 +85,22 @@ function weaponConstructor(
       accuracy: specialAccuracy,
       cooldown: cooldown,
       description: specialDescription,
+      justUsed: 0,
       initilization: specialInitilization,
       onBeginTurn: specialTurnStart,
+      beforeAttack: specialBeforeAttack,
       beforeStrike: specialBeforeStrike,
       afterStrike: specialAfterStrike,
       onDamageTaken: specialOnDamageTaken,
     },
-  };
+    init() {
+      this.normal.parent = this;
+      this.special.parent = this;
+      delete this.init;
+      return this;
+    },
+  }.init();
   newWeapon.img.src = newWeapon.imgSrc;
-
   if (addToArray) {
     allWeapons.push(newWeapon);
   } else {
@@ -99,11 +130,13 @@ function getWeapon(weaponName, give = true, reciever, log = true) {
         weaponIndex.special.description,
         weaponIndex.normal.initilization,
         weaponIndex.normal.onBeginTurn,
+        weaponIndex.normal.beforeAttack,
         weaponIndex.normal.beforeStrike,
         weaponIndex.normal.afterStrike,
         weaponIndex.normal.onDamageTaken,
         weaponIndex.special.initilization,
         weaponIndex.special.onBeginTurn,
+        weaponIndex.special.beforeAttack,
         weaponIndex.special.beforeStrike,
         weaponIndex.special.afterStrike,
         weaponIndex.special.onDamageTaken
