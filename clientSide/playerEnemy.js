@@ -1,4 +1,5 @@
 //this js file creates the functions needed to make the player/enemy objects
+let allEnemys = [];
 function createPlayer(
   name = new String(),
   hp = new Number(),
@@ -30,6 +31,7 @@ function createPlayer(
 }
 
 function createEnemy(
+  addToArray = new Boolean(),
   name = new String(),
   hp = new Number(),
   img = new String(),
@@ -49,12 +51,17 @@ function createEnemy(
     damage: damage,
     speed: speed,
     skills: skills,
+    specialCooldown: 0,
     type: "enemy",
     moves: moves,
     effects: {},
   };
   enemy.img.src = enemy.imgSrc;
-  return enemy;
+  if (addToArray) {
+    allEnemys.push(enemy);
+  } else {
+    return enemy;
+  }
 }
 
 //event handling
@@ -78,25 +85,42 @@ function checkIfDead() {
   }
 }
 
-function enemyDrops(object) {}
-
 function newEnemy(heal = new Boolean()) {
-  Enemy = createEnemy(
-    "boring enemy",
-    100,
-    "assets/enemy.png",
-    10,
-    10,
-    2,
-    {
-      basic: 2,
-      stealth: 3,
-      heavy: 1,
-      range: 1,
-    },
-    [assignMove("ram", false, null, false)]
-  );
-  turnOrder.push(Enemy);
+  turnOrder.push(getEnemy(false, null, 0));
+}
+
+function getEnemy(
+  useName = new Boolean(),
+  name = new String(),
+  index = new Number()
+) {
+  let foundItem = false;
+  for (let i = 0; i < allEnemys.length; i++) {
+    if (useName) {
+      if (name == allEnemys[i].name) {
+        foundItem = true;
+      }
+    } else {
+      if (index == i) {
+        foundItem = true;
+      }
+    }
+    if (foundItem) {
+      let enemy = createEnemy(
+        false,
+        allEnemys[i].name,
+        allEnemys[i].hp,
+        allEnemys[i].imgSrc,
+        allEnemys[i].defense,
+        allEnemys[i].damage,
+        allEnemys[i].speed,
+        allEnemys[i].skills,
+        allEnemys[i].moves
+      );
+
+      return enemy;
+    }
+  }
 }
 
 function applyEffect(
@@ -115,3 +139,20 @@ function applyEffect(
   effect.onDamageTaken = onDamageTaken;
   target.effects[name] = effect;
 }
+
+createEnemy(
+  true,
+  "boring enemy",
+  100,
+  "assets/enemy.png",
+  10,
+  10,
+  2,
+  {
+    basic: 2,
+    stealth: 3,
+    heavy: 1,
+    range: 1,
+  },
+  [assignMove("round kick", false, null, false)]
+);

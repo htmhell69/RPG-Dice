@@ -10,8 +10,8 @@ function moveConstructor(
   Initilization = function () {},
   TurnStart = function () {},
   beforeAttack = function () {},
-  BeforeStrike = function (target) {},
-  AfterStrike = function (target, hit, damage) {
+  BeforeStrike = function (target, hitRoll) {},
+  AfterStrike = function (target, hit, damage, damageRoll) {
     if (hit) {
       addLog(
         turnOrder[currentTurn].name,
@@ -77,28 +77,44 @@ function assignMove(moveName, give = false, reciever, log = false) {
 }
 
 //create generic weapon
-moveConstructor(true, "ram", "basic", 15, 4, 0);
+moveConstructor(true, "round kick", "basic", 5, 4, 0);
 
 moveConstructor(
   true,
-  "patience",
+  "spinning kick",
   "basic",
-  0,
-  4,
+  10,
+  6,
   0,
   function () {},
   function () {},
   function () {
-    if (this.justUsed > 0) {
-      speed -= 2;
+    if (justUsed) {
+      turnOrder[currentTurn].speed -= 2;
+      addLog(
+        turnOrder[currentTurn].name,
+        "is tired and doesnt feel like dodging anymore"
+      );
     }
   },
-  function (target, hit) {},
-  function () {
-    speed += 1;
+  function (target, hitRoll) {},
+  function (target, hit, damage, damageRoll) {
+    if (hit) {
+      turnOrder[currentTurn].speed += 2;
+      addLog(
+        turnOrder[currentTurn].name,
+        "dealt " + damage + " damage to " + target.name
+      );
+
+      addLog(currentTarget.name, "current hp is " + currentTarget.hp);
+      addLog(
+        turnOrder[currentTurn].name,
+        "is ready to dodge the next few attacks"
+      );
+    }
   }
 );
 
-//create complex item
+//create complex itemif (hit) {
 
 //special initilization
