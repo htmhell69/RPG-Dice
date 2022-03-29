@@ -12,7 +12,7 @@ function createPlayer(
   let player = {
     name: name,
     maxHp: hp,
-    hp: 3,
+    hp: hp,
     imgSrc: img,
     img: new Image(),
     weapons: [],
@@ -86,7 +86,8 @@ function checkIfDead() {
 }
 
 function newEnemy(heal = new Boolean()) {
-  turnOrder.push(getEnemy(false, null, 0));
+  let enemy = getEnemy(false, null, 0);
+  turnOrder.push(enemy);
 }
 
 function getEnemy(
@@ -129,8 +130,8 @@ function applyEffect(
   description = "",
   onBeginTurn = function () {},
   beforeAttack = function () {},
-  onAttackEnd = function () {},
-  onDamageTaken = function () {}
+  onAttackEnd = function (hit, damage, damageRoll) {},
+  onDamageTaken = function (damage, damageRoll) {}
 ) {
   let effect = {};
   effect.onBeginTurn = onBeginTurn;
@@ -145,8 +146,8 @@ createEnemy(
   "boring enemy",
   100,
   "assets/enemy.png",
-  10,
-  10,
+  2,
+  3,
   2,
   {
     basic: 2,
@@ -154,5 +155,8 @@ createEnemy(
     heavy: 1,
     range: 1,
   },
-  [assignMove("round kick", false, null, false)]
+  [
+    assignMove("round kick", false, null, false),
+    assignMove("spinning kick", false, null, false),
+  ]
 );

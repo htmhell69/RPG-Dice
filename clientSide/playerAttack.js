@@ -23,6 +23,7 @@ function startAttack(event) {
 
 function runAttack(event) {
   if (!runningAttack) {
+    removeButton();
     if (
       turnOrder[currentTurn].specialCooldown > 0 &&
       event.target.id == "special"
@@ -47,7 +48,12 @@ function runAttack(event) {
       for (let i = 0; i < entity.weapons.length; i++) {
         entity.weapons[i].normal.beforeAttack();
         entity.weapons[i].special.beforeAttack();
-        entity.weapons[i][currentAttackType].justUsed = 0;
+        if (
+          !entity.weapons[i][currentAttackType] ===
+          currentWeapon[currentAttackType]
+        ) {
+          entity.weapons[i][currentAttackType].justUsed = 0;
+        }
       }
       currentWeapon[currentAttackType].justUsed += 1;
       attackState = 1;
@@ -55,7 +61,6 @@ function runAttack(event) {
       let resultFunc = function (result) {
         //doing some calculations on hitDie to see if it hits
         if (attackState == 1) {
-          diePaused = true;
           let hitRoll = result;
           hitRoll = calculateHit(hitRoll, currentWeapon);
 
@@ -91,9 +96,7 @@ function runAttack(event) {
             canAttack == true
           ) {
             setTimeout(function () {
-              diePaused = false;
               rollDie(function (result) {
-                diePaused = true;
                 if (attackState == 2) {
                   attackState = 0;
                   console.log(result);
@@ -106,16 +109,31 @@ function runAttack(event) {
                     currentAttackType
                   );
                   endAttack(damage, result);
-                  diePaused = false;
                 }
               });
               attackState = 2;
             }, 1000);
           } else {
             runningAttack = false;
-            diePaused = false;
-            currentWeapon[currentAttackType].afterStrike(currentTarget, false);
+            for (let effectName in turnOrder[currentTurn].effects) {
+              turnOrder[currentTurn].effects[effectName].onAttackEnd(
+                false,
+                0,
+                0
+              );
+            }
+            currentWeapon[currentAttackType].afterStrike(
+              currentTarget,
+              false,
+              0,
+              0
+            );
             addLog(turnOrder[currentTurn].name, "your attack missed");
+            if (!currentTurn == turnOrder.length - 1) {
+              currentTurn++;
+            } else {
+              currentTurn = 0;
+            }
             startMenu();
           }
         }
@@ -142,7 +160,11 @@ function endAttack(damage = new Number(), damageRoll = new Number()) {
     currentWeapon.special.afterStrike(currentTarget, true, damage, damageRoll);
     if (!jQuery.isEmptyObject(turnOrder[currentTurn].effects))
       for (let effectName in turnOrder[currentTurn].effects) {
-        turnOrder[currentTurn].effects[effectName].onAttackEnd();
+        turnOrder[currentTurn].effects[effectName].onAttackEnd(
+          true,
+          damage,
+          damageRoll
+        );
       }
     if (entity.specialCooldown - 1 == 1) {
       addLog(
@@ -162,20 +184,30 @@ function endAttack(damage = new Number(), damageRoll = new Number()) {
   }
   if (currentTarget.type == "player") {
     for (let i = 0; i < currentTarget.weapons.length; i++) {
-      currentTarget.weapons[i].special.onDamageTaken();
-      currentTarget.weapons[i].normal.onDamageTaken();
+      currentTarget.weapons[i].special.onDamageTaken(damage, damageRoll);
+      currentTarget.weapons[i].normal.onDamageTaken(damage, damageRoll);
     }
-    if (!jQuery.isEmptyObject(turnOrder[currentTurn].effects)) {
-      for (let effectName in turnOrder[currentTurn].effects) {
-        turnOrder[currentTurn].effects[effectName].onDamageTaken();
-      }
+  } else {
+    for (let i = 0; i < currentTarget.moves.length; i++) {
+      currentTarget.moves[i].onDamageTaken(damage, damageRoll);
+    }
+  }
+  if (!jQuery.isEmptyObject(turnOrder[currentTurn].effects)) {
+    for (let effectName in turnOrder[currentTurn].effects) {
+      turnOrder[currentTurn].effects[effectName].onDamageTaken(
+        damage,
+        damageRoll
+      );
     }
   }
 
   startMenu();
-
   runningAttack = false;
-  currentTurn += 1;
+  if (!currentTurn == turnOrder.length - 1) {
+    currentTurn++;
+  } else {
+    currentTurn = 0;
+  }
 }
 
 function calculateDamage(
@@ -198,7 +230,6 @@ function calculateDamage(
 
   damage += attacker.damage * (attacker.skills[usedSkill] / 2.5 + 1);
   damage -= target.defense * (target.skills[usedSkill] / 2.5 + 1);
-
   return Math.floor(damage);
   //calculate damage
 }
@@ -207,6 +238,7 @@ function calculateHit(hitRoll, move) {
   let hit = hitRoll;
   hit +=
     turnOrder[currentTurn].speed + turnOrder[currentTurn].skills[move.type];
+
   hit -= currentTarget.speed + currentTarget.skills[move.type];
   return hit;
 }

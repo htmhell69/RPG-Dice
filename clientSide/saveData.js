@@ -1,5 +1,9 @@
 function createNewSaveData() {
-  let data = turnOrder;
+  let data = [];
+  for (let i = 0; i < turnOrder.length; i++) {
+    let object = Object.assign({}, turnOrder[i]);
+    data.push(object);
+  }
 
   //converting the weapon object into a string name to store in localStorage
   for (let entityI = 0; entityI < data.length; entityI++) {
@@ -30,8 +34,8 @@ function createNewSaveData() {
       });
   });
 }
+
 function readSaveData() {
-  //if you dont have save data
   fetch(
     "serverSide/readData.php?name=" +
       sessionStorage.getItem("name") +
@@ -78,3 +82,15 @@ var playerName = url.searchParams.get("name");
 var playerPassword = url.searchParams.get("password");
 sessionStorage.setItem("name", playerName);
 sessionStorage.setItem("password", playerPassword);
+
+function stringifyData(data) {
+  for (let entityI = 0; entityI < data.length; entityI++) {
+    if (data[entityI].type == "player") {
+      for (let i = 0; i < data[entityI].weapons.length; i++) {
+        data[entityI].weapons[i] = data[entityI].weapons[i].name;
+      }
+    }
+  }
+}
+
+function parseData() {}

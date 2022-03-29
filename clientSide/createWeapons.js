@@ -37,7 +37,10 @@ function weaponConstructor(
       addLog(currentTarget.name, "current hp is " + currentTarget.hp);
     }
   },
-  normalOnDamageTaken = function () {},
+  normalOnDamageTaken = function (
+    damage = new Number(),
+    damageRoll = new Number()
+  ) {},
   specialInitilization = function () {},
   specialTurnStart = function () {},
   specialBeforeAttack = function () {},
@@ -57,7 +60,10 @@ function weaponConstructor(
     );
     addLog(currentTarget.name, "current hp is " + currentTarget.hp);
   },
-  specialOnDamageTaken = function () {}
+  specialOnDamageTaken = function (
+    damage = new Number(),
+    damageRoll = new Number()
+  ) {}
 ) {
   newWeapon = {
     name: name,

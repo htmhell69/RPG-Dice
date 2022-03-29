@@ -4,7 +4,6 @@ var canvasHeight = dieCanvas.getBoundingClientRect().height;
 var canvasWidth = dieCanvas.getBoundingClientRect().width;
 var Dice = [];
 var ch;
-var diePaused = false;
 var dieLooping = false;
 var dieLoop;
 
@@ -77,23 +76,21 @@ function rollDie(resultFunc) {
       rollDie(resultFunc);
     }, 50);
   }
-  if (diePaused == false) {
-    console.log(attackState + " " + keyPressed);
-    let dieResult = 0;
-    updateDie();
-    dieCtx.clearRect(0, 0, canvasWidth, canvasHeight);
-    for (let i = 0; i < Dice.length; i++) {
-      ch = Math.floor(1 + Math.random() * 6);
-      Dice[i].lastRoll = ch;
-      dieResult += ch;
-      drawDots(ch, Dice[i]);
-    }
+  console.log(attackState + " " + keyPressed);
+  let dieResult = 0;
+  updateDie();
+  dieCtx.clearRect(0, 0, canvasWidth, canvasHeight);
+  for (let i = 0; i < Dice.length; i++) {
+    ch = Math.floor(1 + Math.random() * 6);
+    Dice[i].lastRoll = ch;
+    dieResult += ch;
+    drawDots(ch, Dice[i]);
+  }
 
-    if (keyPressed) {
-      dieLooping = false;
-      clearInterval(dieLoop);
-      resultFunc(dieResult);
-    }
+  if (keyPressed) {
+    dieLooping = false;
+    clearInterval(dieLoop);
+    resultFunc(dieResult);
   }
 }
 

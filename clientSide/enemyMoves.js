@@ -18,7 +18,7 @@ function moveConstructor(
         "dealt " + damage + " damage to " + target.name
       );
 
-      addLog(currentTarget.name, "current hp is " + currentTarget.hp);
+      addLog(target.name, "current hp is " + target.hp);
     }
   },
   OnDamageTaken = function () {}
@@ -59,6 +59,7 @@ function assignMove(moveName, give = false, reciever, log = false) {
         allMoves[i].cooldown,
         allMoves[i].initilization,
         allMoves[i].onBeginTurn,
+        allMoves[i].beforeAttack,
         allMoves[i].beforeStrike,
         allMoves[i].afterStrike,
         allMoves[i].onDamageTaken
@@ -89,7 +90,7 @@ moveConstructor(
   function () {},
   function () {},
   function () {
-    if (justUsed) {
+    if (this.justUsed) {
       turnOrder[currentTurn].speed -= 2;
       addLog(
         turnOrder[currentTurn].name,
@@ -105,8 +106,7 @@ moveConstructor(
         turnOrder[currentTurn].name,
         "dealt " + damage + " damage to " + target.name
       );
-
-      addLog(currentTarget.name, "current hp is " + currentTarget.hp);
+      addLog(target.name, "current hp is " + target.hp);
       addLog(
         turnOrder[currentTurn].name,
         "is ready to dodge the next few attacks"

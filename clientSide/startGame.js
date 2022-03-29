@@ -22,7 +22,7 @@ function singlePlayer(event, newGame = true) {
       2,
       5,
       1,
-      { basic: 2, stealth: 0, heavy: 3, range: 0 }
+      { basic: 2, stealth: 1, heavy: 3, range: 1 }
     );
     getMaterial("wood", player, 5);
     getMaterial("wood", player, 5);
