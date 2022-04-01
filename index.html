@@ -2,174 +2,145 @@
 <html>
   <head>
     <title>RPG Dice</title>
-
     <link rel="icon" type="image/x-icon" href="assets/icon.png" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <style>
       * {
-        padding: 0;
         margin: 0;
+        padding: 0;
       }
 
-      .signin-modal,
-      .signup-modal {
-        position: fixed;
-        top: 0;
-        bottom: 0;
-        left: 0;
-        right: 0;
-        background-color: #22222222;
-        background-image: url("assets/icon.png");
-        backdrop-filter: blur(0.5vh);
-        display: flex;
-        justify-content: center;
-        align-items: center;
+      body {
+        background-color: black;
       }
 
-      .signin-modal-inner,
-      .signup-modal-inner {
-        width: 50vh;
-        padding: 4vh 6vh;
-        text-align: center;
-        background-color: #fff;
-        border-radius: 3vh;
-        box-shadow: 0 0 0.2vh #888;
+      p {
+        color: white;
       }
 
-      .signin-modal-inner h2,
-      .signup-modal-inner h2 {
-        margin: 1vh 0 3vh 0;
-        font-family: sans-serif;
-        font-size: 4vh;
-        color: #222;
+      .title {
+        height: 6vw;
+        background-color: rgb(29, 32, 33);
+        color: white;
       }
 
-      .menu-option {
-        display: block;
-        margin: 2vh 1vh;
-        padding: 2vh;
-        text-align: center;
-        font-family: "Nunito";
-        font-size: 3vh;
-        border-radius: 1vh;
-        color: #ed5d5d;
-        background-color: transparent;
-        border: solid 0.5vh #ed5d5d;
-        box-shadow: 0 0 0.2vh #762e2e;
-        transition: 0.2s;
+      .title h1 {
+        font-size: 3vw;
+        display: inline-block;
+        position: absolute;
+      }
+      .title img {
+        width: 10%;
+        height: 100%;
+        float: right;
       }
 
-      .menu-option:hover {
-        color: #fff;
-        background-color: #ed5d5d;
-        border: solid 0.5vh transparent;
+      .info {
+        display: relative;
+        background-color: rgb(29, 32, 33);
+        width: 68vw;
+        float: right;
+        padding: 10px;
       }
 
-      .menu-option:active {
-        transform: scale(0.95);
+      .info p {
+        font-size: 2vw;
       }
 
-      .input-text {
-        width: 96.5%;
-        padding: 2vh;
-        margin: 0.5vh 0;
-        outline: none;
-        border: none;
-        box-sizing: border-box;
-        background-color: #fff;
-        font-size: 3vh;
-        border-radius: 2vh;
-        box-shadow: inset 0 0 0.5vh #00000020;
+      .game-options {
+        display: inline-block;
+        padding: 10px;
+        width: 28vw;
+        height: 80vh;
       }
 
-      .input-submit {
-        width: 96.5%;
-        margin-bottom: -3vh;
+      #login {
+        background-color: rgb(29, 32, 33);
+        display: inline-block;
+        width: 100%;
+        height: 30%;
+        font-size: 3vw;
+        color: white;
       }
 
-      .signin-text {
-        margin: -0.5vh 0 2vh 0;
-        font-size: 2.8vh;
-        color: #444;
-        font-family: "Nunito", sans-serif;
+      .gamePlayType {
+        background-color: rgb(29, 32, 33);
+        display: inline-block;
+        width: 49.34%;
+        height: 30%;
+        font-size: 2vw;
+        color: white;
       }
 
-      input:-webkit-autofill,
-      input:-webkit-autofill:hover,
-      input:-webkit-autofill:focus {
-        -webkit-box-shadow: 0 0 0px 1000px #e8e8e8 inset;
-        transition: background-color 5000s ease-in-out 0s;
+      #gamePlayLeft {
+        width: 100%;
+        height: 100%;
+      }
+
+      #gamePlayRight {
+        width: 100%;
+        height: 100%;
       }
     </style>
   </head>
   <body>
-    <div class="signin-modal">
-      <div class="signin-modal-inner">
-        <h2>Sign In</h2>
-        <p class="signin-text">Welcome back!</p>
-        <form method="POST" id="signin-from-homepage">
-          <input
-            class="input-text"
-            type="text"
-            name="name"
-            placeholder="Name"
-            required
-          /><br />
-          <input
-            class="input-text"
-            type="password"
-            name="pscd"
-            placeholder="Password"
-            required
-          /><br />
-          <input
-            class="input-submit menu-option"
-            type="submit"
-            value="Enter Account"
-          />
-        </form>
-        <br />
-        <a href="signup.html" class="menu-option">
-          Don't have an account? Create one!
-        </a>
-      </div>
+    <div class="title">
+      <h1>Welcome To Rpg Dice</h1>
+      <img src="assets/icon.png" />
     </div>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-    <script src="clientSide/requestPhp.js"></script>
+    <div class="game-options">
+      <button id="login">login</button>
+      <button class="gamePlayType" id="singlePlayer">single player</button>
+      <button class="gamePlayType" id="multiplayer">multiplayer</button>
+    </div>
+    <div class="info">
+      <img src="assets/gamePlay.png" id="gamePlayLeft" />
+      <p>
+        This is the start of the rpg dice game this game is a turn based pvp
+        game where you gather resources and craft new weapons and tools to use
+        in combat. The newest addition is the inventory a place where you can
+        see every item/resource you currently have. Pretty insane
+      </p>
+      <img src="assets/gamePlay2.png" id="gamePlayRight" />
+    </div>
     <script>
-      $("#signin-from-homepage").submit(function (event) {
-        let name = this.name.value;
-        let password = this.pscd.value;
-        event.preventDefault();
-        //fetch call to get data from database
-        fetch("serverSide/readData.php?name=" + name + "&password=" + password)
-          .then((response) => response.json())
-          .then((data) => {
-            if (data.NAME == name && data.PASSWORD == password) {
-              //starting game and sending name and password as parameters
-              window.location.replace(
-                "game.html?name=" + name + "&password=" + password
-              );
-            } else {
-              let error = document.createElement("P");
-              error.style.color = "red";
-              error.innerHTML = "&#9888; your password is incorrect";
-              //appending it to the div
-              let div = $(".signin-text");
-              div.empty();
-              div.append(error);
-            }
-          })
-          //if username or password is incorrect will display error message
-          .catch(function (err) {
-            let error = document.createElement("P");
-            error.style.color = "red";
-            error.innerHTML = "&#9888; your username is incorrect";
-            //appending it to the div
-            let div = $(".signin-text");
-            div.empty();
-            div.append(error);
-          });
-      });
+      const queryString = window.location.search;
+      const urlParams = new URLSearchParams(queryString);
+      const name = urlParams.get("name");
+      const password = urlParams.get("password");
+
+      if (!(name == null && password == null)) {
+        let gameTypes = document.getElementsByClassName("gamePlayType");
+        for (let i = 0; i < gameTypes.length; i++) {
+          gameTypes[i].style.backgroundColor = "#1d2021";
+        }
+      } else {
+        let gameTypes = document.getElementsByClassName("gamePlayType");
+        for (let i = 0; i < gameTypes.length; i++) {
+          gameTypes[i].style.backgroundColor = "#4a5053";
+        }
+      }
+      document.getElementById("login").onclick = function () {
+        if (!(name == null && password == null)) {
+          if (
+            prompt(
+              "you are already signed in are you sure you want to sign in agian if you do type yes"
+            ) == "yes"
+          ) {
+          }
+        } else {
+          window.location.replace("signIn.html");
+        }
+      };
+      document.getElementById("singlePlayer").onclick = function () {
+        if (!(name == null && password == null)) {
+          window.location.replace(
+            "game.html?name=" + name + "&password=" + password
+          );
+        } else {
+          alert("you must be logged in to play");
+        }
+      };
     </script>
   </body>
 </html>

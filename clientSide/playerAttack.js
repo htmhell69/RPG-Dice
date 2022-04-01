@@ -23,7 +23,6 @@ function startAttack(event) {
 
 function runAttack(event) {
   if (!runningAttack) {
-    removeButton();
     if (
       turnOrder[currentTurn].specialCooldown > 0 &&
       event.target.id == "special"
@@ -39,6 +38,7 @@ function runAttack(event) {
         );
       }
     } else {
+      removeButton();
       currentAttackType = event.target.id;
       runningAttack = true;
       console.log("attack ran " + event.target.id);

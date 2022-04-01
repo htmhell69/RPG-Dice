@@ -135,18 +135,18 @@ body {
 .log-content {
   display: none;
   position: absolute;
-  width: 50vw;
-  height: 50vw;
+  width: 65vw;
+  height: 75vh;
   background-color: #fafafa;
   box-shadow: 5px #000;
   border-radius: 4px;
-  z-index: 1;
+  z-index: 5;
   overflow: auto;
   transition: 0.2s;
 }
 
 .log:hover .log-content {
-  display: inline-block;
+  display: block;
 }
 
 .log-item {
@@ -157,12 +157,10 @@ body {
 }
 
 .erase {
-  position: absolute;
-  bottom: 0;
-  width: 5vw;
-  height: 5vw;
-  right: 0;
+  display: inline-block;
   border: none;
+  width: 50px;
+  height: 50px;
 }
 
 .Inventory-content {
